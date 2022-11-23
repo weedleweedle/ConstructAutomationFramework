@@ -15,8 +15,12 @@ public class Actions
 	public void openEditor()
 	{
 		driver.get("https://editor.construct.net/");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
-	
+	public void quit()
+	{
+		driver.quit();
+	}
 	public void click(By by)
 	{
 		// wait 5 seconds for element to be clickable
