@@ -1,5 +1,5 @@
-# ConstructPOM
-A Page Object Model for [Construct](https://www.construct.net/)
+# Construct Automation Framework
+An automation framework for [Construct](https://www.construct.net/)
 
 ## Requirements
 - Java Development Kit 17.0.3 or newer (we're using Eclipse Temurin)
