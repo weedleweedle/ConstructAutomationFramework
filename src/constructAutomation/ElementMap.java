@@ -17,6 +17,14 @@ public class ElementMap
 	public static class startPage
 	{
 		public static final By newButton = By.className("buttonNew");
+		public static final By openButton = By.className("buttonOpen");
+		
+		public static class openButtonDropdown
+		{
+			public static final By cloud = By.className("option fromCloud");
+			public static final By file = By.className("option fromFile");
+			public static final By projectFolder = By.className("option fromFolder");
+		}
 	}
 	public static class buyNowPage
 	{
@@ -31,25 +39,43 @@ public class ElementMap
 		public static final By logIn = By.xpath("//*[@role='menuitem']//span[text()='Log in']");
 		public static final By purchase = By.xpath("//*[@role='menuitem']//span[text()='Purchase...']");
 		public static final By enterAccessCode = By.xpath("//*[@role='menuitem']//span[text()='Enter access code']");
-		public static final By viewDetails = By.xpath("//*[@role='menuitem']//span[text()='View details']");
+		public static final By viewDetails = By.xpath("//*[@role='menuitem']//span[text()='View details']");		
+		public static class logInPopup
+		{
+			public static final By closeX = By.xpath("//*[@id='loginDialog']/ui-dialog-caption/ui-close-button");
+			public static final By googleButton = By.className("abcRioButtonContentWrapper");
+			public static final By facebookButton = By.className("oAuthLoginButton");
+			public static final By usernameField = By.id("username");
+			public static final By passwordField = By.id("password");
+			public static final By rememberCheckbox = By.id("remember");
+			public static final By cancelButton = By.id("cancel");
+			public static final By logInButton = By.id("login");
+		}
+		public static class enterAccessCodePopup
+		{
+			public static final By closeX = By.xpath("//*[id='inputCheckDialog']/ui-dialog-caption/ui-close-button");
+			public static final By accessCodeField = By.className("input");
+			public static final By rememberCheckbox = By.className("inputCheckbox");
+			public static final By okButton = By.className("okButton");
+			public static final By cancelButton = By.className("cancelButton");
+		}
 	}
-	public static class logInPopup
+	public static class learnColumn
 	{
-		public static final By closeX = By.xpath("//*[@id='loginDialog']/ui-dialog-caption/ui-close-button");
-		public static final By googleButton = By.className("abcRioButtonContentWrapper");
-		public static final By facebookButton = By.className("oAuthLoginButton");
-		public static final By usernameField = By.id("username");
-		public static final By passwordField = By.id("password");
-		public static final By rememberCheckbox = By.id("remember");
-		public static final By cancelButton = By.id("cancel");
-		public static final By logInButton = By.id("login");
+		public static final By beginnersGuide = By.xpath("//a[@data-campaign-content='BeginnersGuide']");
+		public static final By manual = By.xpath("//a[@data-campaign-content='Manual']");
+		public static final By tutorials = By.xpath("//a[@data-campaign-content='Tutorials']");
 	}
-	public static class enterAccessCodePopup
+	public static class participateColumn
 	{
-		public static final By closeX = By.xpath("//*[id='inputCheckDialog']/ui-dialog-caption/ui-close-button");
-		public static final By accessCodeField = By.className("input");
-		public static final By rememberCheckbox = By.className("inputCheckbox");
-		public static final By okButton = By.className("okButton");
-		public static final By cancelButton = By.className("cancelButton");
+		public static final By arcade = By.xpath("//a[@data-campaign-content='Arcade']");
+		public static final By blogs = By.xpath("//a[@data-campaign-content='Blogs']");
+		public static final By forum = By.xpath("//a[@data-campaign-content='Forum']");
+	}
+	public static class exploreColumn
+	{
+		public static final By assetStore = By.xpath("//a[@data-campaign-content='AssetStore']");
+		public static final By whatsNew = By.className("whatsnewlinkbox cardLink -turquoise");
+		public static final By constructNet = By.xpath("//a[@data-campaign-content='ConstructNet']");
 	}
 }
