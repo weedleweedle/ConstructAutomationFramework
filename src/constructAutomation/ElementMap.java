@@ -6,7 +6,7 @@ public class ElementMap
 {
 	public static final By accountButton = By.id("userAccountWrap");
 	public static final By buyNowTab = By.className("buyNowTab");
-	public static final By startPageTab = By.xpath("//span[text()='Start page']/..");
+	public static final By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
 	
 	public static class welcomePopup
 	{
@@ -93,15 +93,29 @@ public class ElementMap
 			{
 				return By.xpath("//*[@id='Country']/*[text()='" + country + "']");
 			}
+			
+			// These two only appear if you select a country other than the default
+			public static final By goButton = By.className("go");
+			public static final By cancelLink = By.className("cancel");
+			
+			public static final By phoneNumberBox = By.id("Phone");
+			public static final By editEmail = By.className("editEmail");
+			public static final By cancellationTerms = By.className("subTerms");
+			public static class cancellationTermsPopup
+			{
+				public static final By contactingUs = By.linkText("contacting us");
+				public static final By okButton = By.id("CloseSubTermsOverlayLink");
+			}
+			public static final By placeOrderButton = By.id("BtnPlaceOrder");
 		}
 	}
 	public static class accountDropdown
 	{
-		public static final By register = By.xpath("//span[text()='Register...']");
-		public static final By logIn = By.xpath("//span[text()='Log in']");
-		public static final By purchase = By.xpath("//span[text()='Purchase...']");
-		public static final By enterAccessCode = By.xpath("//span[text()='Enter access code']");
-		public static final By viewDetails = By.xpath("//span[text()='View details']");		
+		public static final By register = By.xpath("//span[text()='Register...']/..");
+		public static final By logIn = By.xpath("//span[text()='Log in']/..");
+		public static final By purchase = By.xpath("//span[text()='Purchase...']/..");
+		public static final By enterAccessCode = By.xpath("//span[text()='Enter access code']/..");
+		public static final By viewDetails = By.xpath("//span[text()='View details']/..");		
 		public static class logInPopup
 		{
 			public static final By closeX = By.xpath("//*[@id='loginDialog']//ui-close-button");
@@ -121,6 +135,48 @@ public class ElementMap
 			public static final By okButton = By.className("okButton");
 			public static final By cancelButton = By.className("cancelButton");
 		}
+	}
+	public static class menuDropdown
+	{
+		public static final By project = By.xpath("//span[text()='Project'][@class='menu-item-text']/..");
+		public static class projectPopout
+		{
+			public static final By newProject = By.xpath("//span[text()='New']/..");
+			public static final By cloudOpen = By.xpath("//span[text()='Cloud open']/..");
+			public static final By openLocalFile = By.xpath("//span[text()='Open local file']/..");
+			public static final By openLocalFolder = By.xpath("//span[text()='Open local project folder']/..");
+		}
+		
+		public static final By guidedTours = By.xpath("//span[text()='Guided tours']/..");
+		public static class guidedToursPopout
+		{
+			public static final By beginnersGuide = By.xpath("//span[contains(text(),'Beginner')]/..");
+			public static final By platformGame = By.xpath("//span[text()='Make a platform game']/..");
+			public static final By startedWithtimelineAnimations = By.xpath("//span[text()='Get started with timeline animations']/..");
+			public static final By startedWithJavaScript = By.xpath("//span[text()='Get started with JavaScript']/..");
+		}
+		
+		public static final By view = By.xpath("//span[text()='View']/..");
+		public static class viewPopout
+		{
+			public static final By startPage = By.xpath("//span[text()='Start page'][@class='menu-item-text']/..");
+			public static final By exampleBrowser = By.xpath("//span[text()='Example browser']/..");
+			public static final By addonManager = By.xpath("//span[text()='Addon manager']/..");
+			public static final By exportManager = By.xpath("//span[text()='Export manager']/..");
+			public static final By storageCleanup = By.xpath("//span[text()='Storage cleanup']/..");
+		}
+		
+		public static final By account = By.xpath("//span[text()='Account']/..");
+		public static class accountPopout
+		{
+			// this has all the same options as the menuDropdown... hmm
+		}
+		public static final By installAsApp = By.xpath("//span[text()='Install as app']/..");
+		public static final By getAddons = By.xpath("//span[text()='Get addons']/..");
+		public static final By assetStore = By.xpath("//span[text()='assetStore']/..");
+		public static final By settings = By.xpath("//span[text()='Settings']/..");
+		public static final By help = By.xpath("//span[text()='Help']/..");
+		public static final By about = By.xpath("//span[text()='About']/..");
 	}
 	public static class cloudOpen // Accessible from the start page, and from the menu
 	{
