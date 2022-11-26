@@ -4,13 +4,6 @@ import org.openqa.selenium.By;
 
 public class ElementMap
 {
-	public static class welcomePopup
-	{
-		public static final By closeX = By.xpath("//*[@id='welcomeTourDialog']/ui-dialog-caption/ui-close-button");
-		public static final By tourButton = By.className("tourButton");
-		public static final By noThanksLink = By.className("noThanksLink");		
-	}
-	
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
 	public static class exampleBrowser
 	{
@@ -456,6 +449,12 @@ public class ElementMap
 		public static final By about = By.xpath("//span[text()='About']/..");
 	}
 	
+	public static class welcomePopup
+	{
+		public static final By closeX = By.xpath("//*[@id='welcomeTourDialog']/ui-dialog-caption/ui-close-button");
+		public static final By tourButton = By.className("tourButton");
+		public static final By noThanksLink = By.className("noThanksLink");		
+	}
 	public static class logInPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='loginDialog']//ui-close-button");
@@ -505,17 +504,6 @@ public class ElementMap
 		public static final By accountInfo = By.linkText("View account information");
 		
 		public static final By storageCleanup = By.linkText("Storage cleanup...");
-		public static class storageCleanupPopup
-		{
-			public static final By closeX = By.xpath("//*[@id='storageCleanupDialog']//ui-close-button");
-			public static final By exportedProjects = By.className("clearExportManagerStorage");
-			public static final By nwjsStorage = By.className("clearNwjsStorage");
-			public static final By exampleProjects = By.className("clearExampleProjectsStorage");
-			public static final By savedVersions = By.className("clearC3Storage");
-			public static final By help = By.xpath("//*[@id='storageCleanupDialog']//*[@class='helpLink']");
-			public static final By clearStorageButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='okButton bold']");
-			public static final By cancelButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='cancelButton']");
-		}
 		
 		/*
 		 * If persistent storage has been granted, this link doesn't exist.
@@ -544,10 +532,193 @@ public class ElementMap
 		public static final By legalInfo = By.linkText("Legal information");
 		public static final By okButton = By.xpath("//*[@id='aboutDialog']//*[@class='okButton']");
 	}
+	public static class storageCleanupPopup
+	{
+		public static final By closeX = By.xpath("//*[@id='storageCleanupDialog']//ui-close-button");
+		public static final By exportedProjects = By.className("clearExportManagerStorage");
+		public static final By nwjsStorage = By.className("clearNwjsStorage");
+		public static final By exampleProjects = By.className("clearExampleProjectsStorage");
+		public static final By savedVersions = By.className("clearC3Storage");
+		public static final By help = By.xpath("//*[@id='storageCleanupDialog']//*[@class='helpLink']");
+		public static final By clearStorageButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='okButton bold']");
+		public static final By cancelButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='cancelButton']");
+	}
 	public static class shortBreakPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 		public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
+	}
+	public static class addonManagerPopup
+	{
+		public static final By closeX = By.xpath("//*[@id='addonManagerDialog']//ui-close-button");
+		public static final By installAddonButton = By.className("installAddon");
+		public static final By getAddons = By.linkText("Get addons");
+		public static final By okButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='okButton']");
+		public By addon (String addon)
+		{
+			return By.xpath("//*[@columnname='name']/*[text()='" + addon + "']/../..");
+		}
+		public static class addonContextMenu
+		{		
+			// This option is available on all addons that aren't Guided tours
+			public static final By helpFor = By.xpath("//span[contains(text(),'Help for')]");
+			
+			// These two options are only available on third party addons
+			public static final By downloadAddon = By.xpath("//span[text()='Download .c3addon']");
+			public static final By uninstall = By.xpath("//span[text()='Uninstall']");
+			
+			// This is the only context menu option on built-in Guided tours
+			public static final By visitWebsite = By.xpath("//span[text()='Visit website']");
+			
+		}
+		public static class installAddonPopup
+		{
+			public static final By closeX = By.xpath("//*[@id='addonConfirmInstallDialog']//ui-close-button");
+			public static final By addonWebsite = By.className("addonWebsite");
+			public static final By documentationWebsite = By.className("addonDocumentation");
+			public static final By cancelButton = By.xpath("//*[@id='addonConfirmInstallDialog']//*[@class='cancelButton']");
+			public static final By installButton = By.xpath("//*[@id='addonConfirmInstallDialog']//*[@class='okButton']");
+			public static class installFinishedPopup
+			{
+				public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
+				public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
+			}
+		}
+		public static class uninstallAddonPopup
+		{
+			public static final By closeX = By.xpath("//*[@id='confirmDialog']//ui-close-button");
+			public static final By uninstallButton = By.xpath("//*[@id='addonConfirmInstallDialog']//*[@class='confirmButton bold']");
+			public static final By cancelButton = By.className("cancelConfirmButton");
+			public static class uninstallFinishedPopup
+			{
+				public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
+				public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
+			}
+		}
+	}
+	public static class freeEditionPopup
+	{
+		public static final By closeX = By.xpath("//*[@id='freeEditionLimitDialog']//ui-close-button");
+		public static final By logInLink = By.linkText("log in to your account");
+		public static final By purchaseButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='okButton']");
+		public static final By learnMoreButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='infoButton']");
+		public static final By cancelButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='cancelButton']");
+	}
+	public static class exportManagerPopup
+	{
+		public static final By closeX = By.xpath("//*[@id='archiveManagerDialog']//ui-close-button");
+		public static final By addArchive = By.xpath("//*[@title='Add archive']");
+		public static final By downloadArchive = By.xpath("//*[@title='Download archive']");
+		public static final By deleteArchive = By.xpath("//*[@title='Delete archive']");
+		public static final By buildApplication = By.xpath("//*[@title='Build Application']");
+		public By export (String export)
+		{
+			return By.xpath("//*[@columnname='project']/*[text()='" + export + "']/../..");
+		}
+	}
+	public static class settingsPopup
+	{
+		public static final By closeX = By.xpath("//*[@id='settingsDialog']//ui-close-button");
+		
+		public static final By languageSetting = By.className("languageSetting");
+		public By language (String languageCode)
+		{
+			return By.xpath("//*[@class='languageSetting']/*[@value='" + languageCode + "']");
+		}
+		
+		public static final By uiMode = By.className("uiMode");
+		public static class uiModes
+		{
+			public static By auto = By.xpath("//*[@class='uiMode']/*[@value='auto']");
+			public static By mobile = By.xpath("//*[@class='uiMode']/*[@value='mobile']");
+			public static By desktop = By.xpath("//*[@class='uiMode']/*[@value='desktop']");
+		}
+		
+		public static final By simplifiedMode = By.className("useSimplifiedMode");
+		public static final By textEditorFontSize = By.className("textEditorFontSize");
+		public static final By textEditorAutoIndent = By.className("textEditorAutoIndent");
+		
+		public static final By theme = By.className("theme");
+		public static class themes
+		{
+			public static By defaultTheme = By.xpath("//*[@class='theme']/*[text()='Default (no theme)']");
+			public static By dark = By.xpath("//*[@class='theme']/*[text()='Dark']");
+			public static By light = By.xpath("//*[@class='theme']/*[text()='Light']");
+		}
+		
+		public static final By enableUiAnimations = By.className("enableUIAnims");
+		public static final By enableUiEffects = By.className("enableUIEffects");
+		public static final By enableNotifications = By.className("enableNotifications");
+		public static final By enableTakeABreakReminders = By.className("showTakeBreakReminders");
+		public static final By zoomMouseWheelOnly = By.className("zoomMouseWheelOnly");
+		public static final By useDefaultIconColor = By.className("useDefaultIconColor");
+		public static final By iconColor = By.className("iconColor");
+		public static final By resetButton = By.className("resetLayout");
+		
+		public static final By saveLocation = By.className("defaultSaveLocation");
+		public static class saveLocations
+		{
+			public static final By cloud = By.xpath("//*[@class='defaultSaveLocation']/*[@value='cloud']");
+			public static final By localBrowser = By.xpath("//*[@class='defaultSaveLocation']/*[@value='local-browser']");
+			public static final By download = By.xpath("//*[@class='defaultSaveLocation']/*[@value='download']");
+			public static final By saveAs = By.xpath("//*[@class='defaultSaveLocation']/*[@value='save-as']");
+		}
+		
+		public static final By enableAutoSave = By.className("enableAutosave");
+		
+		public static final By backupLocation = By.className("autosaveLocation");
+		public static class backupLocations
+		{
+			public static final By localStorage = By.xpath("//*[@class='defaultSaveLocation']/*[@value='LOCAL STORAGE']");
+			public static final By googleDrive = By.xpath("//*[@class='defaultSaveLocation']/*[@value='GOOGLE DRIVE']");
+			public static final By dropBox = By.xpath("//*[@class='defaultSaveLocation']/*[@value='DROPBOX']");
+			public static final By oneDrive = By.xpath("//*[@class='defaultSaveLocation']/*[@value='ONE DRIVE']");
+			public static final By sameLocation = By.xpath("//*[@class='defaultSaveLocation']/*[@value='MATCH']");
+			public static final By localFolder = By.xpath("//*[@class='defaultSaveLocation']/*[@value='WEBFS FOLDER']");
+		}
+		public static final By chooseLocalBackupButton = By.className("localBackupFolderChoose");
+		public static final By autoSaveDuration = By.className("autosaveDuration");
+		
+		public static final By defaultProjectAuthor = By.className("defaultProjectAuthor");
+		public static final By defaultProjectEmail = By.className("defaultProjectEmail");
+		public static final By defaultProjectWebsite = By.className("defaultProjectWebsite");
+		public static final By defaultAnimationSpeed = By.className("defaultAnimationSpeed");
+		
+		public static final By releaseNotifications = By.className("updateChannel");
+		public static class releases
+		{
+			public static final By stable = By.xpath("//*[@class='updateChannel']/*[@value='stable']");
+			public static final By beta = By.xpath("//*[@class='updateChannel']/*[@value='beta']");
+		}
+		
+		public static final By previewSelector = By.className("previewMode");
+		public static class previewModes
+		{
+			public static final By popupWindow = By.xpath("//*[@class='previewMode']/*[@value='popup-window']");
+			public static final By browserTab = By.xpath("//*[@class='previewMode']/*[@value='browser-tab']");
+			public static final By dialog = By.xpath("//*[@class='previewMode']/*[@value='iframe-dialog']");
+		}
+		
+		public static final By showStartPage = By.className("showStartPage");
+		public static final By autoHideStartPage = By.className("autoHideStartPage");
+		public static final By showStartPageMessageBanners = By.className("showStartPageMessageBanners");
+		public static final By hideAddActionRows = By.className("hideAddActionRows");
+		public static final By translateExpressions = By.className("translateExpressions");
+		public static final By useInAppClipboard = By.className("useFakeClipboard");
+		public static final By cacheCloudMetadata = By.className("cacheCloudMetadata");
+		public static final By showInProgressLanguages = By.className("inProgressLanguages");
+		public static final By enableExperimentalFeatures = By.className("experimentalFeatures");
+		
+		public static final By gpuPreference = By.className("gpuPowerPreference");
+		public static class gpuPreferences
+		{
+			public static final By highPerformance = By.xpath("//*[@class='gpuPowerPreference']/*[@value='high-performance']");
+			public static final By defaultPreference = By.xpath("//*[@class='gpuPowerPreference']/*[@value='default']");
+			public static final By lowPower = By.xpath("//*[@class='gpuPowerPreference']/*[@value='low-power']");
+		}
+		
+		public static final By help = By.linkText("Help");
+		public static final By closeButton = By.xpath("//*[@id='settingsDialog']//*[@class='okButton']");
 	}
 	public static class cloudOpenPopup
 	{
