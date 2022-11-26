@@ -213,7 +213,72 @@ public class ElementMap
 		public static final By effectsExpander = By.className("titleSection -effect");
 		public static class effects
 		{
+			public static final By threeDExpander = By.xpath("//*[@class='titleSection -effect'][text()='3D']");
+			public static class threeD
+			{
+				public static final By fogExponential = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-fogexponential']");
+			}
 			
+			public static final By blendExpander = By.xpath("//*[@class='titleSection -effect'][text()='Blend']");
+			public static class blend
+			{
+				public static final By darken = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-darken']");
+				public static final By dodge = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-dodge']");
+				public static final By exclusion = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-exclusion']");
+				public static final By lighten = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-lighten']");
+				public static final By multiply = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-multiply']");
+				public static final By overlay = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-overlay']");
+				public static final By screen = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-screen']");
+				public static final By softLight = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-softlight']");
+			}
+			
+			public static final By colorExpander = By.xpath("//*[@class='titleSection -effect'][text()='Color']");
+			public static class color
+			{
+				public static final By adjustHsl = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-hsladjust']");
+				public static final By alphaClamp = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-alphaclamp']");
+				public static final By blurHorizontal = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-blurhorizontal']");
+				public static final By blurVertical = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-blurvertical']");
+				public static final By grayscale = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-grayscale']");
+				public static final By inverse = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-inverse']");
+				public static final By noise = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-noise']");
+				public static final By pixellate = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-pixellate']");
+				public static final By posterize = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-posterize']");
+				public static final By radialBlur = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-radialblur']");
+				public static final By replaceColor = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-replacecolor']");
+				public static final By replaceSolidColor = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-replacesolidcolor']");
+				public static final By setColor = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-setcolor']");
+				public static final By sharpen = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-sharpen']");
+				public static final By tint = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-tint']");
+				public static final By vignette = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-vignette']");		
+			}
+	
+			public static final By distortionExpander = By.xpath("//*[@class='titleSection -effect'][text()='Distortion']");
+			public static class distortion
+			{
+				public static final By bulge = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-bulge']");
+				public static final By glass = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-glass']");
+				public static final By pulse = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-pulse']");
+				public static final By stretch = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-stretch']");
+				public static final By swirl = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-swirl']");
+				public static final By warpLayout = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-warplayout']");
+				public static final By warpObject = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-warpobject']");
+				public static final By warpRipple = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-warpripple']");
+				public static final By water = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-water']");
+			}
+			
+			public static final By maskExpander = By.xpath("//*[@class='titleSection -effect'][text()='Mask']");
+			public static class mask
+			{
+				public static final By adjustHslMask = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-hsladjustmask']");
+				public static final By warpObjectMask = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-warpobjectmask']");
+			}
+			
+			public static final By normalMappingExpander = By.xpath("//*[@class='titleSection -effect'][text()='Normal mapping']");
+			public static class normalMapping
+			{
+				public static final By bumpMapping = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-bumpmapping']");
+			}
 		}
 	}
 	
@@ -424,6 +489,66 @@ public class ElementMap
 		public static final By yourLicenses = By.linkText("Your licenses");
 		public static final By editProfile = By.linkText("Edit profile");
 	}	
+	public static class aboutPopup
+	{
+		public static final By closeX = By.xpath("//*[@id='aboutDialog']//ui-close-button");
+		public static final By releaseNotes = By.className("viewReleaseNotes");
+		
+		public static final By platformInformation = By.linkText("Platform information");
+		public static class platformInfoPopup
+		{
+			public static final By closeX = By.xpath("//*[@id='platformInfoDialog']//ui-close-button");
+			public static final By copyButton = By.className("copy");
+			public static final By okButton = By.xpath("//*[@id='platformInfoDialog']//*[@class='okButton']");
+		}
+	
+		public static final By accountInfo = By.linkText("View account information");
+		
+		public static final By storageCleanup = By.linkText("Storage cleanup...");
+		public static class storageCleanupPopup
+		{
+			public static final By closeX = By.xpath("//*[@id='storageCleanupDialog']//ui-close-button");
+			public static final By exportedProjects = By.className("clearExportManagerStorage");
+			public static final By nwjsStorage = By.className("clearNwjsStorage");
+			public static final By exampleProjects = By.className("clearExampleProjectsStorage");
+			public static final By savedVersions = By.className("clearC3Storage");
+			public static final By help = By.xpath("//*[@id='storageCleanupDialog']//*[@class='helpLink']");
+			public static final By clearStorageButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='okButton bold']");
+			public static final By cancelButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='cancelButton']");
+		}
+		
+		/*
+		 * If persistent storage has been granted, this link doesn't exist.
+		 * If persistent storage is request but not granted, the following error
+		 * popup shows. I don't have a way to find out what happens if persisent
+		 * storage is request and approved.
+		 */
+		public static final By requestPersistentStorage = By.linkText("Request persistent storage");
+		public static class persistentStoragePopup
+		{			
+			public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
+			public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");
+		}
+		
+		public static final By officialWebsite = By.linkText("Construct.net");
+		public static final By aboutUs = By.linkText("About us");
+		public static final By help = By.xpath("//*[@id='aboutDialog']//*[@class='helpLink']");
+		public static final By forums = By.linkText("Forums");
+		public static final By tutorials = By.linkText("Tutorials");
+		public static final By getAddons = By.linkText("Get addons");
+		public static final By suggestFeatures = By.linkText("Suggest features");
+		public static final By reportIssues = By.linkText("Report issues");
+		public static final By contributeTranslations = By.linkText("Contribute translations");
+		public static final By eula = By.linkText("End-user license agreement");
+		public static final By privacyPolicy = By.linkText("Privacy policy");
+		public static final By legalInfo = By.linkText("Legal information");
+		public static final By okButton = By.xpath("//*[@id='aboutDialog']//*[@class='okButton']");
+	}
+	public static class shortBreakPopup
+	{
+		public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
+		public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
+	}
 	public static class cloudOpenPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='fileListDialog']//ui-close-button");
