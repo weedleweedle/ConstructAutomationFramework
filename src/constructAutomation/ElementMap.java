@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 
 public class ElementMap
 {
+	public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
 	public static class exampleBrowser
 	{
@@ -378,7 +379,7 @@ public class ElementMap
 	public static class accountDropdown
 	{
 		public static final By register = By.xpath("//span[text()='Register...']/..");
-		public static final By logIn = By.xpath("//span[text()='Log in']/..");
+		public static final By logIn = By.xpath("//ui-menuitem//span[text()='Log in']/..");
 		public static final By purchase = By.xpath("//span[text()='Purchase...']/..");
 		public static final By enterAccessCode = By.xpath("//span[text()='Enter access code']/..");
 		public static final By viewDetails = By.xpath("//span[text()='View details']/..");		
