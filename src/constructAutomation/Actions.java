@@ -18,10 +18,11 @@ public class Actions
 		return new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.elementToBeClickable(by));
 	}
 	
-	public void openEditor()
+	public void openEditor() throws InterruptedException
 	{
 		driver.get("https://editor.construct.net/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		click(ElementMap.welcomePopup.noThanksLink);
+		Thread.sleep(5000);
 	}
 	public void quit() throws InterruptedException
 	{
@@ -41,11 +42,7 @@ public class Actions
 		driver.switchTo().frame(clickableElement(by));
 	}
 	public void logIn(String username, String password) throws InterruptedException
-	{
-		openEditor();
-		click(ElementMap.welcomePopup.noThanksLink);
-		Thread.sleep(5000);
-		
+	{		
 		click(ElementMap.accountButton);
 		Thread.sleep(5000);
 		
@@ -56,5 +53,11 @@ public class Actions
 		sendText(ElementMap.logInPopup.passwordField, password);
 		
 		click(ElementMap.logInPopup.logInButton);
+	}
+	public void setUp() throws InterruptedException
+	{
+		System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		openEditor();
 	}
 }
