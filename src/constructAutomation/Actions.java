@@ -40,4 +40,21 @@ public class Actions
 	{
 		driver.switchTo().frame(clickableElement(by));
 	}
+	public void logIn(String username, String password) throws InterruptedException
+	{
+		openEditor();
+		click(ElementMap.welcomePopup.noThanksLink);
+		Thread.sleep(5000);
+		
+		click(ElementMap.accountButton);
+		Thread.sleep(5000);
+		
+		click(ElementMap.accountDropdown.logIn);
+		
+		switchToIframe(ElementMap.iframe);
+		sendText(ElementMap.logInPopup.usernameField, username);
+		sendText(ElementMap.logInPopup.passwordField, password);
+		
+		click(ElementMap.logInPopup.logInButton);
+	}
 }
