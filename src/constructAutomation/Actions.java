@@ -5,13 +5,13 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Actions
 {
-	WebDriver driver = new ChromeDriver();
+	WebDriver driver = new EdgeDriver();
 	
 	public WebElement clickableElement(By by)
 	{
@@ -56,7 +56,7 @@ public class Actions
 	}
 	public void setUp() throws InterruptedException
 	{
-		System.setProperty("webdriver.chrome.driver", ".\\driver\\chromedriver.exe");		
+		System.setProperty("webdriver.edge.driver", "C:\\driver\\msedgedriver.exe");		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		openEditor();
 	}
