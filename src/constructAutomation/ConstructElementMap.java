@@ -2,15 +2,15 @@ package constructAutomation;
 
 import org.openqa.selenium.By;
 
-public class ElementMap
+public class ConstructElementMap
 {
 	public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
-	public static class exampleBrowser
+	public static final class exampleBrowser
 	{
 		public static final By searchBox = By.className("searchInputField");
 		
-		public By removeFilter(String tag)
+		public static final By removeFilter(String tag)
 		{
 			return By.xpath("//div[@id='selectedTags']/div[@data-tag='" + tag.toLowerCase() + "']");
 		}
@@ -19,7 +19,7 @@ public class ElementMap
 		public static final By clearButtonFooter = By.className("resultsFooterClearTags");
 		
 		public static final By levelsExpander = By.className("titleSection -level");
-		public static class levels
+		public static final class levels
 		{
 			public static final By beginner = By.xpath("//div[@class='section -level']/div[@data-tag='beginner']");
 			public static final By intermediate = By.xpath("//div[@class='section -level']/div[@data-tag='intermediate']");
@@ -27,7 +27,7 @@ public class ElementMap
 		}
 		
 		public static final By categoriesExpander = By.className("titleSection -category");
-		public static class categories
+		public static final class categories
 		{
 			public static final By newFilter = By.xpath("//div[@class='section -category']/div[@data-tag='new']");
 			public static final By recommended = By.xpath("//div[@class='section -category']/div[@data-tag='recommended']");
@@ -42,7 +42,7 @@ public class ElementMap
 		}
 		
 		public static final By genresExpander = By.className("titleSection -genre");
-		public static class genres
+		public static final class genres
 		{
 			public static final By action = By.xpath("//div[@class='section -genre']/div[@data-tag='action']");
 			public static final By adventure = By.xpath("//div[@class='section -genre']/div[@data-tag='adventure']");
@@ -59,7 +59,7 @@ public class ElementMap
 		}
 		
 		public static final By tagsExpander = By.className("titleSection -tag");
-		public static class tags
+		public static final class tags
 		{
 			public static final By threeD = By.xpath("//div[@class='section -tag']/div[@data-tag='3d']");
 			public static final By meshDistortion = By.xpath("//div[@class='section -tag']/div[@data-tag='mesh-distortion']");
@@ -70,17 +70,17 @@ public class ElementMap
 		}
 		
 		public static final By pluginsExpander = By.className("titleSection -plugin");
-		public static class plugins
+		public static final class plugins
 		{
 			public static final By threeDExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'3D')]");
-			public static class threeD
+			public static final class threeD
 			{
 				public static final By threeDCamera = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Camera3D']");
 				public static final By threeDShape = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Shape3D']");
 			}
 			
 			public static final By dataAndStorageExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'Data & storage')]");
-			public static class dataAndStorage
+			public static final class dataAndStorage
 			{
 				public static final By array = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Arr']");
 				public static final By binaryData = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-BinaryData']");
@@ -91,7 +91,7 @@ public class ElementMap
 			}
 			
 			public static final By formControls = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'Form Controls')]");
-			public static class formControls
+			public static final class formControls
 			{
 				public static final By button = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Button']");
 				public static final By htmlElement = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-HTMLElement']");
@@ -102,7 +102,7 @@ public class ElementMap
 			}
 			
 			public static final By generalExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'General')]");
-			public static class general
+			public static final class general
 			{
 				public static final By ninePatch = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-NinePatch']");
 				public static final By particles = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Particles']");
@@ -116,7 +116,7 @@ public class ElementMap
 			}
 			
 			public static final By inputExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'Input')]");
-			public static class input
+			public static final class input
 			{
 				public static final By gamePad = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-gamepad']");
 				public static final By keyBoard = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Keyboard']");
@@ -125,7 +125,7 @@ public class ElementMap
 			}
 			
 			public static final By mediaExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'Media')]");
-			public static class media
+			public static final class media
 			{
 				public static final By audio = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Audio']");
 				public static final By geolocation = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Geolocation']");
@@ -136,7 +136,7 @@ public class ElementMap
 			}
 			
 			public static final By otherExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'Other')]");
-			public static class other
+			public static final class other
 			{
 				public static final By advancedRandom = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-AdvancedRandom']");
 				public static final By blueTooth = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Bluetooth']");
@@ -147,7 +147,7 @@ public class ElementMap
 			}
 			
 			public static final By webExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'Web')]");
-			public static class web
+			public static final class web
 			{
 				public static final By ajax = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-AJAX']");
 				public static final By browser = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Browser']");
@@ -156,10 +156,10 @@ public class ElementMap
 		}
 		
 		public static final By behaviorsExpander = By.className("titleSection -behavior");
-		public static class behaviors
+		public static final class behaviors
 		{
 			public static final By attributesExpander = By.xpath("//*[@class='titleSection -behavior'][text()='Attributes']");
-			public static class attributes
+			public static final class attributes
 			{
 				public static final By jumpThru = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-jumpthru']");
 				public static final By persist = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Persist']");
@@ -168,7 +168,7 @@ public class ElementMap
 			}
 			
 			public static final By generalExpander = By.xpath("//*[@class='titleSection -behavior'][text()='General']");
-			public static class general
+			public static final class general
 			{
 				public static final By anchor = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Anchor']");
 				public static final By boundToLayout = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-bound']");
@@ -186,7 +186,7 @@ public class ElementMap
 			}
 			
 			public static final By movementsExpander = By.xpath("//*[@class='titleSection -behavior'][text()='Movements']");
-			public static class movements
+			public static final class movements
 			{
 				public static final By eightDirection = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-EightDir']");
 				public static final By bullet = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Bullet']");
@@ -205,16 +205,16 @@ public class ElementMap
 		}
 		
 		public static final By effectsExpander = By.className("titleSection -effect");
-		public static class effects
+		public static final class effects
 		{
 			public static final By threeDExpander = By.xpath("//*[@class='titleSection -effect'][text()='3D']");
-			public static class threeD
+			public static final class threeD
 			{
 				public static final By fogExponential = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-fogexponential']");
 			}
 			
 			public static final By blendExpander = By.xpath("//*[@class='titleSection -effect'][text()='Blend']");
-			public static class blend
+			public static final class blend
 			{
 				public static final By darken = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-darken']");
 				public static final By dodge = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-dodge']");
@@ -227,7 +227,7 @@ public class ElementMap
 			}
 			
 			public static final By colorExpander = By.xpath("//*[@class='titleSection -effect'][text()='Color']");
-			public static class color
+			public static final class color
 			{
 				public static final By adjustHsl = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-hsladjust']");
 				public static final By alphaClamp = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-alphaclamp']");
@@ -248,7 +248,7 @@ public class ElementMap
 			}
 	
 			public static final By distortionExpander = By.xpath("//*[@class='titleSection -effect'][text()='Distortion']");
-			public static class distortion
+			public static final class distortion
 			{
 				public static final By bulge = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-bulge']");
 				public static final By glass = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-glass']");
@@ -262,14 +262,14 @@ public class ElementMap
 			}
 			
 			public static final By maskExpander = By.xpath("//*[@class='titleSection -effect'][text()='Mask']");
-			public static class mask
+			public static final class mask
 			{
 				public static final By adjustHslMask = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-hsladjustmask']");
 				public static final By warpObjectMask = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-warpobjectmask']");
 			}
 			
 			public static final By normalMappingExpander = By.xpath("//*[@class='titleSection -effect'][text()='Normal mapping']");
-			public static class normalMapping
+			public static final class normalMapping
 			{
 				public static final By bumpMapping = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-bumpmapping']");
 			}
@@ -277,62 +277,62 @@ public class ElementMap
 	}
 	
 	public static final By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
-	public static class startPage
+	public static final class startPage
 	{
 		public static final By newButton = By.className("buttonNew");
 		public static final By openButton = By.className("buttonOpen");
-		public static class openButtonDropdown
+		public static final class openButtonDropdown
 		{
 			public static final By cloud = By.className("option fromCloud");
 			public static final By file = By.className("option fromFile");
 			public static final By projectFolder = By.className("option fromFolder");
 		}
-		public static class learnColumn
+		public static final class learnColumn
 		{
 			public static final By beginnersGuide = By.xpath("//a[@data-campaign-content='BeginnersGuide']");
 			public static final By manual = By.xpath("//a[@data-campaign-content='Manual']");
 			public static final By tutorials = By.xpath("//a[@data-campaign-content='Tutorials']");
 		}
-		public static class participateColumn
+		public static final class participateColumn
 		{
 			public static final By arcade = By.xpath("//a[@data-campaign-content='Arcade']");
 			public static final By blogs = By.xpath("//a[@data-campaign-content='Blogs']");
 			public static final By forum = By.xpath("//a[@data-campaign-content='Forum']");
 		}
-		public static class exploreColumn
+		public static final class exploreColumn
 		{
 			public static final By assetStore = By.xpath("//a[@data-campaign-content='AssetStore']");
 			public static final By whatsNew = By.className("whatsnewlinkbox cardLink -turquoise");
 			public static final By constructNet = By.xpath("//a[@data-campaign-content='ConstructNet']");
 		}
-		public static class recommendedExamples
+		public static final class recommendedExamples
 		{
 			public static final By browseExamples = By.id("buttonExamples");
 			public static final By example1 = By.xpath("//*[@id='groupExamples']/div[1]");
 			public static final By example2 = By.xpath("//*[@id='groupExamples']/div[2]");
 			public static final By example3 = By.xpath("//*[@id='groupExamples']/div[3]");
 		}
-		public static class socialMedia
+		public static final class socialMedia
 		{
 			public static final By twitter = By.id("linkTwitter");
 			public static final By reddit = By.id("linkReddit");
 			public static final By youTube = By.id("linkYoutube");
 			public static final By facebook = By.id("linkFacebook");
 		}
-		public By recentProject(String row) // there's a max limit of 5 recent projects
+		public static final By recentProject(String row) // there's a max limit of 5 recent projects
 		{
 			return By.xpath("//*[@class='cardProject'][" + row + "]");
 		}
 	}
 	
 	public static final By buyNowTab = By.className("buyNowTab");
-	public static class buyNowPage
+	public static final class buyNowPage
 	{
 		public static final By fullRunDownLink = By.linkText("full run down");
 		public static final By proceedToPaymentMiddle = By.xpath("//div[@class='proceedOverlay']//a[@class='openDemo']");
 		public static final By pricingPages = By.linkText("visit our pricing pages");
 		public static final By proceedToPaymentBottom = By.xpath("//*[@class='c']//a[@class='openDemo']");
-		public static class secondPage
+		public static final class secondPage
 		{
 			public static final By emailBox = By.id("Email");
 			public static final By youCanLogin = By.linkText("or you can login");
@@ -341,7 +341,7 @@ public class ElementMap
 			public static final By privacyPolicy = By.linkText("privacy policy");
 			public static final By continueButton = By.id("BtnContinue");
 		}
-		public static class thirdPage
+		public static final class thirdPage
 		{
 			public static final By creditOrDebit = By.id("pm1");
 			public static final By payPal = By.id("pm2");
@@ -354,7 +354,7 @@ public class ElementMap
 			
 			public static final By postCode = By.id("Postcode");
 			public static final By countryDropdown = By.id("Country");
-			public By country(String country)
+			public static final By country(String country)
 			{
 				return By.xpath("//*[@id='Country']/*[text()='" + country + "']");
 			}
@@ -366,7 +366,7 @@ public class ElementMap
 			public static final By phoneNumberBox = By.id("Phone");
 			public static final By editEmail = By.className("editEmail");
 			public static final By cancellationTerms = By.className("subTerms");
-			public static class cancellationTermsPopup
+			public static final class cancellationTermsPopup
 			{
 				public static final By contactingUs = By.linkText("contacting us");
 				public static final By okButton = By.id("CloseSubTermsOverlayLink");
@@ -376,7 +376,7 @@ public class ElementMap
 	}
 	
 	public static final By accountButton = By.id("userAccountWrap");
-	public static class accountDropdown
+	public static final class accountDropdown
 	{
 		public static final By register = By.xpath("//span[text()='Register...']/..");
 		public static final By logIn = By.xpath("//ui-menuitem//span[text()='Log in']/..");
@@ -386,10 +386,10 @@ public class ElementMap
 	}
 	
 	public static final By menuButton = By.id("mainMenuButton");
-	public static class menuDropdown
+	public static final class menuDropdown
 	{
 		public static final By project = By.xpath("//span[text()='Project'][@class='menu-item-text']/..");
-		public static class projectPopout
+		public static final class projectPopout
 		{
 			public static final By newProject = By.xpath("//span[text()='New']/..");
 			public static final By cloudOpen = By.xpath("//span[text()='Cloud open']/..");
@@ -398,19 +398,19 @@ public class ElementMap
 		}
 		
 		public static final By guidedTours = By.xpath("//span[text()='Guided tours']/..");
-		public static class guidedToursPopout
+		public static final class guidedToursPopout
 		{
 			public static final By beginnersGuide = By.xpath("//span[contains(text(),'Beginner')]/..");
 			public static final By platformGame = By.xpath("//span[text()='Make a platform game']/..");
 			public static final By startedWithtimelineAnimations = By.xpath("//span[text()='Get started with timeline animations']/..");
 			public static final By startedWithJavaScript = By.xpath("//span[text()='Get started with JavaScript']/..");
 		}
-		public static class guidedToursPopup
+		public static final class guidedToursPopup
 		{
 			public static final By menuDots = By.xpath("//ui-menu-dots-button");
 			public static final By exitTour = By.xpath("//span[text()='Exit tour']/../..");
 			public static final By nextButton = By.className("nextButton bold");
-			public static class closeConfirmation
+			public static final class closeConfirmation
 			{
 				public static final By closeX = By.xpath("//*[@id='confirmDialog']//ui-close-button");
 				public static final By exitButton = By.className("confirmButton bold");
@@ -419,7 +419,7 @@ public class ElementMap
 		}
 		
 		public static final By view = By.xpath("//span[text()='View']/..");
-		public static class viewPopout
+		public static final class viewPopout
 		{
 			public static final By startPage = By.xpath("//span[text()='Start page'][@class='menu-item-text']/..");
 			public static final By exampleBrowser = By.xpath("//span[text()='Example browser']/..");
@@ -429,7 +429,7 @@ public class ElementMap
 		}
 		
 		public static final By account = By.xpath("//span[text()='Account']/..");
-		public static class accountPopout
+		public static final class accountPopout
 		{
 			/*
 			 * Locators are the same as account Dropdown, however these two can't exist
@@ -450,13 +450,13 @@ public class ElementMap
 		public static final By about = By.xpath("//span[text()='About']/..");
 	}
 	
-	public static class welcomePopup
+	public static final class welcomePopup
 	{
 		public static final By closeX = By.xpath("//*[@id='welcomeTourDialog']/ui-dialog-caption/ui-close-button");
 		public static final By tourButton = By.className("tourButton");
 		public static final By noThanksLink = By.className("noThanksLink");		
 	}
-	public static class logInPopup
+	public static final class logInPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='loginDialog']//ui-close-button");
 		public static final By googleButton = By.className("abcRioButtonContentWrapper");
@@ -467,7 +467,7 @@ public class ElementMap
 		public static final By cancelButton = By.id("cancel");
 		public static final By logInButton = By.id("login");
 	}
-	public static class enterAccessCodePopup
+	public static final class enterAccessCodePopup
 	{
 		public static final By closeX = By.xpath("//*[id='inputCheckDialog']//ui-close-button");
 		public static final By accessCodeField = By.className("input");
@@ -475,7 +475,7 @@ public class ElementMap
 		public static final By okButton = By.className("okButton");
 		public static final By cancelButton = By.className("cancelButton");
 	}
-	public static class accountInfoPopup
+	public static final class accountInfoPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='accountInfoDialog']//ui-close-button");
 		public static final By help = By.linkText("Help");
@@ -489,13 +489,13 @@ public class ElementMap
 		public static final By yourLicenses = By.linkText("Your licenses");
 		public static final By editProfile = By.linkText("Edit profile");
 	}	
-	public static class aboutPopup
+	public static final class aboutPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='aboutDialog']//ui-close-button");
 		public static final By releaseNotes = By.className("viewReleaseNotes");
 		
 		public static final By platformInformation = By.linkText("Platform information");
-		public static class platformInfoPopup
+		public static final class platformInfoPopup
 		{
 			public static final By closeX = By.xpath("//*[@id='platformInfoDialog']//ui-close-button");
 			public static final By copyButton = By.className("copy");
@@ -508,12 +508,12 @@ public class ElementMap
 		
 		/*
 		 * If persistent storage has been granted, this link doesn't exist.
-		 * If persistent storage is request but not granted, the following error
+		 * If persistent storage is requested but not granted, the following error
 		 * popup shows. I don't have a way to find out what happens if persisent
-		 * storage is request and approved.
+		 * storage is requested and approved.
 		 */
 		public static final By requestPersistentStorage = By.linkText("Request persistent storage");
-		public static class persistentStoragePopup
+		public static final class persistentStoragePopup
 		{			
 			public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 			public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");
@@ -533,7 +533,7 @@ public class ElementMap
 		public static final By legalInfo = By.linkText("Legal information");
 		public static final By okButton = By.xpath("//*[@id='aboutDialog']//*[@class='okButton']");
 	}
-	public static class storageCleanupPopup
+	public static final class storageCleanupPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='storageCleanupDialog']//ui-close-button");
 		public static final By exportedProjects = By.className("clearExportManagerStorage");
@@ -544,22 +544,22 @@ public class ElementMap
 		public static final By clearStorageButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='okButton bold']");
 		public static final By cancelButton = By.xpath("//*[@id='storageCleanupDialog']//*[@class='cancelButton']");
 	}
-	public static class shortBreakPopup
+	public static final class shortBreakPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 		public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
 	}
-	public static class addonManagerPopup
+	public static final class addonManagerPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='addonManagerDialog']//ui-close-button");
 		public static final By installAddonButton = By.className("installAddon");
 		public static final By getAddons = By.linkText("Get addons");
 		public static final By okButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='okButton']");
-		public By addon (String addon)
+		public static final By addon (String addon)
 		{
 			return By.xpath("//*[@columnname='name']/*[text()='" + addon + "']/../..");
 		}
-		public static class addonContextMenu
+		public static final class addonContextMenu
 		{		
 			// This option is available on all addons that aren't Guided tours
 			public static final By helpFor = By.xpath("//span[contains(text(),'Help for')]");
@@ -572,32 +572,32 @@ public class ElementMap
 			public static final By visitWebsite = By.xpath("//span[text()='Visit website']");
 			
 		}
-		public static class installAddonPopup
+		public static final class installAddonPopup
 		{
 			public static final By closeX = By.xpath("//*[@id='addonConfirmInstallDialog']//ui-close-button");
 			public static final By addonWebsite = By.className("addonWebsite");
 			public static final By documentationWebsite = By.className("addonDocumentation");
 			public static final By cancelButton = By.xpath("//*[@id='addonConfirmInstallDialog']//*[@class='cancelButton']");
 			public static final By installButton = By.xpath("//*[@id='addonConfirmInstallDialog']//*[@class='okButton']");
-			public static class installFinishedPopup
+			public static final class installFinishedPopup
 			{
 				public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 				public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
 			}
 		}
-		public static class uninstallAddonPopup
+		public static final class uninstallAddonPopup
 		{
 			public static final By closeX = By.xpath("//*[@id='confirmDialog']//ui-close-button");
 			public static final By uninstallButton = By.xpath("//*[@id='addonConfirmInstallDialog']//*[@class='confirmButton bold']");
 			public static final By cancelButton = By.className("cancelConfirmButton");
-			public static class uninstallFinishedPopup
+			public static final class uninstallFinishedPopup
 			{
 				public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 				public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
 			}
 		}
 	}
-	public static class freeEditionPopup
+	public static final class freeEditionPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='freeEditionLimitDialog']//ui-close-button");
 		public static final By logInLink = By.linkText("log in to your account");
@@ -605,34 +605,34 @@ public class ElementMap
 		public static final By learnMoreButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='infoButton']");
 		public static final By cancelButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='cancelButton']");
 	}
-	public static class exportManagerPopup
+	public static final class exportManagerPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='archiveManagerDialog']//ui-close-button");
 		public static final By addArchive = By.xpath("//*[@title='Add archive']");
 		public static final By downloadArchive = By.xpath("//*[@title='Download archive']");
 		public static final By deleteArchive = By.xpath("//*[@title='Delete archive']");
 		public static final By buildApplication = By.xpath("//*[@title='Build Application']");
-		public By export (String export)
+		public static final By export (String export)
 		{
 			return By.xpath("//*[@columnname='project']/*[text()='" + export + "']/../..");
 		}
 	}
-	public static class settingsPopup
+	public static final class settingsPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='settingsDialog']//ui-close-button");
 		
 		public static final By languageSetting = By.className("languageSetting");
-		public By language (String languageCode)
+		public static final By language (String languageCode)
 		{
 			return By.xpath("//*[@class='languageSetting']/*[@value='" + languageCode + "']");
 		}
 		
 		public static final By uiMode = By.className("uiMode");
-		public static class uiModes
+		public static final class uiModes
 		{
-			public static By auto = By.xpath("//*[@class='uiMode']/*[@value='auto']");
-			public static By mobile = By.xpath("//*[@class='uiMode']/*[@value='mobile']");
-			public static By desktop = By.xpath("//*[@class='uiMode']/*[@value='desktop']");
+			public static final By auto = By.xpath("//*[@class='uiMode']/*[@value='auto']");
+			public static final By mobile = By.xpath("//*[@class='uiMode']/*[@value='mobile']");
+			public static final By desktop = By.xpath("//*[@class='uiMode']/*[@value='desktop']");
 		}
 		
 		public static final By simplifiedMode = By.className("useSimplifiedMode");
@@ -640,11 +640,11 @@ public class ElementMap
 		public static final By textEditorAutoIndent = By.className("textEditorAutoIndent");
 		
 		public static final By theme = By.className("theme");
-		public static class themes
+		public static final class themes
 		{
-			public static By defaultTheme = By.xpath("//*[@class='theme']/*[text()='Default (no theme)']");
-			public static By dark = By.xpath("//*[@class='theme']/*[text()='Dark']");
-			public static By light = By.xpath("//*[@class='theme']/*[text()='Light']");
+			public static final By defaultTheme = By.xpath("//*[@class='theme']/*[text()='Default (no theme)']");
+			public static final By dark = By.xpath("//*[@class='theme']/*[text()='Dark']");
+			public static final By light = By.xpath("//*[@class='theme']/*[text()='Light']");
 		}
 		
 		public static final By enableUiAnimations = By.className("enableUIAnims");
@@ -657,7 +657,7 @@ public class ElementMap
 		public static final By resetButton = By.className("resetLayout");
 		
 		public static final By saveLocation = By.className("defaultSaveLocation");
-		public static class saveLocations
+		public static final class saveLocations
 		{
 			public static final By cloud = By.xpath("//*[@class='defaultSaveLocation']/*[@value='cloud']");
 			public static final By localBrowser = By.xpath("//*[@class='defaultSaveLocation']/*[@value='local-browser']");
@@ -668,7 +668,7 @@ public class ElementMap
 		public static final By enableAutoSave = By.className("enableAutosave");
 		
 		public static final By backupLocation = By.className("autosaveLocation");
-		public static class backupLocations
+		public static final class backupLocations
 		{
 			public static final By localStorage = By.xpath("//*[@class='defaultSaveLocation']/*[@value='LOCAL STORAGE']");
 			public static final By googleDrive = By.xpath("//*[@class='defaultSaveLocation']/*[@value='GOOGLE DRIVE']");
@@ -686,14 +686,14 @@ public class ElementMap
 		public static final By defaultAnimationSpeed = By.className("defaultAnimationSpeed");
 		
 		public static final By releaseNotifications = By.className("updateChannel");
-		public static class releases
+		public static final class releases
 		{
 			public static final By stable = By.xpath("//*[@class='updateChannel']/*[@value='stable']");
 			public static final By beta = By.xpath("//*[@class='updateChannel']/*[@value='beta']");
 		}
 		
 		public static final By previewSelector = By.className("previewMode");
-		public static class previewModes
+		public static final class previewModes
 		{
 			public static final By popupWindow = By.xpath("//*[@class='previewMode']/*[@value='popup-window']");
 			public static final By browserTab = By.xpath("//*[@class='previewMode']/*[@value='browser-tab']");
@@ -711,7 +711,7 @@ public class ElementMap
 		public static final By enableExperimentalFeatures = By.className("experimentalFeatures");
 		
 		public static final By gpuPreference = By.className("gpuPowerPreference");
-		public static class gpuPreferences
+		public static final class gpuPreferences
 		{
 			public static final By highPerformance = By.xpath("//*[@class='gpuPowerPreference']/*[@value='high-performance']");
 			public static final By defaultPreference = By.xpath("//*[@class='gpuPowerPreference']/*[@value='default']");
@@ -721,7 +721,7 @@ public class ElementMap
 		public static final By help = By.linkText("Help");
 		public static final By closeButton = By.xpath("//*[@id='settingsDialog']//*[@class='okButton']");
 	}
-	public static class cloudOpenPopup
+	public static final class cloudOpenPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='fileListDialog']//ui-close-button");
 		public static final By refresh = By.xpath("//*[@title='Refresh']");
@@ -732,11 +732,11 @@ public class ElementMap
 		public static final By logOut = By.xpath("//*[@title='Logout']");
 		public static final By searchBox = By.xpath("//ui-toolbar-textbox/input");
 		public static final By fileNameBox = By.xpath("//ui-dialog-footer//input");
-		public By cloudFolder(String row)
+		public static final By cloudFolder(String row)
 		{
 			return By.xpath("//ui-table-row[@tabindex='-1'][" + row + "]");		
 		}
-		public static class services
+		public static final class services
 		{
 			public static final By dropBox = By.xpath("//*[@value='DROPBOX']");
 			public static final By oneDrive = By.xpath("//*[@value='ONE DRIVE']");
