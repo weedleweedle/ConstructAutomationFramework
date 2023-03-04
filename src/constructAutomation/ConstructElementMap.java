@@ -2,7 +2,7 @@ package constructAutomation;
 
 import org.openqa.selenium.By;
 
-public class ConstructElementMap
+public class ConstructElementMap extends Data
 {
 	public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");

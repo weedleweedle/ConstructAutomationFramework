@@ -9,64 +9,64 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ConstructMethodLibrary
+public class ConstructMethodLibrary extends ConstructElementMap
 {
-	WebDriver driver = new EdgeDriver();
+	static WebDriver driver = new EdgeDriver();
 	
-	public WebElement clickableElement(By by)
+	public static WebElement clickableElement(By by)
 	{
 		return clickableElement(by, 5);
 	}
 	
-	public WebElement clickableElement(By by, int seconds)
+	public static WebElement clickableElement(By by, int seconds)
 	{
 		return stop(seconds).until(ExpectedConditions.elementToBeClickable(by));
 	}
 	
-	public WebDriverWait stop(int seconds)
+	public static WebDriverWait stop(int seconds)
 	{
 		return new WebDriverWait(driver, Duration.ofSeconds(seconds));
 	}
 	
-	public void quit()
+	public static void quit()
 	{
 		driver.quit();
 	}
 	
-	public void click(By by)
+	public static void click(By by)
 	{
 		clickableElement(by).click();
 	}
 	
-	public void sendText(By by, String text)
+	public static void sendText(By by, String text)
 	{
 		clickableElement(by).sendKeys(text);
 	}
 	
-	public void switchToIframe(By by)
+	public static void switchToIframe(By by)
 	{
 		driver.switchTo().frame(clickableElement(by));
 	}
 	
-	public void logIn(String username, String password) throws InterruptedException
+	public static void logIn() throws InterruptedException
 	{		
-		click(ConstructElementMap.accountButton);
+		click(accountButton);
 		
-		click(ConstructElementMap.accountDropdown.logIn);
+		click(accountDropdown.logIn);
 		
-		switchToIframe(ConstructElementMap.iframe);
+		switchToIframe(iframe);
 		
-		sendText(ConstructElementMap.logInPopup.usernameField, username);
+		sendText(logInPopup.usernameField, SensitiveData.username);
 		
-		sendText(ConstructElementMap.logInPopup.passwordField, password);
+		sendText(logInPopup.passwordField, SensitiveData.password);
 		
-		click(ConstructElementMap.logInPopup.logInButton);
+		click(logInPopup.logInButton);
 	}
 	
-	public void start()
+	public static void start()
 	{
-		System.setProperty("webdriver.edge.driver", "C:\\driver\\msedgedriver.exe");
-		driver.get("https://editor.construct.net/");
-		click(ConstructElementMap.welcomePopup.noThanksLink);
+		System.setProperty(driverKey, driverValue);
+		driver.get(editorURL);
+		click(welcomePopup.noThanksLink);
 	}
 }

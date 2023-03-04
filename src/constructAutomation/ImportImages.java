@@ -1,12 +1,15 @@
 package constructAutomation;
 
-public class ImportImages
+public class ImportImages extends ConstructMethodLibrary
 {
 	static ConstructMethodLibrary cml = new ConstructMethodLibrary();
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{	
-		cml.start();
-		cml.quit();
+		start();
+		
+		logIn();
+		
+		quit();
 	}
 }
