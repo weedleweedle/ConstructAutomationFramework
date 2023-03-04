@@ -89,7 +89,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 		
 		TypeIntoFileExplorer(projectPath);
 		
-		stop(EstimatedProjectLoadTimeInSeconds).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(progressDialog)));
+		stop(EstimatedProjectLoadTimeInSeconds).until(ExpectedConditions.invisibilityOfElementLocated(progressDialog));
 	}
 	
 	public static void openProject() throws InterruptedException, AWTException
