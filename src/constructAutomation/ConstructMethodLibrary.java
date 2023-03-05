@@ -81,6 +81,11 @@ public class ConstructMethodLibrary extends ConstructElementMap
 		switchToDefaultContent();
 	}
 	
+	public static void waitUntilElementIsGone(By by, int seconds)
+	{
+		stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
+	}
+	
 	public static void openProject(int EstimatedProjectLoadTimeInSeconds) throws InterruptedException, AWTException
 	{		
 		click(startPage.openButton);
@@ -89,7 +94,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 		
 		TypeIntoFileExplorer(projectPath);
 		
-		stop(EstimatedProjectLoadTimeInSeconds).until(ExpectedConditions.invisibilityOfElementLocated(progressDialog));
+		waitUntilElementIsGone(progressDialog, EstimatedProjectLoadTimeInSeconds);
 	}
 	
 	public static void openProject() throws InterruptedException, AWTException
