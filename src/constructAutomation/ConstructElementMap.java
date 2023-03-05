@@ -6,6 +6,7 @@ public class ConstructElementMap extends Data
 {
 	public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
+	public static final By progressDialog = By.id("progressDialog");
 	public static final class exampleBrowser
 	{
 		public static final By searchBox = By.className("searchInputField");
@@ -279,13 +280,13 @@ public class ConstructElementMap extends Data
 	public static final By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
 	public static final class startPage
 	{
-		public static final By newButton = By.className("buttonNew");
-		public static final By openButton = By.className("buttonOpen");
+		public static final By newButton = By.id("buttonNew");
+		public static final By openButton = By.id("buttonOpen");
 		public static final class openButtonDropdown
 		{
-			public static final By cloud = By.className("option fromCloud");
-			public static final By file = By.className("option fromFile");
-			public static final By projectFolder = By.className("option fromFolder");
+			public static final By cloud = By.xpath("//div[@class='option fromCloud']");
+			public static final By file = By.xpath("//div[@class='option fromFile']");
+			public static final By projectFolder = By.xpath("//div[@class='option fromFolder']");
 		}
 		public static final class learnColumn
 		{
