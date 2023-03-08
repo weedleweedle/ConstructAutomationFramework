@@ -277,6 +277,46 @@ public class ConstructElementMap extends Data
 		}
 	}
 	
+	public static final By projectTab = By.xpath("");
+	public static final class project
+	{
+		public static final class animationsEditor
+		{			
+			public static final class animationsPane
+			{
+				// Used to bring up the context menu
+				public static final By animationsPaneBackground = By.xpath("//ui-animation-editor-panel-content/ui-tree[@role='tree']");
+				public static final class animationsPaneContext
+				{
+					public static final By importAnimations = By.xpath("//span[text()='Import Animation']");
+					public static final class importAnimationsContext
+					{
+						public static final By fromFiles = By.xpath("//span[text()='From Files']");
+					}
+				}
+			}
+		}
+		public static final class createNewObjectTypePopup
+		{
+			public static final By searchBar = By.xpath("//dialog[@id='createNewObjectTypeDialog']//input[@type='search']");
+			public static final By name = By.id("crObjectTypeNameInput");
+		}
+		public static final class projectPane
+		{
+			public static final By projectTreeItem (String name) {
+				return By.xpath("(//span[@class='tree-item-name' and text()='" + name + "'])[1]");
+			}
+			public static final class projectFolder
+			{
+				public static final By objectTypes = By.xpath("//span[text()='Object types']");
+				public static final class objectTypesContext
+				{
+					public static final By addNewObjectType = By.xpath("//span[text()='Add new object type']");
+				}
+			}
+		}
+	}
+	
 	public static final By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
 	public static final class startPage
 	{
