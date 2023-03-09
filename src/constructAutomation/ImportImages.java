@@ -12,7 +12,7 @@ public class ImportImages extends ConstructMethodLibrary
 			
 			logIn();
 			
-			openProject();
+			openProjectFolder();
 			
 			importImages("frameworkTesting");
 			

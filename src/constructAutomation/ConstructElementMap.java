@@ -432,6 +432,7 @@ public class ConstructElementMap extends Data
 		public static final By project = By.xpath("//span[text()='Project'][@class='menu-item-text']/..");
 		public static final class projectPopout
 		{
+			// Different options depending on if a project is open or not
 			public static final By newProject = By.xpath("//span[text()='New']/..");
 			public static final By cloudOpen = By.xpath("//span[text()='Cloud open']/..");
 			public static final By openLocalFile = By.xpath("//span[text()='Open local file']/..");

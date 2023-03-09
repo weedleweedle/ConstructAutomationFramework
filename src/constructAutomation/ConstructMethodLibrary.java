@@ -98,10 +98,11 @@ public class ConstructMethodLibrary extends ConstructElementMap
 		stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
 	
-	public static void openProject(int EstimatedProjectLoadTimeInSeconds) throws InterruptedException, AWTException
+	public static void openProjectFolder(int EstimatedProjectLoadTimeInSeconds) throws InterruptedException, AWTException
 	{		
 		Robot robot = new Robot();
 		
+		// Alternate path. Less clicks but only usable from the Start Page.
 		click(startPage.openButton);
 		
 		click(startPage.openButtonDropdown.projectFolder);
@@ -119,9 +120,9 @@ public class ConstructMethodLibrary extends ConstructElementMap
 		waitUntilElementIsGone(progressDialog, EstimatedProjectLoadTimeInSeconds);
 	}
 	
-	public static void openProject() throws InterruptedException, AWTException
+	public static void openProjectFolder() throws InterruptedException, AWTException
 	{		
-		openProject(120);
+		openProjectFolder(120);
 	}
 	
 	private static void typeIntoFileExplorer(String path) throws AWTException
