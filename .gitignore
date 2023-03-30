@@ -27,3 +27,4 @@ driver/chromedriver.exe
 addons
 
 src/constructAutomation/SensitiveData.java
+/target/
