@@ -277,7 +277,9 @@ public class ConstructElementMap extends Data
 		}
 	}
 	
-	public static final By projectTab = By.xpath("");
+	public static final By projectTab (String name) {
+		return By.xpath("//ui-tab[starts-with(@title, 'Layout: " + name + "')]");
+	}
 	public static final class project
 	{
 		public static final class animationsEditor
@@ -434,6 +436,15 @@ public class ConstructElementMap extends Data
 		{
 			// Different options depending on if a project is open or not
 			public static final By newProject = By.xpath("//span[text()='New']/..");
+			public static final By openRecent = By.xpath("//span[text()='Open recent']/..");
+			public static final class openRecentPopout {
+				
+				// Returns the first recent project that contains 'name'
+				// You'll need to match the project name almost exactly if it's named similarly to the other UI menu items
+				public static final By recentProject (String name) {
+					return By.xpath("(//span[contains(text(), '" + name + "')]/..)[1]");
+				}
+			}
 			public static final By cloudOpen = By.xpath("//span[text()='Cloud open']/..");
 			public static final By openLocalFile = By.xpath("//span[text()='Open local file']/..");
 			public static final By openLocalFolder = By.xpath("//span[text()='Open local project folder']/..");
