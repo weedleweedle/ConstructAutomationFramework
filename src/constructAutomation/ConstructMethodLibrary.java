@@ -107,21 +107,37 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	public static void logIn()
 	{		
-		click(accountButton);
+		click(userAccountButton.userAccountButton);
 		
 		click(accountDropdown.logIn);
 		
 		switchToIframe(iframe);
 		
-		sendText(logInPopup.usernameField, SensitiveData.username);
+		sendText(logInDialog.usernameField, SensitiveData.username);
 		
-		sendText(logInPopup.passwordField, SensitiveData.password);
+		sendText(logInDialog.passwordField, SensitiveData.password);
 		
-		click(logInPopup.logInButton);
+		click(logInDialog.logInButton);
+		
+		waitUntilElementIsGone(logInDialog.loginDialog);		
 		
 		switchToDefaultContent();
+		
+		waitUntilTextIs(userAccountButton.userAccountName, SensitiveData.username, 10);
 	}
 	
+	/**<h1>Wait Until Text is</h1>
+	 * Wait until the text of an element is the specified text.
+	 * @param by The <code>By</code> of the element of which to check the text
+	 * @param text The awaited text
+	 * @param seconds How long to wait for the text
+	 * @author laserwolve
+	 */
+	private static void waitUntilTextIs(By by, String text, int seconds) {
+		stop(seconds).until(ExpectedConditions.textToBe(by, text));
+		
+	}
+
 	/**<h1>Open a Project Folder</h1>
 	 * Opens a Construct 3 project folder.
 	 * @see {@link #openProjectFolder(int)}
@@ -277,5 +293,16 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	public static void waitUntilElementIsGone(By by, int seconds)
 	{
 		stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
+	}
+	
+	/** <h1>Wait Until Element is Gone</h1>
+	 * Waits until the specified element is no longer visible.
+	 * @param The element for which to wait upon.
+	 * @see {@link #waitUntilElementIsGone(by, int)}
+	 * @author laserwolve
+	 */
+	public static void waitUntilElementIsGone(By by)
+	{
+		waitUntilElementIsGone(by, 10);
 	}
 }

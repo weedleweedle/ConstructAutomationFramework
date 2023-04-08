@@ -2,6 +2,10 @@ package constructAutomation;
 
 import org.openqa.selenium.By;
 
+/**<h1>Construct Element Map</h1>
+ * <code>By</code> objects with locators for all the elements in the Construct Editor.
+ * @author laserwolve
+ */
 public class ConstructElementMap extends Data
 {
 	public static final class aboutPopup
@@ -118,7 +122,6 @@ public class ConstructElementMap extends Data
 			return By.xpath("//*[@columnname='name']/*[text()='" + addon + "']/../..");
 		}
 	}
-	
 	public static final class buyNowPage
 	{
 		public static final class secondPage
@@ -189,7 +192,6 @@ public class ConstructElementMap extends Data
 			return By.xpath("//ui-table-row[@tabindex='-1'][" + row + "]");		
 		}
 	}
-	
 	public static final class enterAccessCodePopup
 	{
 		public static final By accessCodeField = By.className("input");
@@ -467,7 +469,6 @@ public class ConstructElementMap extends Data
 			return By.xpath("//div[@id='selectedTags']/div[@data-tag='" + tag.toLowerCase() + "']");
 		}
 	}
-	
 	public static final class exportManagerPopup
 	{
 		public static final By addArchive = By.xpath("//*[@title='Add archive']");
@@ -487,10 +488,10 @@ public class ConstructElementMap extends Data
 		public static final By learnMoreButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='infoButton']");
 		public static final By logInLink = By.linkText("log in to your account");
 		public static final By purchaseButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='okButton']");
-	}
-	
-	public static final class logInPopup
+	}	
+	public static final class logInDialog
 	{
+		public static final By loginDialog = By.id("loginDialog");
 		public static final By cancelButton = By.id("cancel");
 		public static final By closeX = By.xpath("//*[@id='loginDialog']//ui-close-button");
 		public static final By facebookButton = By.className("oAuthLoginButton");
@@ -577,7 +578,6 @@ public class ConstructElementMap extends Data
 		public static final By settings = By.xpath("//span[text()='Settings']/..");
 		public static final By view = By.xpath("//span[text()='View']/..");
 	}
-	
 	public static final class project
 	{
 		public static final class animationsEditor
@@ -720,7 +720,6 @@ public class ConstructElementMap extends Data
 			return By.xpath("//*[@class='languageSetting']/*[@value='" + languageCode + "']");
 		}
 	}
-	
 	public static final class shortBreakPopup
 	{
 		public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
@@ -790,7 +789,23 @@ public class ConstructElementMap extends Data
 		public static final By noThanksLink = By.className("noThanksLink");
 		public static final By tourButton = By.className("tourButton");		
 	}	
-	public static final By accountButton = By.id("userAccountWrap");
+	public static final class userAccountButton
+	{
+		public static final By userAccountButton = By.id("userAccountWrap");
+		
+		/**<h1>User License Type</h1>
+		 * The text of this element is always "Free edition". If the license type of the account that's signed in is not "Free edition", this element is hidden.
+		 * @author laserwolve
+		 */
+		public static final By userLicenseType = By.id("userLicenseType");
+		/**<h1>User Account Name</h1>
+		 * Defaults to "Guest" while signed out, and the username "Guest" is not permitted when creating a Construct account. However, an account by this name does actually exist, ableit lower case.
+		 * @see <a href="https://www.construct.net/en/users/42941/guest">User named "guest"</a>
+		 * @author laserwolve
+		 */
+		public static final By userAccountName = By.id("userAccountName");
+	}
+	
 	public static final By buyNowTab = By.className("buyNowTab");
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
 	public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
