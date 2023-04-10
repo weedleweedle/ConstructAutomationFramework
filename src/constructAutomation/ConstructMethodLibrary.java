@@ -79,8 +79,9 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @param archiveName The name of the {@value constructAutomation.Data#archiveFileExtension} archive containing images formatted for Construct.
 	 * @throws AWTException in {@link #typeIntoFileExplorer}
 	 * @author laserwolve
+	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 */
-	public static void importImages(String spriteName, String archiveName) throws AWTException
+	public static void importImages(String spriteName, String archiveName) throws AWTException, InterruptedException
 	{
 		rightClick(project.projectBar.projectFolder.objectTypes);
 		
@@ -143,8 +144,9 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @see {@link #openProjectFolder(int)}
 	 * @throws AWTException in {@link #openProjectFolder}
 	 * @author laserwolve
+	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 */
-	public static void openProjectFolder() throws AWTException
+	public static void openProjectFolder() throws AWTException, InterruptedException
 	{		
 		openProjectFolder(120);
 	}
@@ -154,9 +156,10 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * Chromium "Let site edit files?" popup.
 	 * @param MaximumProjectLoadTimeInSeconds The maximum amount of time to wait (in seconds) for the project to load.
 	 * @throws AWTException in {@link #typeIntoFileExplorer}
+	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 * @author laserwolve
 	 */
-	public static void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException // TODO: Update Javadoc with the exception that would be thrown if 'EstimatedProjectLoadTimeInSeconds' is exceeded
+	public static void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException, InterruptedException // TODO: Update Javadoc with the exception that would be thrown if 'EstimatedProjectLoadTimeInSeconds' is exceeded
 	{	
 		Robot robot = new Robot();	// TODO: Can we reuse this robot in 'TypeIntoFileExplorer'?
 		
@@ -267,15 +270,21 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * to <strong>path</strong>, then pastes it into the File Explorer window.
 	 * @param path The file path to type/paste into the File Explorer window.
 	 * @throws AWTException from {@link java.awt.Robot#Robot}
-	 * @author laserwolve
+	 * @throws InterruptedException from {@link Thread#sleep}
+	 * @author laserwolve 
 	 */
-	private static void typeIntoFileExplorer(String path) throws AWTException //TODO: Will this work headless?
+	private static void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
 	{		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
 		
 		Robot robot = new Robot();
 		
-		// This section won't work if the file explorer doesn't have focus
+		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up
+		
+//		robot.keyPress(KeyEvent.VK_CONTROL);
+//		robot.keyPress(KeyEvent.VK_L);
+//		robot.keyRelease(KeyEvent.VK_CONTROL);
+//		robot.keyRelease(KeyEvent.VK_L);		// Focus path bar
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
