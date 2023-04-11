@@ -805,6 +805,42 @@ public class ConstructElementMap extends Data
 		 */
 		public static final By userAccountName = By.id("userAccountName");
 	}
+	public static final class newProjectPopup
+	{
+		public static final By name = By.id("npProjectNameInput");
+		public static final By choosePreset = By.id("npPresetSelect");
+		public static final class Presets
+		{
+			public static final By retroStyle = By.xpath("//option[@value='retro-style']");
+			public static final By sdLandscape43 = By.xpath("//option[@value='sd-landscape-4-3']");
+			// The value attribute for this preset says "4-3", that might be a typo
+			public static final By sdPortrait34 = By.xpath("//option[@value='sd-portrait-4-3']");
+			public static final By sdLandscape169 = By.xpath("//option[@value='sd-landscape-16-9']");
+			public static final By sdPortrait169 = By.xpath("//option[@value='sd-portrait-16-9']");
+			// variable names can't start with numbers
+			public static final By landscape720p = By.xpath("//option[@value='720p-landscape']");
+			public static final By portrait720p = By.xpath("//option[@value='720p-portrait']");
+			public static final By landscape1080p = By.xpath("//option[@value='1080p-landscape']");
+			public static final By portrait1080p = By.xpath("//option[@value='1080p-portrait']");
+			public static final By landscape4k = By.xpath("//option[@value='4k-landscape']");
+			public static final By portrait4k = By.xpath("//option[@value='1080p-portait']");
+		}
+		public static final By viewportSizeWidth = By.id("npViewportWidthInput");
+		public static final By viewportSizeHeight = By.id("npViewportHeightInput");
+		public static final By orientations = By.id("npOrientationSelect");
+		public static final class Orientations 
+		{
+			public static final By any = By.xpath("//option[@value='any']");
+			public static final By portrait = By.xpath("//option[@value='portrait']");
+			public static final By landscape = By.xpath("//option[@value='landscape']");
+		}
+		public static final By startWith = By.id("npStartWithSelect");
+		public static final class StartWith
+		{
+			public static final By eventSheet = By.xpath("//option[@value='event-sheet']");
+			public static final By script = By.xpath("//option[@value='script']");
+		}
+	}
 	
 	public static final By buyNowTab = By.className("buyNowTab");
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
