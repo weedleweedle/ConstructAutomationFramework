@@ -615,6 +615,42 @@ public class ConstructElementMap extends Data
 				return By.xpath("(//span[@class='tree-item-name' and text()='" + name + "'])[1]");
 			}
 		}
+		public static final By save = By.xpath("//ui-toolbar-button[@title='Save project']");
+		public static final By undo = By.xpath("//div[@title='Undo']");
+		public static final By viewUndoStack = By.xpath("//div[@title='View undo stack']");
+		/**<h1>Undo Stack</h1>
+		 * Gets a <code>By</code> for an undo action in the stack, specified by a number. This method is 0-based but Construct's undo stack is 1-based,
+		 * at least in the UI. This is a very weak locator so it might break in the future.
+		 * @param number The (0-based) number of the desired undo action
+		 * @return A <code>By</code> with a locator for the element of the desired undo action
+		 * @author laserwolve
+		 */
+		public static final By undoStack (int number)
+		{
+			return By.xpath("(//span[@class='menu-item-text'])[" + number + "]");
+		}
+		public static final By redo = By.xpath("//div[@title='Redo']");
+		public static final By viewRedoStack = By.xpath("//div[@title='View redo stack']");
+		/**<h1>Redo Stack</h1>
+		 * Uses the same locators as {@link #undoStack(int)}, but these two menu items can't be open at the same time.
+		 * @param number The (0-based) number of the desired undo action
+		 * @return A <code>By</code> with a locator for the element of the desired undo action
+		 * @author laserwolve
+		 * @see {@link #undoStack(int)}
+		 */
+		public static final By redoStack (int number)
+		{
+			return By.xpath("(//span[@class='menu-item-text'])[" + number + "]");
+		}
+		public static final By preview = By.xpath("//div[@title='Preview']");
+		public static final By viewOtherPreviewOptions = By.xpath("//div[@title='Other preview options']");
+		public static final class OtherPreviewOptions
+		{
+			public static final By previewLayout = By.xpath("//span[@class='menu-item-text'][text()='Preview layout']");
+			public static final By debugLayout = By.xpath("//span[@class='menu-item-text'][text()='Debug layout']");
+			public static final By previewProject = By.xpath("//span[@class='menu-item-text'][text()='Preview project']");
+			public static final By remotePreview = By.xpath("//span[@class='menu-item-text'][text()='Remote preview']");
+		}
 	}
 	public static final class SettingsPopup
 	{
