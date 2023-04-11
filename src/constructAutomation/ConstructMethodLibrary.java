@@ -83,21 +83,21 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	public static void importImages(String spriteName, String archiveName) throws AWTException, InterruptedException
 	{
-		rightClick(project.projectBar.projectFolder.objectTypes);
+		rightClick(Project.ProjectBar.ProjectFolder.objectTypes);
 		
-		click(project.projectBar.projectFolder.objectTypesContext.addNewObjectType);
+		click(Project.ProjectBar.ProjectFolder.ObjectTypesContext.addNewObjectType);
 		
-		sendText(project.createNewObjectTypePopup.searchBar, objectTypes.sprite);
+		sendText(Project.CreateNewObjectTypePopup.searchBar, objectTypes.sprite);
 		
-		sendText(project.createNewObjectTypePopup.name, spriteName + Keys.ENTER);
+		sendText(Project.CreateNewObjectTypePopup.name, spriteName + Keys.ENTER);
 		
-		doubleClick(project.projectBar.projectTreeItem(spriteName));
+		doubleClick(Project.ProjectBar.projectTreeItem(spriteName));
 		
-		rightClick(project.animationsEditor.animationsPane.animationsPaneBackground);
+		rightClick(Project.AnimationsEditor.AnimationsPane.animationsPaneBackground);
 		
-		click(project.animationsEditor.animationsPane.animationsPaneContext.importAnimations);
+		click(Project.AnimationsEditor.AnimationsPane.AnimationsPaneContext.importAnimations);
 		
-		click(project.animationsEditor.animationsPane.animationsPaneContext.importAnimationsContext.fromFiles);
+		click(Project.AnimationsEditor.AnimationsPane.AnimationsPaneContext.ImportAnimationsContext.fromFiles);
 		
 		typeIntoFileExplorer(sourcePath + archiveName + archiveFileExtension);
 	}
@@ -108,23 +108,23 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	public static void logIn()
 	{		
-		click(userAccountButton.userAccountButton);
+		click(UserAccountButton.userAccountButton);
 		
-		click(accountDropdown.logIn);
+		click(AccountDropdown.logIn);
 		
 		switchToIframe(iframe);
 		
-		sendText(logInDialog.usernameField, SensitiveData.username);
+		sendText(LogInDialog.usernameField, SensitiveData.username);
 		
-		sendText(logInDialog.passwordField, SensitiveData.password);
+		sendText(LogInDialog.passwordField, SensitiveData.password);
 		
-		click(logInDialog.logInButton);
+		click(LogInDialog.logInButton);
 		
-		waitUntilElementIsGone(logInDialog.loginDialog);		
+		waitUntilElementIsGone(LogInDialog.loginDialog);		
 		
 		switchToDefaultContent();
 		
-		waitUntilTextIs(userAccountButton.userAccountName, SensitiveData.username, 10);
+		waitUntilTextIs(UserAccountButton.userAccountName, SensitiveData.username, 10);
 	}
 	
 	/**<h1>Wait Until Text is</h1>
@@ -163,9 +163,9 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	{	
 		Robot robot = new Robot();	// TODO: Can we reuse this robot in 'TypeIntoFileExplorer'?
 		
-		click(startPage.openButton);
+		click(StartPage.openButton);
 		
-		click(startPage.openButtonDropdown.projectFolder);
+		click(StartPage.OpenButtonDropdown.projectFolder);
 		
 		typeIntoFileExplorer(projectPath);
 		
@@ -219,7 +219,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	public static void start()
 	{
 		driver.get(editorURL);
-		click(welcomePopup.noThanksLink);
+		click(WelcomePopup.noThanksLink);
 	}
 	
 	/**<h1>Stop</h1>
