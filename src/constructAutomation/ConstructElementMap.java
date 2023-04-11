@@ -44,7 +44,7 @@ public class ConstructElementMap extends Data
 		/*
 		 * If persistent storage has been granted, this link doesn't exist.
 		 * If persistent storage is requested but not granted, the following error
-		 * popup shows. I don't have a way to find out what happens if persisent
+		 * popup shows. I don't have a way to find out what happens if persistent
 		 * storage is requested and approved.
 		 */
 		public static final By requestPersistentStorage = By.linkText("Request persistent storage");
@@ -52,7 +52,7 @@ public class ConstructElementMap extends Data
 		public static final By suggestFeatures = By.linkText("Suggest features");
 		public static final By tutorials = By.linkText("Tutorials");
 	}
-	public static final class accountDropdown
+	public static final class AccountDropdown
 	{
 		public static final By enterAccessCode = By.xpath("//span[text()='Enter access code']/..");
 		public static final By logIn = By.xpath("//ui-menuitem//span[text()='Log in']/..");
@@ -60,7 +60,7 @@ public class ConstructElementMap extends Data
 		public static final By register = By.xpath("//span[text()='Register...']/..");
 		public static final By viewDetails = By.xpath("//span[text()='View details']/..");		
 	}
-	public static final class accountInfoPopup
+	public static final class AccountInfoPopup
 	{
 		public static final By closeButton = By.className("okButton");
 		public static final By closeX = By.xpath("//*[@id='accountInfoDialog']//ui-close-button");
@@ -74,9 +74,9 @@ public class ConstructElementMap extends Data
 		// If logged in...
 		public static final By yourLicenses = By.linkText("Your licenses");
 	}
-	public static final class addonManagerPopup
+	public static final class AddonManagerPopup
 	{
-		public static final class addonContextMenu
+		public static final class AddonContextMenu
 		{		
 			// These two options are only available on third party addons
 			public static final By downloadAddon = By.xpath("//span[text()='Download .c3addon']");
@@ -89,9 +89,9 @@ public class ConstructElementMap extends Data
 			public static final By visitWebsite = By.xpath("//span[text()='Visit website']");
 			
 		}
-		public static final class installAddonPopup
+		public static final class InstallAddonPopup
 		{
-			public static final class installFinishedPopup
+			public static final class InstallFinishedPopup
 			{
 				public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 				public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
@@ -102,9 +102,9 @@ public class ConstructElementMap extends Data
 			public static final By documentationWebsite = By.className("addonDocumentation");
 			public static final By installButton = By.xpath("//*[@id='addonConfirmInstallDialog']//*[@class='okButton']");
 		}
-		public static final class uninstallAddonPopup
+		public static final class UninstallAddonPopup
 		{
-			public static final class uninstallFinishedPopup
+			public static final class UninstallFinishedPopup
 			{
 				public static final By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 				public static final By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");		
@@ -122,9 +122,9 @@ public class ConstructElementMap extends Data
 			return By.xpath("//*[@columnname='name']/*[text()='" + addon + "']/../..");
 		}
 	}
-	public static final class buyNowPage
+	public static final class BuyNowPage
 	{
-		public static final class secondPage
+		public static final class Page2
 		{
 			public static final By continueButton = By.id("BtnContinue");
 			public static final By emailBox = By.id("Email");
@@ -133,9 +133,9 @@ public class ConstructElementMap extends Data
 			public static final By storeTAndC = By.linkText("store terms & conditions");
 			public static final By youCanLogin = By.linkText("or you can login");
 		}
-		public static final class thirdPage
+		public static final class Page3
 		{
-			public static final class cancellationTermsPopup
+			public static final class CancellationTermsPopup
 			{
 				public static final By contactingUs = By.linkText("contacting us");
 				public static final By okButton = By.id("CloseSubTermsOverlayLink");
@@ -170,9 +170,9 @@ public class ConstructElementMap extends Data
 		public static final By proceedToPaymentBottom = By.xpath("//*[@class='c']//a[@class='openDemo']");
 		public static final By proceedToPaymentMiddle = By.xpath("//div[@class='proceedOverlay']//a[@class='openDemo']");
 	}
-	public static final class cloudOpenPopup
+	public static final class CloudOpenPopup
 	{
-		public static final class services
+		public static final class Services
 		{
 			public static final By dropBox = By.xpath("//*[@value='DROPBOX']");
 			public static final By googleDrive = By.xpath("//*[@value='GOOGLE DRIVE']");
@@ -192,7 +192,7 @@ public class ConstructElementMap extends Data
 			return By.xpath("//ui-table-row[@tabindex='-1'][" + row + "]");		
 		}
 	}
-	public static final class enterAccessCodePopup
+	public static final class EnterAccessCodePopup
 	{
 		public static final By accessCodeField = By.className("input");
 		public static final By cancelButton = By.className("cancelButton");
@@ -200,18 +200,18 @@ public class ConstructElementMap extends Data
 		public static final By okButton = By.className("okButton");
 		public static final By rememberCheckbox = By.className("inputCheckbox");
 	}
-	public static final class exampleBrowser
+	public static final class ExampleBrowser
 	{
-		public static final class behaviors
+		public static final class Behaviors
 		{
-			public static final class attributes
+			public static final class Attributes
 			{
 				public static final By jumpThru = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-jumpthru']");
 				public static final By persist = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Persist']");
 				public static final By shadowCaster = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-shadowcaster']");
 				public static final By solid = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-solid']");
 			}
-			public static final class general
+			public static final class General
 			{
 				public static final By anchor = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Anchor']");
 				public static final By boundToLayout = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-bound']");
@@ -228,7 +228,7 @@ public class ConstructElementMap extends Data
 				public static final By wrap = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Wrap']");
 			}
 			
-			public static final class movements
+			public static final class Movements
 			{
 				public static final By bullet = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Bullet']");
 				public static final By car = By.xpath("//*[@class='section -behavior']/*[@data-tag='behavior-Car']");
@@ -250,7 +250,7 @@ public class ConstructElementMap extends Data
 			public static final By movementsExpander = By.xpath("//*[@class='titleSection -behavior'][text()='Movements']");
 		}
 		
-		public static final class categories
+		public static final class Categories
 		{
 			public static final By bareBonesTemplate = By.xpath("//div[@class='section -category']/div[@data-tag='barebones-template']");
 			public static final By demoGame = By.xpath("//div[@class='section -category']/div[@data-tag='demo-game']");
@@ -264,9 +264,9 @@ public class ConstructElementMap extends Data
 			public static final By techDemo = By.xpath("//div[@class='section -category']/div[@data-tag='techDemo']");
 		}
 		
-		public static final class effects
+		public static final class Effects
 		{
-			public static final class blend
+			public static final class Blend
 			{
 				public static final By darken = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-darken']");
 				public static final By dodge = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-dodge']");
@@ -277,7 +277,7 @@ public class ConstructElementMap extends Data
 				public static final By screen = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-screen']");
 				public static final By softLight = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-softlight']");
 			}
-			public static final class color
+			public static final class Color
 			{
 				public static final By adjustHsl = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-hsladjust']");
 				public static final By alphaClamp = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-alphaclamp']");
@@ -297,7 +297,7 @@ public class ConstructElementMap extends Data
 				public static final By vignette = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-vignette']");		
 			}
 			
-			public static final class distortion
+			public static final class Distortion
 			{
 				public static final By bulge = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-bulge']");
 				public static final By glass = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-glass']");
@@ -309,17 +309,17 @@ public class ConstructElementMap extends Data
 				public static final By warpRipple = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-warpripple']");
 				public static final By water = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-water']");
 			}
-			public static final class mask
+			public static final class Mask
 			{
 				public static final By adjustHslMask = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-hsladjustmask']");
 				public static final By warpObjectMask = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-warpobjectmask']");
 			}
 			
-			public static final class normalMapping
+			public static final class MormalMapping
 			{
 				public static final By bumpMapping = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-bumpmapping']");
 			}
-			public static final class threeD
+			public static final class ThreeD
 			{
 				public static final By fogExponential = By.xpath("//*[@class='section -effect']/*[@data-tag='effect-fogexponential']");
 			}
@@ -333,7 +333,7 @@ public class ConstructElementMap extends Data
 			public static final By normalMappingExpander = By.xpath("//*[@class='titleSection -effect'][text()='Normal mapping']");
 			public static final By threeDExpander = By.xpath("//*[@class='titleSection -effect'][text()='3D']");
 		}
-		public static final class genres
+		public static final class Genres
 		{
 			public static final By action = By.xpath("//div[@class='section -genre']/div[@data-tag='action']");
 			public static final By adventure = By.xpath("//div[@class='section -genre']/div[@data-tag='adventure']");
@@ -349,15 +349,15 @@ public class ConstructElementMap extends Data
 			public static final By strategy = By.xpath("//div[@class='section -genre']/div[@data-tag='strategy']");
 		}
 		
-		public static final class levels
+		public static final class Levels
 		{
 			public static final By advanced = By.xpath("//div[@class='section -level']/div[@data-tag='advanced']");
 			public static final By beginner = By.xpath("//div[@class='section -level']/div[@data-tag='beginner']");
 			public static final By intermediate = By.xpath("//div[@class='section -level']/div[@data-tag='intermediate']");
 		}
-		public static final class plugins
+		public static final class Plugins
 		{
-			public static final class dataAndStorage
+			public static final class DataAndStorage
 			{
 				public static final By array = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Arr']");
 				public static final By binaryData = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-BinaryData']");
@@ -366,7 +366,7 @@ public class ConstructElementMap extends Data
 				public static final By localStorage = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-LocalStorage']");
 				public static final By xml = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-XML']");
 			}
-			public static final class formControls
+			public static final class FormControls
 			{
 				public static final By button = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Button']");
 				public static final By htmlElement = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-HTMLElement']");
@@ -376,7 +376,7 @@ public class ConstructElementMap extends Data
 				public static final By textInput = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-textBox']");
 			}
 			
-			public static final class general
+			public static final class General
 			{
 				public static final By ninePatch = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-NinePatch']");
 				public static final By particles = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Particles']");
@@ -388,7 +388,7 @@ public class ConstructElementMap extends Data
 				public static final By tileMap = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Tilemap']");
 				public static final By timeLineController = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Timeline']");
 			}
-			public static final class input
+			public static final class Input
 			{
 				public static final By gamePad = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-gamepad']");
 				public static final By keyBoard = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Keyboard']");
@@ -396,7 +396,7 @@ public class ConstructElementMap extends Data
 				public static final By touch = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Touch']");
 			}
 			
-			public static final class media
+			public static final class Media
 			{
 				public static final By audio = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Audio']");
 				public static final By geolocation = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Geolocation']");
@@ -405,7 +405,7 @@ public class ConstructElementMap extends Data
 				public static final By userMedia = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-UserMedia']");
 				public static final By videoRecorder = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-GameRecorder']");
 			}
-			public static final class other
+			public static final class Other
 			{
 				public static final By advancedRandom = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-AdvancedRandom']");
 				public static final By blueTooth = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Bluetooth']");
@@ -415,12 +415,12 @@ public class ConstructElementMap extends Data
 				public static final By share = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Share']");
 			}
 			
-			public static final class threeD
+			public static final class ThreeD
 			{
 				public static final By threeDCamera = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Camera3D']");
 				public static final By threeDShape = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Shape3D']");
 			}
-			public static final class web
+			public static final class Web
 			{
 				public static final By ajax = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-AJAX']");
 				public static final By browser = By.xpath("//*[@class='section -plugin']/*[@data-tag='plugin-Browser']");
@@ -440,7 +440,7 @@ public class ConstructElementMap extends Data
 			public static final By webExpander = By.xpath("//*[@class='titleSection -plugin'][contains(text(),'Web')]");
 		}
 		
-		public static final class tags
+		public static final class Tags
 		{
 			public static final By meshDistortion = By.xpath("//div[@class='section -tag']/div[@data-tag='mesh-distortion']");
 			public static final By mobile = By.xpath("//div[@class='section -tag']/div[@data-tag='mobile']");
@@ -469,7 +469,7 @@ public class ConstructElementMap extends Data
 			return By.xpath("//div[@id='selectedTags']/div[@data-tag='" + tag.toLowerCase() + "']");
 		}
 	}
-	public static final class exportManagerPopup
+	public static final class ExportManagerPopup
 	{
 		public static final By addArchive = By.xpath("//*[@title='Add archive']");
 		public static final By buildApplication = By.xpath("//*[@title='Build Application']");
@@ -481,7 +481,7 @@ public class ConstructElementMap extends Data
 			return By.xpath("//*[@columnname='project']/*[text()='" + export + "']/../..");
 		}
 	}
-	public static final class freeEditionPopup
+	public static final class FreeEditionPopup
 	{
 		public static final By cancelButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='cancelButton']");
 		public static final By closeX = By.xpath("//*[@id='freeEditionLimitDialog']//ui-close-button");
@@ -489,7 +489,7 @@ public class ConstructElementMap extends Data
 		public static final By logInLink = By.linkText("log in to your account");
 		public static final By purchaseButton = By.xpath("//*[@id='addonManagerDialog']//*[@class='okButton']");
 	}	
-	public static final class logInDialog
+	public static final class LogInDialog
 	{
 		public static final By loginDialog = By.id("loginDialog");
 		public static final By cancelButton = By.id("cancel");
@@ -501,9 +501,9 @@ public class ConstructElementMap extends Data
 		public static final By rememberCheckbox = By.id("remember");
 		public static final By usernameField = By.id("username");
 	}
-	public static final class menuDropdown
+	public static final class MenuDropdown
 	{
-		public static final class accountPopout
+		public static final class AccountPopout
 		{
 			public static final By enterAccessCode = By.xpath("//span[text()='Enter access code']/..");
 			public static final By logIn = By.xpath("//span[text()='Log in']/..");
@@ -515,7 +515,7 @@ public class ConstructElementMap extends Data
 			public static final By register = By.xpath("//span[text()='Register...']/..");
 			public static final By viewDetails = By.xpath("//span[text()='View details']/..");
 		}
-		public static final class guidedToursPopout
+		public static final class GuidedToursPopout
 		{
 			public static final By beginnersGuide = By.xpath("//span[contains(text(),'Beginner')]/..");
 			public static final By platformGame = By.xpath("//span[text()='Make a platform game']/..");
@@ -523,9 +523,9 @@ public class ConstructElementMap extends Data
 			public static final By startedWithtimelineAnimations = By.xpath("//span[text()='Get started with timeline animations']/..");
 		}
 		
-		public static final class guidedToursPopup
+		public static final class GuidedToursPopup
 		{
-			public static final class closeConfirmation
+			public static final class CloseConfirmation
 			{
 				public static final By cancelButton = By.className("cancelConfirmButton");
 				public static final By closeX = By.xpath("//*[@id='confirmDialog']//ui-close-button");
@@ -535,9 +535,9 @@ public class ConstructElementMap extends Data
 			public static final By menuDots = By.xpath("//ui-menu-dots-button");
 			public static final By nextButton = By.className("nextButton bold");
 		}
-		public static final class projectPopout
+		public static final class ProjectPopout
 		{
-			public static final class openRecentPopout {
+			public static final class OpenRecentPopout {
 				
 				/** The element for a recent project under "Open recent". Neither these elements or the "Open recent" element will be present
 				 * if there's no recent projects. You'll need to match the project name almost exactly if it's named similarly to the other UI menu items.
