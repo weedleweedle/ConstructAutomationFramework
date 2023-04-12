@@ -1,6 +1,5 @@
 package constructAutomation;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 class LocatorValidation extends ConstructMethodLibrary
@@ -16,12 +15,7 @@ class LocatorValidation extends ConstructMethodLibrary
 		confirmTrue(isElementClickable(WelcomePopup.noThanksLink));
 		
 		confirmTrue(isElementClickable(WelcomePopup.tourButton));
-	}
-	
-	@AfterAll
-	static void tearDownAfterClass()
-	{
+		
 		quit();
 	}
-
 }
