@@ -159,7 +159,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 		click(AccountDropdown.logIn);
 		
-		switchToIframe(iframe);
+		switchToIframe(Misc.iframe);
 		
 		sendText(LogInDialog.usernameField, SensitiveData.username);
 		
@@ -224,7 +224,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);		// Select "Edit files"
 		
-		waitUntilElementIsGone(progressDialog, MaximumProjectLoadTimeInSeconds);
+		waitUntilElementIsGone(Misc.progressDialog, MaximumProjectLoadTimeInSeconds);
 	}
 	
 	/**<h1>Quit</h1>

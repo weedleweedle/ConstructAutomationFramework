@@ -203,6 +203,7 @@ public class ConstructElementMap extends Data
 	}
 	public static final class ExampleBrowser
 	{
+		public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
 		public static final class Behaviors
 		{
 			public static final class Attributes
@@ -583,6 +584,10 @@ public class ConstructElementMap extends Data
 	}
 	public static final class Project
 	{
+		public static final By projectTab (String name)
+		{
+			return By.xpath("//ui-tab[starts-with(@title, 'Layout: " + name + "')]");
+		}
 		public static final class AnimationsEditor
 		{			
 			public static final class AnimationsPane
@@ -766,6 +771,7 @@ public class ConstructElementMap extends Data
 	}
 	public static final class StartPage
 	{
+		public static final By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
 		public static final class ExploreColumn
 		{
 			public static final By assetStore = By.xpath("//a[@data-campaign-content='AssetStore']");
@@ -822,13 +828,9 @@ public class ConstructElementMap extends Data
 		public static final By nwjsStorage = By.className("clearNwjsStorage");
 		public static final By savedVersions = By.className("clearC3Storage");
 	}
-	/**<h1>Welcome Popup</h1>
-	 * The welcome popup that first displays when arriving at {@value Data#editorURL}. Clicking any button on the popup will dismiss it
-	 * for the remainder of that browser session.
-	 * @author laserwolve
-	 */
 	public static final class WelcomePopup
 	{
+		// Clicking any button on the popup will dismiss it for the remainder of that browser session.
 		public static final By closeX = By.xpath("//*[@id='welcomeTourDialog']/ui-dialog-caption/ui-close-button");
 		public static final By noThanksLink = By.className("noThanksLink");
 		public static final By tourButton = By.className("tourButton");		
@@ -889,14 +891,10 @@ public class ConstructElementMap extends Data
 		public static final By help = By.linkText("Help");
 		public static final By create = By.className("okButton");
 		public static final By cancel = By.className("cancelButton");
-	}
-	
-	public static final By buyNowTab = By.className("buyNowTab");
-	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
-	public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
-	public static final By progressDialog = By.id("progressDialog");
-	public static final By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
-	public static final By projectTab (String name) {
-		return By.xpath("//ui-tab[starts-with(@title, 'Layout: " + name + "')]");
+	}	
+	public static final class Misc
+	{
+		public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
+		public static final By progressDialog = By.id("progressDialog");
 	}
 }

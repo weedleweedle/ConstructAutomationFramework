@@ -19,7 +19,7 @@ class LocatorValidation extends ConstructMethodLibrary
 		
 		// menu confirmation
 		click(Menu.menuButton);
-		click(Menu.project); // Confirms Menu.menuButton
+		click(Menu.project);
 		confirmClickable(Menu.ProjectPopout.newProject);
 		confirmClickable(Menu.ProjectPopout.cloudOpen);
 		confirmClickable(Menu.ProjectPopout.openLocalFile);
