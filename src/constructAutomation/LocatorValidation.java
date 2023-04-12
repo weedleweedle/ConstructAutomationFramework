@@ -1,7 +1,5 @@
 package constructAutomation;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +9,13 @@ class LocatorValidation extends ConstructMethodLibrary
 	@Test
 	void test()
 	{
-		driver.get(editorURL);
+		start();
 		
-		assertEquals(driver.getCurrentUrl(), editorURL);
+		confirmTrue(isElementClickable(WelcomePopup.closeX));
+		
+		confirmTrue(isElementClickable(WelcomePopup.noThanksLink));
+		
+		confirmTrue(isElementClickable(WelcomePopup.tourButton));
 	}
 	
 	@AfterAll

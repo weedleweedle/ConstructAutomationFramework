@@ -10,6 +10,8 @@ public class ImportImages extends ConstructMethodLibrary
 		{
 			start();
 			
+			dismissWelcomePopup();
+			
 			logIn();
 			
 			openProjectFolder();

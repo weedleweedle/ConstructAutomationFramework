@@ -1,14 +1,18 @@
 package constructAutomation;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
+import java.util.Objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -50,9 +54,40 @@ public class ConstructMethodLibrary extends ConstructElementMap
 		return clickableElement(by, 5);
 	}
 	
+	/**<h1>Is Element Clickable</h1>
+	 * Uses {@link #clickableElement(By)} to determine if an element is clickable or not.
+	 * @param by The <code>By</code> of the element to check.
+	 * @return whether or not the element is clickable.
+	 * @author laserwolve
+	 * @see {@link #clickableElement(By)}
+	 */
+	public static boolean isElementClickable(By by)
+	{
+		try
+		{
+			return !Objects.isNull(clickableElement(by));
+		}
+		catch (TimeoutException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**<h1>Confirm True</h1>
+	 * Basic wrapper for {@link org.junit.jupiter.api.Assertions#assertTrue(boolean)}
+	 * @param condition The condition to check.
+	 * @author laserwolve
+	 * @see {@link org.junit.jupiter.api.Assertions#assertTrue(boolean)}
+	 */
+	public static void confirmTrue(boolean condition)
+	{
+		assertTrue(condition);
+	}
+	
 	/**<h1>Clickable Element</h1>
 	 * Returns the element specified by the By, after it has become clickable.
-	 * @param by The By of the element to click.
+	 * @param by The <code>By</code> of the element to click.
 	 * @param seconds The length of time, in seconds, to wait for this element to become clickable.
 	 * @return The clickable element.
 	 * @author laserwolve
@@ -213,12 +248,20 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	/**<h1>Start</h1>
-	 *  Browse to the Construct Editor and dismiss the welcome popup.
+	 *  Browse to the Construct Editor.
 	 * @author laserwolve
 	 */
 	public static void start()
 	{
 		driver.get(editorURL);
+	}
+	
+	/**<h1>Dismiss Welcome Popup</h1>
+	 * Dismisses the welcome popup.
+	 * @author laserwolve
+	 */
+	public static void dismissWelcomePopup()
+	{
 		click(WelcomePopup.noThanksLink);
 	}
 	
