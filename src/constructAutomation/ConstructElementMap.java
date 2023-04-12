@@ -122,8 +122,9 @@ public class ConstructElementMap extends Data
 			return By.xpath("//*[@columnname='name']/*[text()='" + addon + "']/../..");
 		}
 	}
-	public static final class BuyNowPage
+	public static final class BuyNow
 	{
+		public static final By buyNowTab = By.className("buyNowTab");
 		public static final class Page2
 		{
 			public static final By continueButton = By.id("BtnContinue");
@@ -501,8 +502,10 @@ public class ConstructElementMap extends Data
 		public static final By rememberCheckbox = By.id("remember");
 		public static final By usernameField = By.id("username");
 	}
-	public static final class MenuDropdown
+	public static final class Menu
 	{
+		public static final By menuButton = By.id("mainMenuButton");
+		
 		public static final class AccountPopout
 		{
 			public static final By enterAccessCode = By.xpath("//span[text()='Enter access code']/..");
@@ -551,7 +554,7 @@ public class ConstructElementMap extends Data
 			}
 			public static final By cloudOpen = By.xpath("//span[text()='Cloud open']/..");
 			// Different options depending on if a project is open or not
-			public static final By newProject = By.xpath("//span[text()='New']/..");
+			public static final By newProject = By.xpath("//span[text()='New']/..");	// Can't name it just "new"
 			public static final By openLocalFile = By.xpath("//span[text()='Open local file']/..");
 			public static final By openLocalFolder = By.xpath("//span[text()='Open local project folder']/..");
 			public static final By openRecent = By.xpath("//span[text()='Open recent']/..");
@@ -819,7 +822,6 @@ public class ConstructElementMap extends Data
 		public static final By nwjsStorage = By.className("clearNwjsStorage");
 		public static final By savedVersions = By.className("clearC3Storage");
 	}
-	
 	/**<h1>Welcome Popup</h1>
 	 * The welcome popup that first displays when arriving at {@value Data#editorURL}. Clicking any button on the popup will dismiss it
 	 * for the remainder of that browser session.
@@ -892,7 +894,6 @@ public class ConstructElementMap extends Data
 	public static final By buyNowTab = By.className("buyNowTab");
 	public static final By exampleBrowserTab = By.xpath("//ui-tabbar//span[text()='Example browser']/..");
 	public static final By iframe = By.xpath("//ui-dialog-contents//iframe");
-	public static final By menuButton = By.id("mainMenuButton");
 	public static final By progressDialog = By.id("progressDialog");
 	public static final By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
 	public static final By projectTab (String name) {

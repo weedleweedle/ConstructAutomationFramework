@@ -87,6 +87,16 @@ class ConstructMethodLibrary extends ConstructElementMap
 		assertTrue(condition);
 	}
 	
+	/**<h1>Confirm Clickable</h1>
+	 * Confirms if an element is clickable or not.
+	 * @param by The <code>By</code> of the element to determined clickability.
+	 * @author laserwolve
+	 */
+	void confirmClickable(By by)
+	{
+		confirmTrue(isElementClickable(by));
+	}
+	
 	/**<h1>Clickable Element</h1>
 	 * Returns the element specified by the By, after it has become clickable.
 	 * @param by The <code>By</code> of the element to click.

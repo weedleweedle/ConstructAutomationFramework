@@ -6,17 +6,25 @@ class LocatorValidation extends ConstructMethodLibrary
 {
 
 	@Test
-	void test()
+	void validateLocators()
 	{
 		start();
 		
-		confirmTrue(isElementClickable(WelcomePopup.closeX));
+		// Confirm everything in the welcome popup
+		confirmClickable(WelcomePopup.closeX);
+		confirmClickable(WelcomePopup.tourButton);
 		
-		confirmTrue(isElementClickable(WelcomePopup.noThanksLink));
+		// dismiss the welcome popup, that'll put us on the start page
+		dismissWelcomePopup(); // Confirms WelcomePopup.noThanksLink
 		
-		confirmTrue(isElementClickable(WelcomePopup.tourButton));
-		
-		dismissWelcomePopup();
+		// menu confirmation
+		click(Menu.menuButton);
+		click(Menu.project); // Confirms Menu.menuButton
+		confirmClickable(Menu.ProjectPopout.newProject);
+		confirmClickable(Menu.ProjectPopout.cloudOpen);
+		confirmClickable(Menu.ProjectPopout.openLocalFile);
+		confirmClickable(Menu.ProjectPopout.openLocalFolder);
+//		confirmClickable(Menu.ProjectPopout.openRecent); // Confirm this after we have a recent project
 		
 		quit();
 	}
