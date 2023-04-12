@@ -16,6 +16,8 @@ class LocatorValidation extends ConstructMethodLibrary
 		
 		confirmTrue(isElementClickable(WelcomePopup.tourButton));
 		
+		dismissWelcomePopup();
+		
 		quit();
 	}
 }

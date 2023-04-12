@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
@@ -27,11 +26,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * A helper class for common Construct actions.
  * @author laserwolve
  */
-public class ConstructMethodLibrary extends ConstructElementMap
+class ConstructMethodLibrary extends ConstructElementMap
 {	
 	 WebDriver driver = WebDriverManager.edgedriver().create();
 	 Actions actions = new Actions(driver);
-	String name = this.getClass().getName();
 	 Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	/**<h1>Click</h1>
@@ -40,7 +38,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.WebElement#click()}
 	 */
-	public  void click(By by)
+	void click(By by)
 	{
 		clickableElement(by).click();
 	}
@@ -52,7 +50,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @return The clickable element.
 	 * @author laserwolve
 	 */
-	public  WebElement clickableElement(By by)
+	WebElement clickableElement(By by)
 	{
 		return clickableElement(by, 5);
 	}
@@ -64,11 +62,12 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link #clickableElement(By)}
 	 */
-	public  boolean isElementClickable(By by)
+	boolean isElementClickable(By by)
 	{
 		try
 		{
-			return !Objects.isNull(clickableElement(by));
+			clickableElement(by);
+			return true;
 		}
 		catch (TimeoutException e)
 		{
@@ -83,12 +82,9 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.junit.jupiter.api.Assertions#assertTrue(boolean)}
 	 */
-	public  void confirmTrue(boolean condition)
+	void confirmTrue(boolean condition)
 	{
 		assertTrue(condition);
-		if(condition) {
-//			logger.
-		}
 	}
 	
 	/**<h1>Clickable Element</h1>
@@ -98,7 +94,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @return The clickable element.
 	 * @author laserwolve
 	 */
-	public  WebElement clickableElement(By by, int seconds)
+	WebElement clickableElement(By by, int seconds)
 	{
 		return stop(seconds).until(ExpectedConditions.elementToBeClickable(by)); // TODO: What happens if the element doesn't become clickable in time?
 	}
@@ -109,7 +105,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.interactions.Actions#doubleClick(WebElement)}
 	 */
-	public  void doubleClick(By by)
+	void doubleClick(By by)
 	{
 		actions.doubleClick(clickableElement(by)).perform();
 	}
@@ -122,7 +118,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 */
-	public  void importImages(String spriteName, String archiveName) throws AWTException, InterruptedException
+	void importImages(String spriteName, String archiveName) throws AWTException, InterruptedException
 	{
 		rightClick(Project.ProjectBar.ProjectFolder.objectTypes);
 		
@@ -147,7 +143,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * Logs in to the Construct Editor.
 	 * @author laserwolve
 	 */
-	public  void logIn()
+	void logIn()
 	{		
 		click(UserAccountButton.userAccountButton);
 		
@@ -187,7 +183,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 */
-	public  void openProjectFolder() throws AWTException, InterruptedException
+	void openProjectFolder() throws AWTException, InterruptedException
 	{		
 		openProjectFolder(120);
 	}
@@ -200,7 +196,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 * @author laserwolve
 	 */
-	public  void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException, InterruptedException // TODO: Update Javadoc with the exception that would be thrown if 'EstimatedProjectLoadTimeInSeconds' is exceeded
+	void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException, InterruptedException // TODO: Update Javadoc with the exception that would be thrown if 'EstimatedProjectLoadTimeInSeconds' is exceeded
 	{	
 		Robot robot = new Robot();	// TODO: Can we reuse this robot in 'TypeIntoFileExplorer'?
 		
@@ -226,7 +222,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.WebDriver#quit()}
 	 */
-	public  void quit()
+	void quit()
 	{
 		driver.quit();
 	}
@@ -237,7 +233,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.interactions.Actions#contextClick(WebElement)}
 	 */
-	public  void rightClick(By by)
+	void rightClick(By by)
 	{
 		actions.contextClick(clickableElement(by)).perform();
 	}
@@ -248,7 +244,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @param text The text to be inputted.
 	 * @author laserwolve
 	 */
-	public  void sendText(By by, String text)
+	void sendText(By by, String text)
 	{
 		clickableElement(by).sendKeys(text);
 	}
@@ -257,7 +253,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 *  Browse to the Construct Editor.
 	 * @author laserwolve
 	 */
-	public  void start()
+	void start()
 	{
 		driver.get(editorURL);
 	}
@@ -266,7 +262,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * Dismisses the welcome popup.
 	 * @author laserwolve
 	 */
-	public  void dismissWelcomePopup()
+	void dismissWelcomePopup()
 	{
 		click(WelcomePopup.noThanksLink);
 	}
@@ -277,7 +273,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @return A wait of the specified duration.
 	 * @author laserwolve
 	 */
-	public  WebDriverWait stop()
+	WebDriverWait stop()
 	{
 		return stop(5);
 	}
@@ -289,7 +285,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.support.ui.WebDriverWait#WebDriverWait(WebDriver, Duration)}
 	 */
-	public  WebDriverWait stop(int seconds)
+	WebDriverWait stop(int seconds)
 	{
 		return new WebDriverWait(driver, Duration.ofSeconds(seconds));
 	}
@@ -299,7 +295,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @see {@link org.openqa.selenium.WebDriver.TargetLocator#defaultContent()}
 	 * @author laserwolve
 	 */
-	public  void switchToDefaultContent()
+	void switchToDefaultContent()
 	{
 		driver.switchTo().defaultContent();
 	}
@@ -309,7 +305,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @param by The IFrame to which to switch.
 	 * @author laserwolve
 	 */
-	public  void switchToIframe(By by)
+	void switchToIframe(By by)
 	{
 		driver.switchTo().frame(clickableElement(by));
 	}
@@ -348,7 +344,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @param seconds How long to wait, in seconds, for the element to no longer be visible.
 	 * @author laserwolve
 	 */
-	public  void waitUntilElementIsGone(By by, int seconds)
+	void waitUntilElementIsGone(By by, int seconds)
 	{
 		stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
@@ -359,7 +355,7 @@ public class ConstructMethodLibrary extends ConstructElementMap
 	 * @see {@link #waitUntilElementIsGone(by, int)}
 	 * @author laserwolve
 	 */
-	public  void waitUntilElementIsGone(By by)
+	void waitUntilElementIsGone(By by)
 	{
 		waitUntilElementIsGone(by, 10);
 	}
