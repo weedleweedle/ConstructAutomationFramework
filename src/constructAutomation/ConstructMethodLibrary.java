@@ -11,6 +11,7 @@ import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.logging.Logger;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -64,8 +65,16 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	boolean isElementClickable(By by)
 	{
-		clickableElement(by);
-		return true;
+		try
+		{
+			Assert.assertNotNull(clickableElement(by));
+			return true;
+		}
+		catch (AssertionError e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	void validateLocators(Class<?> targetClass) throws IllegalArgumentException, IllegalAccessException
@@ -75,30 +84,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 		for (Field f : fields) 
 		{
 			By by = (By) f.get(targetClass);
-			confirmClickable(by);
-			// Give us both class name and by locator ( and maybe by field name? ) on both passes and fails
+			if(isElementClickable(by)) System.out.println(f.getName() + " in " + targetClass.getName() + " is clickable");
+			else System.out.println(f.getName() + " in " + targetClass.getName() + " is not clickable");
 		}
-	}
-	
-	/**<h1>Confirm True</h1>
-	 * Basic wrapper for {@link org.junit.jupiter.api.Assertions#assertTrue(boolean)}
-	 * @param condition The condition to check.
-	 * @author laserwolve
-	 * @see {@link org.junit.jupiter.api.Assertions#assertTrue(boolean)}
-	 */
-	void confirmTrue(boolean condition)
-	{
-		assertTrue(condition);
-	}
-	
-	/**<h1>Confirm Clickable</h1>
-	 * Confirms if an element is clickable or not.
-	 * @param by The <code>By</code> of the element to determined clickability.
-	 * @author laserwolve
-	 */
-	void confirmClickable(By by)
-	{
-		confirmTrue(isElementClickable(by));
 	}
 	
 	/**<h1>Clickable Element</h1>
