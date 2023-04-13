@@ -7,12 +7,12 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -64,15 +64,19 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	boolean isElementClickable(By by)
 	{
-		try
+		clickableElement(by);
+		return true;
+	}
+	
+	void validateLocators(Class<?> targetClass) throws IllegalArgumentException, IllegalAccessException
+	{
+		Field[] fields = targetClass.getDeclaredFields();
+		
+		for (Field f : fields) 
 		{
-			clickableElement(by);
-			return true;
-		}
-		catch (TimeoutException e)
-		{
-			e.printStackTrace();
-			return false;
+			By by = (By) f.get(targetClass);
+			confirmClickable(by);
+			// Give us both class name and by locator ( and maybe by field name? ) on both passes and fails
 		}
 	}
 	
