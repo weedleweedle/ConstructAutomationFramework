@@ -1,34 +1,37 @@
 package constructAutomation;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 
+@TestMethodOrder(OrderAnnotation.class)
 class LocatorValidation extends ConstructMethodLibrary
 {
-	@BeforeEach
-	void setUp()
+	@BeforeAll
+	static void setUp()
 	{
 		start();
-	}
-	
-	@AfterEach
-	void tearDown()
+	}	
+	@AfterAll
+	static void tearDown()
 	{
 		quit();
-	}
-	
+	}	
 	@Test
-	void validateLocators() throws IllegalAccessException
+	@Order(1)
+	void validateWelcomeMessage()
 	{	
 		validateLocators(WelcomePopup.class);
-	}
-	
-	@Test
-	void validateLearnColumn() throws IllegalAccessException
-	{
+		
 		dismissWelcomePopup();
-
+	}	
+	@Test
+	@Order(2)
+	void validateLearnColumn()
+	{
 		validateLocators(StartPage.LearnColumn.class);
 	}
 }

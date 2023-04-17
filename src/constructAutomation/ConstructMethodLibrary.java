@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 class ConstructMethodLibrary extends ConstructElementMap
 {	
-	 WebDriver driver = WebDriverManager.edgedriver().create();
+	 static WebDriver driver = WebDriverManager.edgedriver().create();
 	 Actions actions = new Actions(driver);
 	 
 	 @Rule		
@@ -71,27 +71,49 @@ class ConstructMethodLibrary extends ConstructElementMap
 		return Objects.nonNull(clickableElement(by));
 	}
 	
-	void validateLocators(Class<?> targetClass) throws IllegalAccessException
+	/**<h1>Validate Locators</h1>
+	 * Loops through the <code>By</code> locators in a class, validating that they are clickable. Uses a try/catch block instead of a throws declaration to make all its calling
+	 * methods cleaner.
+	 * @param targetClass The class containing <code>By</code> locators to be validated as clickable.
+	 * @author laserwolve
+	 */
+	void validateLocators(Class<?> targetClass)
 	{
 		Field[] fields = targetClass.getDeclaredFields();
 		
 		for (Field f : fields) 
 		{
-			By by = (By) f.get(targetClass);
+			By by = null;
+			try
+			{
+				by = (By) f.get(targetClass);
+			}
+			catch (IllegalAccessException e)
+			{
+			}
 			Assert.assertTrue(f.getName() + " in " + targetClass.getName() + " is clickable", isElementClickable(by));
 		}
 	}
 	
+
 	/**<h1>Clickable Element</h1>
 	 * Returns the element specified by the By, after it has become clickable.
 	 * @param by The <code>By</code> of the element to click.
 	 * @param seconds The length of time, in seconds, to wait for this element to become clickable.
 	 * @return The clickable element.
 	 * @author laserwolve
+	 * @throws TimeoutException if the element doesn't become clickable in time
 	 */
 	WebElement clickableElement(By by, int seconds)
 	{
-		return stop(seconds).until(ExpectedConditions.elementToBeClickable(by)); // TODO: What happens if the element doesn't become clickable in time?
+		try
+		{
+			return stop(seconds).until(ExpectedConditions.elementToBeClickable(by));
+		}
+		catch (TimeoutException e)
+		{
+			return null;
+		}
 	}
 	
 	/**<h1>Double Click</h1>
@@ -217,7 +239,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.WebDriver#quit()}
 	 */
-	void quit()
+	static void quit()
 	{
 		driver.quit();
 	}
@@ -248,7 +270,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 *  Browse to the Construct Editor.
 	 * @author laserwolve
 	 */
-	void start()
+	static void start()
 	{
 		driver.get(editorURL);
 	}
