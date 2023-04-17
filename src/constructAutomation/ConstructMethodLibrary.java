@@ -1,7 +1,5 @@
 package constructAutomation;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
@@ -9,11 +7,14 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
 import java.time.Duration;
-import java.util.logging.Logger;
+import java.util.Objects;
 
 import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.rules.ErrorCollector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,7 +32,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 {	
 	 WebDriver driver = WebDriverManager.edgedriver().create();
 	 Actions actions = new Actions(driver);
-	 Logger logger = Logger.getLogger(this.getClass().getName());
+	 
+	 @Rule		
+	 ErrorCollector errorCollector = new ErrorCollector();
 	
 	/**<h1>Click</h1>
 	 * Clicks the element specified in the By.
@@ -65,27 +68,17 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	boolean isElementClickable(By by)
 	{
-		try
-		{
-			Assert.assertNotNull(clickableElement(by));
-			return true;
-		}
-		catch (AssertionError e)
-		{
-			e.printStackTrace();
-			return false;
-		}
+		return Objects.nonNull(clickableElement(by));
 	}
 	
-	void validateLocators(Class<?> targetClass) throws IllegalArgumentException, IllegalAccessException
+	void validateLocators(Class<?> targetClass) throws IllegalAccessException
 	{
 		Field[] fields = targetClass.getDeclaredFields();
 		
 		for (Field f : fields) 
 		{
 			By by = (By) f.get(targetClass);
-			if(isElementClickable(by)) System.out.println(f.getName() + " in " + targetClass.getName() + " is clickable");
-			else System.out.println(f.getName() + " in " + targetClass.getName() + " is not clickable");
+			Assert.assertTrue(f.getName() + " in " + targetClass.getName() + " is clickable", isElementClickable(by));
 		}
 	}
 	

@@ -1,21 +1,34 @@
 package constructAutomation;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class LocatorValidation extends ConstructMethodLibrary
 {
-	@Test
-	void validateLocators() throws IllegalArgumentException, IllegalAccessException
+	@BeforeEach
+	void setUp()
 	{
 		start();
-		
+	}
+	
+	@AfterEach
+	void tearDown()
+	{
+		quit();
+	}
+	
+	@Test
+	void validateLocators() throws IllegalAccessException
+	{	
 		validateLocators(WelcomePopup.class);
-		
-		// dismiss the welcome popup, that'll put us on the start page
+	}
+	
+	@Test
+	void validateLearnColumn() throws IllegalAccessException
+	{
 		dismissWelcomePopup();
 
 		validateLocators(StartPage.LearnColumn.class);
-		
-		quit();
 	}
 }
