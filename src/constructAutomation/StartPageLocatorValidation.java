@@ -8,7 +8,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 
 @TestMethodOrder(OrderAnnotation.class)
-class LocatorValidation extends ConstructMethodLibrary
+class StartPageLocatorValidation extends ConstructMethodLibrary
 {
 	@BeforeAll
 	static void setUp()
@@ -36,7 +36,7 @@ class LocatorValidation extends ConstructMethodLibrary
 		
 		confirmClickable(StartPage.ParticipateColumn.class);
 		
-//		confirmClickable(StartPage.ExploreColumn.class);
+		confirmClickable(StartPage.ExploreColumn.class);
 	}
 	@Test
 	@Order(3)
@@ -54,6 +54,18 @@ class LocatorValidation extends ConstructMethodLibrary
 	@Order(5)
 	void validateStartPageMisc()
 	{
-		confirmClickable2(StartPage.newButton);
+		confirmClickable(StartPage.startPageClose);
+		
+		confirmClickable(StartPage.newButton);
+		
+		confirmClickable(StartPage.openButton);
+		
+		click(StartPage.openButton);
+		
+		confirmClickable(StartPage.OpenButtonDropdown.cloud);
+		
+		confirmClickable(StartPage.OpenButtonDropdown.file);
+		
+		confirmClickable(StartPage.OpenButtonDropdown.projectFolder);
 	}
 }

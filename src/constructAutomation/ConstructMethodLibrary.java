@@ -92,15 +92,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	
 	void confirmClickable(By by)
 	{
-		String name = null;
-		try
-		{
-			name = this.getClass().getDeclaredMethod("confirmClickable").getParameters()[0].getName();
-		}
-		catch (NoSuchMethodException e)
-		{
-		}
-		confirmTrue(name + " in " + by.getClass().getName() + " is clickable", isElementClickable(by));
+		confirmTrue(by.toString() + " in " + by.getClass().getName() + " is clickable", isElementClickable(by));
 	}
 	/**<h1>Confirm True</h1>
 	 * Basic wrapper for {@link org.junit.Assert#assertTrue(String, boolean)} 

@@ -807,11 +807,12 @@ class ConstructElementMap extends Data
 	static class StartPage
 	{
 		static By startPageTab = By.xpath("//ui-tabbar//span[text()='Start page']/..");
+		static By startPageClose = By.xpath("//ui-tabbar//span[text()='Start page']/following-sibling::ui-close-button");
 		static class ExploreColumn
 		{
 			static By assetStore = By.xpath("//a[@data-campaign-content='AssetStore']");
 			static By constructNet = By.xpath("//a[@data-campaign-content='ConstructNet']");
-			static By whatsNew = By.className("whatsnewlinkbox cardLink -turquoise");
+			static By whatsNew = By.xpath("//a[@class='whatsnewlinkbox cardLink -turquoise']");
 		}
 		static class LearnColumn
 		{
@@ -845,7 +846,7 @@ class ConstructElementMap extends Data
 			static By twitter = By.id("linkTwitter");
 			static By youTube = By.id("linkYoutube");
 		}
-		static By newButton = By.id("buttonNw");
+		static By newButton = By.id("buttonNew");
 		static By openButton = By.id("buttonOpen");
 		static By recentProject(String row) // there's a max limit of 5 recent projects
 		{
