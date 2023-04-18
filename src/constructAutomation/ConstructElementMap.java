@@ -524,6 +524,7 @@ class ConstructElementMap extends Data
 		static By saveAnyway = By.className("cancelConfirmButton");
 	}
 	static By menuButton = By.id("mainMenuButton");
+	
 	/**<h1>Menu Dropdown</h1>
 	 * Like other menus, the menu will wholly populate instantaneously, but the icon images for the menu items will populate individually, presumably
 	 * as they load.
@@ -532,6 +533,7 @@ class ConstructElementMap extends Data
 	static class MenuDropdown
 	{
 		static By project = By.xpath("//span[text()='Project'][@class='menu-item-text']/..");
+		
 		/**<h1>Project Popout</h1>
 		 * This popout has different contents depending on various conditions.
 		 * @author laserwolve
@@ -542,6 +544,7 @@ class ConstructElementMap extends Data
 			 * We can't name this variable just "new" because that's a Java keyword. "New" is the first option when a project isn't open.
 			 * It's the 3rd from the bottom if a project is open, and there are recent projects. It's the 2nd from the bottom if a project is open,
 			 * and there are no recent projects.
+			 * @author laserwolve
 			 */
 			static By newProject = By.xpath("//span[text()='New']/..");
 			static class OpenRecentPopout {
@@ -595,7 +598,6 @@ class ConstructElementMap extends Data
 			static By getStartedWithTimelineAnimations = By.xpath("//span[text()='Get started with timeline animations']/..");
 		}
 		
-
 		static class ViewPopout
 		{
 			static By addonManager = By.xpath("//span[text()='Addon manager']/..");
@@ -608,11 +610,16 @@ class ConstructElementMap extends Data
 		static By about = By.xpath("//span[text()='About']/..");
 		static By account = By.xpath("//span[text()='Account']/..");
 		
-		static By assetStore = By.xpath("//span[text()='assetStore']/..");
+		static By assetStore = By.xpath("//span[text()='Asset Store']/..");
 		static By getAddons = By.xpath("//span[text()='Get addons']/..");
 		
 		static By guidedTours = By.xpath("//span[text()='Guided tours']/..");
 		static By help = By.xpath("//span[text()='Help']/..");
+		
+		/**<h1>Install as app</h1>
+		 * This menu item is not present in incognito/InPrivate browsing sessions.
+		 * @author laserwolve
+		 */
 		static By installAsApp = By.xpath("//span[text()='Install as app']/..");
 		static By settings = By.xpath("//span[text()='Settings']/..");
 		static By view = By.xpath("//span[text()='View']/..");
