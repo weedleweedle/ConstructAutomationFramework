@@ -6,8 +6,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -286,12 +284,14 @@ class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	/**<h1>Dismiss Welcome Popup</h1>
-	 * Dismisses the welcome popup.
+	 * Dismisses the welcome popup, and waits for it to disappear.
 	 * @author laserwolve
 	 */
 	void dismissWelcomePopup()
 	{
 		click(WelcomePopup.noThanksLink);
+		
+		waitUntilElementIsGone(welcomePopup);
 	}
 	
 	/**<h1>Stop</h1>

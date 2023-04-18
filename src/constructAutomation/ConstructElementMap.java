@@ -848,7 +848,7 @@ class ConstructElementMap extends Data
 		}
 		static By newButton = By.id("buttonNew");
 		static By openButton = By.id("buttonOpen");
-		static By recentProject(String row) // there's a max limit of 5 recent projects
+		static By recentProject(int row) // there's a max limit of 6 recent projects
 		{
 			return By.xpath("//*[@class='cardProject'][" + row + "]");
 		}
@@ -864,6 +864,7 @@ class ConstructElementMap extends Data
 		static By nwjsStorage = By.className("clearNwjsStorage");
 		static By savedVersions = By.className("clearC3Storage");
 	}
+	static By welcomePopup = By.id("welcomeTourDialog");
 	static class WelcomePopup
 	{
 		// Clicking any button on the popup will dismiss it for the remainder of that browser session.
