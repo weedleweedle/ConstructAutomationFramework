@@ -6,12 +6,12 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.time.Duration;
 import java.util.Objects;
 
 import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.rules.ErrorCollector;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -32,9 +32,6 @@ class ConstructMethodLibrary extends ConstructElementMap
 {	
 	 static WebDriver driver = WebDriverManager.edgedriver().create();
 	 Actions actions = new Actions(driver);
-	 
-	 @Rule		
-	 ErrorCollector errorCollector = new ErrorCollector();
 	
 	/**<h1>Click</h1>
 	 * Clicks the element specified in the By.
@@ -77,11 +74,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param targetClass The class containing <code>By</code> locators to be validated as clickable.
 	 * @author laserwolve
 	 */
-	void validateLocators(Class<?> targetClass)
-	{
-		Field[] fields = targetClass.getDeclaredFields();
-		
-		for (Field f : fields) 
+	void confirmClickable(Class<?> targetClass)
+	{	
+		for (Field f : targetClass.getDeclaredFields()) 
 		{
 			By by = null;
 			try
@@ -91,11 +86,34 @@ class ConstructMethodLibrary extends ConstructElementMap
 			catch (IllegalAccessException e)
 			{
 			}
-			Assert.assertTrue(f.getName() + " in " + targetClass.getName() + " is clickable", isElementClickable(by));
+			confirmTrue(f.getName() + " in " + targetClass.getName() + " is clickable", isElementClickable(by));
 		}
 	}
 	
-
+	void confirmClickable(By by)
+	{
+		String name = null;
+		try
+		{
+			name = this.getClass().getDeclaredMethod("confirmClickable").getParameters()[0].getName();
+		}
+		catch (NoSuchMethodException e)
+		{
+		}
+		confirmTrue(name + " in " + by.getClass().getName() + " is clickable", isElementClickable(by));
+	}
+	/**<h1>Confirm True</h1>
+	 * Basic wrapper for {@link org.junit.Assert#assertTrue(String, boolean)} 
+	 * @param message The identifying message
+	 * @param condition The condition to be checked
+	 * @author laserwolve
+	 * @see {@link org.junit.Assert#assertTrue(String, boolean)
+	 */
+	void confirmTrue(String message, boolean condition)
+	{
+		Assert.assertTrue(message, condition);
+	}
+	
 	/**<h1>Clickable Element</h1>
 	 * Returns the element specified by the By, after it has become clickable.
 	 * @param by The <code>By</code> of the element to click.
@@ -188,7 +206,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param seconds How long to wait for the text
 	 * @author laserwolve
 	 */
-	private  void waitUntilTextIs(By by, String text, int seconds) {
+	void waitUntilTextIs(By by, String text, int seconds) {
 		stop(seconds).until(ExpectedConditions.textToBe(by, text));
 		
 	}
@@ -335,7 +353,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @throws InterruptedException from {@link Thread#sleep}
 	 * @author laserwolve 
 	 */
-	private  void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
+	void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
 	{		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
 		

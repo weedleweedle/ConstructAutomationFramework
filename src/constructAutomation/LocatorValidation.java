@@ -24,14 +24,36 @@ class LocatorValidation extends ConstructMethodLibrary
 	@Order(1)
 	void validateWelcomeMessage()
 	{	
-		validateLocators(WelcomePopup.class);
+		confirmClickable(WelcomePopup.class);
 		
 		dismissWelcomePopup();
 	}	
 	@Test
 	@Order(2)
-	void validateLearnColumn()
+	void validateColumns()
 	{
-		validateLocators(StartPage.LearnColumn.class);
+		confirmClickable(StartPage.LearnColumn.class);
+		
+		confirmClickable(StartPage.ParticipateColumn.class);
+		
+//		confirmClickable(StartPage.ExploreColumn.class);
+	}
+	@Test
+	@Order(3)
+	void validateStartPageExamples()
+	{
+		confirmClickable(StartPage.RecommendedExamples.class);
+	}
+	@Test
+	@Order(4)
+	void validateSocialMediaLinks()
+	{
+		confirmClickable(StartPage.SocialMedia.class);
+	}
+	@Test
+	@Order(5)
+	void validateStartPageMisc()
+	{
+		confirmClickable2(StartPage.newButton);
 	}
 }
