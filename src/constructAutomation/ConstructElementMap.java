@@ -10,6 +10,10 @@ class ConstructElementMap extends Data
 {
 	static class AboutPopup
 	{
+		/**<h1>Persistent Storage Popup</h1>
+		 * Appears when persistent storage is requested, but denied.
+		 * @author laserwolve
+		 */
 		static class PersistentStoragePopup
 		{			
 			static By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
@@ -41,11 +45,10 @@ class ConstructElementMap extends Data
 		static By privacyPolicy = By.linkText("Privacy policy");
 		static By releaseNotes = By.className("viewReleaseNotes");
 		static By reportIssues = By.linkText("Report issues");
-		/*
+		
+		/**<h1>Request Persistent Storage</h1>
 		 * If persistent storage has been granted, this link doesn't exist.
-		 * If persistent storage is requested but not granted, the following error
-		 * popup shows. I don't have a way to find out what happens if persistent
-		 * storage is requested and approved.
+		 * @author laserwolve
 		 */
 		static By requestPersistentStorage = By.linkText("Request persistent storage");
 		static By storageCleanup = By.linkText("Storage cleanup...");
