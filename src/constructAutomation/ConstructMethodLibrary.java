@@ -104,6 +104,16 @@ class ConstructMethodLibrary extends ConstructElementMap
 		Assert.assertTrue(message, condition);
 	}
 	
+	/**<h1>Refresh</h1>
+	 * Refreshes the webpage.
+	 * @author laserwolve
+	 * @see {@link org.openqa.selenium.WebDriver.Navigation#refresh()}
+	 */
+	void refresh()
+	{
+		driver.navigate().refresh();
+	}
+	
 	/**<h1>Clickable Element</h1>
 	 * Returns the element specified by the By, after it has become clickable.
 	 * @param by The <code>By</code> of the element to click.

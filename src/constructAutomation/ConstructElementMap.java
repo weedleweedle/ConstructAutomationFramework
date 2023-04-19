@@ -853,6 +853,18 @@ class ConstructElementMap extends Data
 			static By twitter = By.id("linkTwitter");
 			static By youTube = By.id("linkYoutube");
 		}
+		
+		/**<h1>"Get More Events" Banner</h1>
+		 * This banner only pops up while not logged in and it's not the first time per session visiting <a href="https://editor.construct.net/">editor.construct.net</a>.
+		 * If closed, the banner will not appear on subsequent visits.
+		 * @author laserwolve
+		 */
+		static class GetMoreEventsBanner
+		{
+			static By closeX = By.xpath("//div[@id='banner']//div[@class='buttonClose']");
+			static By registerAnAccount = By.xpath("//a[text()='Register an account']");
+			static By logIn = By.xpath("//a[text()='log in']");
+		}
 		static By newButton = By.id("buttonNew");
 		static By openButton = By.id("buttonOpen");
 		static By recentProject(int row) // there's a max limit of 6 recent projects
