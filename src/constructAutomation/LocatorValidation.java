@@ -18,6 +18,12 @@ class LocatorValidation extends constructAutomation.ConstructMethodLibrary
 	static void setUp()
 	{
 		start();
+		
+		dismissWelcomePopup();
+		
+		logIn();
+		
+		createRecentProjects(6);
 	}
 	
 	@AfterAll
@@ -32,14 +38,18 @@ class LocatorValidation extends constructAutomation.ConstructMethodLibrary
 	@DisplayName("Start Page Locator Validation")
 	class StartPageValidation
 	{
+		/**<h1>Validate Welcome Message</h1>
+		 * Before we dismiss the Welcome Message, we need to validate its locators. That can't be done because {@link ConstructMethodLibrary#dismissWelcomePopup()} is required for {@link #setUp()}.
+		 * We're better off manually verifying these locators.
+		 * @author laserwolve
+		 */
+		@Disabled
 		@Test
 		@Order(1)
 		@DisplayName("Validate Welcome Message")
 		void validateWelcomeMessage()
 		{	
 			confirmClickable(WelcomePopup.class);
-			
-			dismissWelcomePopup();
 		}
 		
 		@Test
@@ -76,8 +86,6 @@ class LocatorValidation extends constructAutomation.ConstructMethodLibrary
 		void validateStartPageProjectButtons()
 		{	
 			confirmClickable(StartPage.newButton);
-			
-			confirmClickable(StartPage.openButton);
 			
 			click(StartPage.openButton);
 			

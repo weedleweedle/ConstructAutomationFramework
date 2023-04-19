@@ -37,7 +37,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.WebElement#click()}
 	 */
-	void click(By by)
+	static void click(By by)
 	{
 		clickableElement(by).click();
 	}
@@ -49,7 +49,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @return The clickable element.
 	 * @author laserwolve
 	 */
-	WebElement clickableElement(By by)
+	static WebElement clickableElement(By by)
 	{
 		return clickableElement(by, 5);
 	}
@@ -122,7 +122,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @throws TimeoutException if the element doesn't become clickable in time
 	 */
-	WebElement clickableElement(By by, int seconds)
+	static WebElement clickableElement(By by, int seconds)
 	{
 		try
 		{
@@ -178,7 +178,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * Logs in to the Construct Editor.
 	 * @author laserwolve
 	 */
-	void logIn()
+	static void logIn()
 	{		
 		click(UserAccountButton.userAccountButton);
 		
@@ -206,7 +206,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param seconds How long to wait for the text
 	 * @author laserwolve
 	 */
-	void waitUntilTextIs(By by, String text, int seconds) {
+	static void waitUntilTextIs(By by, String text, int seconds) {
 		stop(seconds).until(ExpectedConditions.textToBe(by, text));
 		
 	}
@@ -279,9 +279,19 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param text The text to be inputted.
 	 * @author laserwolve
 	 */
-	void sendText(By by, String text)
+	static void sendText(By by, String text)
 	{
 		clickableElement(by).sendKeys(text);
+	}
+	
+	/**<h1>Create Recent Projects</h1>
+	 * Creates and saves empty new projects to browser storage. Projects are named numerically (first project is "1", second project is "2")
+	 * @param projectCount The number of projects to create.
+	 * @author laserwolve
+	 */
+	static void createRecentProjects(int projectCount)
+	{
+		// TODO: Implement after https://github.com/Scirra/Construct-bugs/issues/6948 is resolved
 	}
 	
 	/**<h1>Start</h1>
@@ -297,7 +307,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * Dismisses the welcome popup, and waits for it to disappear.
 	 * @author laserwolve
 	 */
-	void dismissWelcomePopup()
+	static void dismissWelcomePopup()
 	{
 		click(WelcomePopup.noThanksLink);
 		
@@ -322,7 +332,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.support.ui.WebDriverWait#WebDriverWait(WebDriver, Duration)}
 	 */
-	WebDriverWait stop(int seconds)
+	static WebDriverWait stop(int seconds)
 	{
 		return new WebDriverWait(driver, Duration.ofSeconds(seconds));
 	}
@@ -332,7 +342,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @see {@link org.openqa.selenium.WebDriver.TargetLocator#defaultContent()}
 	 * @author laserwolve
 	 */
-	void switchToDefaultContent()
+	static void switchToDefaultContent()
 	{
 		driver.switchTo().defaultContent();
 	}
@@ -342,7 +352,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param by The IFrame to which to switch.
 	 * @author laserwolve
 	 */
-	void switchToIframe(By by)
+	static void switchToIframe(By by)
 	{
 		driver.switchTo().frame(clickableElement(by));
 	}
@@ -381,7 +391,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param seconds How long to wait, in seconds, for the element to no longer be visible.
 	 * @author laserwolve
 	 */
-	void waitUntilElementIsGone(By by, int seconds)
+	static void waitUntilElementIsGone(By by, int seconds)
 	{
 		stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
@@ -392,7 +402,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @see {@link #waitUntilElementIsGone(by, int)}
 	 * @author laserwolve
 	 */
-	void waitUntilElementIsGone(By by)
+	static void waitUntilElementIsGone(By by)
 	{
 		waitUntilElementIsGone(by, 10);
 	}
