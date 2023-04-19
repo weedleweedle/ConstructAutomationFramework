@@ -938,9 +938,10 @@ class ConstructElementMap extends Data
 	}	
 	static class OpenSecondProjectPopup
 	{
-		static By dontAskAgain = By.className("confirmCheckbox");
+		static By dontAskAgain = By.xpath("//label[@class='confirmCheckWrap']/input");
 		static By closePreviousProject = By.xpath("//button[@class='confirmButton bold']");
-		static By openBothProjects = By.className("cancelConfirmButton");
+		static By openBothProjects = By.xpath("//button[@class='cancelConfirmButton']");
+		static By closeX = By.xpath("//dialog[@id='confirmCheckDialog']//ui-close-button");
 	}
 	static class Misc
 	{
