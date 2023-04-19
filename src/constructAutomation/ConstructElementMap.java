@@ -936,6 +936,12 @@ class ConstructElementMap extends Data
 		static By create = By.className("okButton");
 		static By cancel = By.className("cancelButton");
 	}	
+	static class OpenSecondProjectPopup
+	{
+		static By dontAskAgain = By.className("confirmCheckbox");
+		static By closePreviousProject = By.xpath("//button[@class='confirmButton bold']");
+		static By openBothProjects = By.className("cancelConfirmButton");
+	}
 	static class Misc
 	{
 		static By iframe = By.xpath("//ui-dialog-contents//iframe");
