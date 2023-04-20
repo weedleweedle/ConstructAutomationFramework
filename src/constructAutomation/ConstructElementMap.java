@@ -40,7 +40,7 @@ class ConstructElementMap extends Data
 		static By okButton = By.xpath("//*[@id='aboutDialog']//*[@class='okButton']");
 		static By platformInformation = By.xpath("//a[text()='Platform information']");
 		static By privacyPolicy = By.xpath("//a[text()='Privacy policy']");
-		static By releaseNotes = By.xpath("//a[@class='viewReleaseNotes']"); // Text contains release notes, i.e. "View r336 release notes"
+		static By releaseNotes = By.xpath("//a[@class='viewReleaseNotes']"); // Can't use text as it contains version number, i.e. "View r336 release notes"
 		static By reportIssues = By.xpath("//a[text()='Report issues']");
 		
 		/**<h1>Request Persistent Storage</h1>
@@ -52,6 +52,7 @@ class ConstructElementMap extends Data
 		static By suggestFeatures = By.xpath("//a[text()='Suggest features']");
 		static By tutorials = By.xpath("//a[text()='Tutorials']");
 	}
+	
 	static class AccountDropdown
 	{
 		static By enterAccessCode = By.xpath("//span[text()='Enter access code']/..");
@@ -60,20 +61,18 @@ class ConstructElementMap extends Data
 		static By register = By.xpath("//span[text()='Register...']/..");
 		static By viewDetails = By.xpath("//span[text()='View details']/..");		
 	}
+	
 	static class AccountInfoPopup
 	{
-		static By closeButton = By.className("okButton");
+		static By closeButton = By.xpath("//button[@class='okButton']");
 		static By closeX = By.xpath("//*[@id='accountInfoDialog']//ui-close-button");
-		static By editProfile = By.linkText("Edit profile");
-		
-		static By help = By.linkText("Help");
-		static By logIn = By.linkText("Log in to existing account");
-		
-		// If logged out...
-		static By registerAccount = By.linkText("Register a new account");
-		// If logged in...
-		static By yourLicenses = By.linkText("Your licenses");
+		static By editProfile = By.xpath("//a[text()='Edit profile']");
+		static By help = By.xpath("//a[text()='Help']");
+		static By logInToExistingAccount = By.xpath("//a[text()='Log in to existing account']");
+		static By registerAccount = By.xpath("//a[text()='Register a new account']");
+		static By yourLicenses = By.xpath("//a[text()='Your licenses']");
 	}
+	
 	static class AddonManagerPopup
 	{
 		static class AddonContextMenu
@@ -954,6 +953,64 @@ class ConstructElementMap extends Data
 		static By closePreviousProject = By.xpath("//button[@class='confirmButton bold']");
 		static By openBothProjects = By.xpath("//button[@class='cancelConfirmButton']");
 		static By closeX = By.xpath("//dialog[@id='confirmCheckDialog']//ui-close-button");
+	}
+	static class ExportProjectPopup
+	{
+		static By nwjs = By.xpath("//span[text()='NW.js']/ancestor::ui-iconviewitem");
+		static By next = By.xpath("//button[@class='nextButton']");
+		
+		static class Page2
+		{
+			static By deduplicateImages = By.xpath("//*[@id='exportDeduplicateImages']");
+			static By losslessFormat = By.xpath("//*[@id='exportLosslessImageFormat']");
+			static By lossyFormat = By.xpath("//*[@id='exportLossyImageFormat']");
+			static By recompressImages = By.xpath("//*[@id='exportRecompressImages']");
+			static By minifyMode = By.xpath("//select[@class='exportMinifyScript']");
+			static By next = By.xpath("//button[@class='nextButton']");
+			
+			static class LosslessFormatOptions
+			{
+				static By png = By.xpath("//option[@value='png']");
+				static By webp = By.xpath("//*[@id='exportLosslessImageFormat']//option[@value='webp']");
+			}
+			
+			static class LossyFormatOptions
+			{
+				static By jpg = By.xpath("//option[@value='jpg']");
+				static By webp = By.xpath("//*[@id='exportLossyImageFormat']//option[@value='webp']");
+			}
+			
+			static class MinifyModes
+			{
+				static By none = By.xpath("//option[@value='none']");
+				static By simple = By.xpath("//option[@value='simple']");
+				static By advanced = By.xpath("//option[@value='advanced']");
+			}
+		}
+		
+		static class NwjsOptions
+		{
+			static By linux32 = By.xpath("//*[@id='nwjsPlatformLinux32']"); // Checked by default
+			static By linux64 = By.xpath("//*[@id='nwjsPlatformLinux64']"); // Checked by default
+			static By mac64 = By.xpath("//*[@id='nwjsPlatformMac64']"); // Checked by default
+			static By win32 = By.xpath("//*[@id='nwjsPlatformWin32']"); // Checked by default
+			static By win64 = By.xpath("//*[@id='nwjsPlatformWin64']"); // Checked by default
+			static By packageAssets = By.xpath("//*[@id='nwjsPackageAssets']"); // Checked by default
+			static By compressFinalZip = By.xpath("//*[@id='nwjsCompressFinalZip']"); // Checked by default
+			static By windowFrame = By.xpath("//*[@id='nwjsWindowFrame]"); // Checked by default
+			static By resizableWindow = By.xpath("//*[@id='nwjsResizableWindow]"); // Checked by default
+			static By kioskMode = By.xpath("//*[@id='nwjsKioskMode']");// Unchecked by default
+			static By ignoreGpuBlacklist = By.xpath("//*[@id='nwjsIgnoreGPUBlacklist']"); // Checked by default
+			static By enableDevTools = By.xpath("//*[@id='nwjsEnableDevTools']"); // Checked by default
+			static By exportForSteam = By.xpath("//*[@id='nwjsSteamMode']"); // Unchecked by default
+			static By next = By.xpath("//button[@class='nextButton']");
+		}
+		
+		static class ExportReport
+		{
+			static By downloadLink = By.xpath("//a[@class='downloadExportedProject']");
+			static By ok = By.xpath("//button[@class='okButton']");
+		}
 	}
 	static class Misc
 	{

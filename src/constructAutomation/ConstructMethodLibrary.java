@@ -229,7 +229,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	void openProjectFolder() throws AWTException, InterruptedException
 	{		
-		openProjectFolder(120);
+		openProjectFolder(600);
 	}
 	
 	/** <h1>Open a Project Folder</h1> 
@@ -258,7 +258,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);		// Select "Edit files"
 		
-		waitUntilElementIsPresent(Misc.progressDialog, 10);
+		waitUntilElementIsPresent(Misc.progressDialog);
 		
 		waitUntilElementIsGone(Misc.progressDialog, MaximumProjectLoadTimeInSeconds);
 	}
@@ -440,6 +440,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 	static void waitUntilElementIsPresent(By by, int seconds)
 	{
 		stop(seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
+	}
+	
+	static void waitUntilElementIsPresent(By by)
+	{
+		waitUntilElementIsPresent(by, 5);
 	}
 	
 	/** <h1>Wait Until Element is Gone</h1>
