@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.Objects;
@@ -30,7 +31,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 {	
 	 static WebDriver driver = WebDriverManager.edgedriver().create();
 	 Actions actions = new Actions(driver);
-	 Robot robot;
+	 static Robot robot;
 	 {
 		 try
 		 {
@@ -232,8 +233,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	/** <h1>Open a Project Folder</h1> 
-	 * Opens a Construct 3 project folder. Must be on the Start page. Throws an exception if the project takes longer to load than <Strong>MaximumProjectLoadTimeInSeconds</Strong>. Uses keyboard commands to interact with the
-	 * Chromium "Let site edit files?" popup.
+	 * Opens a Construct 3 project folder. Must be on the Start page. Throws an exception if the project takes longer to load than <Strong>MaximumProjectLoadTimeInSeconds</Strong>.
+	 * The amount of time it takes a project to load is determined both by the project's size and speed of the computer.
+	 * Uses keyboard commands to interact with the Chromium "Let site edit files?" popup.
 	 * @param MaximumProjectLoadTimeInSeconds The maximum amount of time to wait (in seconds) for the project to load.
 	 * @throws AWTException in {@link #typeIntoFileExplorer}
 	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
@@ -255,6 +257,8 @@ class ConstructMethodLibrary extends ConstructElementMap
 		robot.keyRelease(KeyEvent.VK_RIGHT);		// Give "Edit files" focus
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);		// Select "Edit files"
+		
+		waitUntilElementIsPresent(Misc.progressDialog, 10);
 		
 		waitUntilElementIsGone(Misc.progressDialog, MaximumProjectLoadTimeInSeconds);
 	}
@@ -295,10 +299,40 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * Creates and saves empty new projects to browser storage. Projects are named numerically (first project is "1", second project is "2")
 	 * @param projectCount The number of projects to create.
 	 * @author laserwolve
+	 * @throws InterruptedException 
+	 * @throws AWTException 
 	 */
-	static void createRecentProjects(int projectCount)
+	static void createRecentProjects(int projectCount) throws AWTException, InterruptedException
 	{
-		// TODO: Implement after https://github.com/Scirra/Construct-bugs/issues/6948 is resolved
+		
+		for (int projectNumber = 1; projectNumber <= 6; projectNumber++)
+		{
+			click(menuButton);
+			
+			click(MenuDropdown.project);
+			
+			click(MenuDropdown.ProjectPopout.newProject);
+			
+			sendText(NewProjectPopup.name, String.valueOf(projectNumber));
+			
+			click(NewProjectPopup.create);
+			
+			click(menuButton);
+
+			click(MenuDropdown.project);
+			
+			click(MenuDropdown.ProjectPopout.save);
+			
+			if(projectNumber == 1) click(setUpBackupsPopup.saveAnyway);
+			
+			typeIntoFileExplorer(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + projectNumber);
+			
+			click(menuButton); // Goes too fast, close project isn't available yet
+
+			click(MenuDropdown.project);
+			
+			click(MenuDropdown.ProjectPopout.closeProject);
+		}
 	}
 	
 	/**<h1>Start</h1>
@@ -372,16 +406,12 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @throws InterruptedException from {@link Thread#sleep}
 	 * @author laserwolve 
 	 */
-	void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
+	static void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
 	{		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
 		
 		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up
-		
-//		robot.keyPress(KeyEvent.VK_CONTROL);
-//		robot.keyPress(KeyEvent.VK_L);
-//		robot.keyRelease(KeyEvent.VK_CONTROL);
-//		robot.keyRelease(KeyEvent.VK_L);		// Focus path bar
+	
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
@@ -401,9 +431,20 @@ class ConstructMethodLibrary extends ConstructElementMap
 		stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
 	
+	/** <h1>Wait Until Element is Visible</h1>
+	 * Waits until the specified element is visible.
+	 * @param The element for which to wait upon.
+	 * @param seconds How long to wait, in seconds, for the element to be visible.
+	 * @author laserwolve
+	 */
+	static void waitUntilElementIsPresent(By by, int seconds)
+	{
+		stop(seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
+	}
+	
 	/** <h1>Wait Until Element is Gone</h1>
 	 * Waits until the specified element is no longer visible.
-	 * @param The element for which to wait upon.
+	 * @param By The element for which to wait upon.
 	 * @see {@link #waitUntilElementIsGone(by, int)}
 	 * @author laserwolve
 	 */

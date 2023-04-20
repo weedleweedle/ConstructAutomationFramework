@@ -19,41 +19,38 @@ class ConstructElementMap extends Data
 			static By closeX = By.xpath("//*[@id='okDialog']//ui-close-button");
 			static By okButton = By.xpath("//*[@id='okDialog']//*[@class='okButton']");
 		}
+		
 		static class PlatformInfoPopup
 		{
 			static By closeX = By.xpath("//*[@id='platformInfoDialog']//ui-close-button");
-			static By copyButton = By.className("copy");
+			static By copyButton = By.xpath("//button[@class='copy']");
 			static By okButton = By.xpath("//*[@id='platformInfoDialog']//*[@class='okButton']");
 		}
 		
-		static By aboutUs = By.linkText("About us");
-		static By accountInfo = By.linkText("View account information");
-	
-		static By closeX = By.xpath("//*[@id='aboutDialog']//ui-close-button");
-		
-		static By contributeTranslations = By.linkText("Contribute translations");
-		
-		static By eula = By.linkText("End-user license agreement");
-		static By forums = By.linkText("Forums");
-		
-		static By getAddons = By.linkText("Get addons");
+		static By aboutUs = By.xpath("//a[text()='About us']");
+		static By viewAccountInformation = By.xpath("//a[text()='View account information']");
+		static By closeX = By.xpath("//*[@id='aboutDialog']//ui-close-button");	
+		static By contributeTranslations = By.xpath("//a[text()='Contribute translations']");	
+		static By eula = By.xpath("//a[text()='End-user license agreement']");
+		static By forums = By.xpath("//a[text()='Forums']");	
+		static By getAddons = By.linkText("//a[text()='Get addons']");
 		static By help = By.xpath("//*[@id='aboutDialog']//*[@class='helpLink']");
-		static By legalInfo = By.linkText("Legal information");
-		static By officialWebsite = By.linkText("Construct.net");
+		static By legalInfo = By.xpath("//a[text()='Legal information']");
+		static By officialWebsite = By.xpath("//a[text()='Construct.net']");
 		static By okButton = By.xpath("//*[@id='aboutDialog']//*[@class='okButton']");
-		static By platformInformation = By.linkText("Platform information");
-		static By privacyPolicy = By.linkText("Privacy policy");
-		static By releaseNotes = By.className("viewReleaseNotes");
-		static By reportIssues = By.linkText("Report issues");
+		static By platformInformation = By.xpath("//a[text()='Platform information']");
+		static By privacyPolicy = By.xpath("//a[text()='Privacy policy']");
+		static By releaseNotes = By.xpath("//a[@class='viewReleaseNotes']"); // Text contains release notes, i.e. "View r336 release notes"
+		static By reportIssues = By.xpath("//a[text()='Report issues']");
 		
 		/**<h1>Request Persistent Storage</h1>
 		 * If persistent storage has been granted, this link doesn't exist.
 		 * @author laserwolve
 		 */
-		static By requestPersistentStorage = By.linkText("Request persistent storage");
-		static By storageCleanup = By.linkText("Storage cleanup...");
-		static By suggestFeatures = By.linkText("Suggest features");
-		static By tutorials = By.linkText("Tutorials");
+		static By requestPersistentStorage = By.xpath("//a[text()='Request persistent storage']");
+		static By storageCleanup = By.xpath("//a[text()='Storage cleanup...']");
+		static By suggestFeatures = By.xpath("//a[text()='Suggest features']");
+		static By tutorials = By.xpath("//a[text()='Tutorials']");
 	}
 	static class AccountDropdown
 	{
@@ -508,23 +505,23 @@ class ConstructElementMap extends Data
 	}
 	static class GuidedToursPopup
 	{
-		static class CloseConfirmation
+		static class CloseConfirmation // This window is titled "Account logged out", regardless of login status. That's probably a bug
 		{
-			static By cancelButton = By.className("cancelConfirmButton");
+			static By cancelButton = By.xpath("//button[@class='cancelConfirmButton']");
 			static By closeX = By.xpath("//*[@id='confirmDialog']//ui-close-button");
-			static By exitButton = By.className("confirmButton bold");
+			static By exitButton = By.xpath("//button[@class='confirmButton bold']");
 		}
 		static By exitTour = By.xpath("//span[text()='Exit tour']/../..");
 		static By menuDots = By.xpath("//ui-menu-dots-button");
-		static By nextButton = By.className("nextButton bold");
+		static By nextButton = By.xpath("//button[@class='nextButton bold']");
 	}
 	
 	static class setUpBackupsPopup
 	{
 		static By closeX = By.xpath("//dialog[@id='confirmDialog']//ui-close-button");
-		static By learnMore = By.linkText("Learn more");
-		static By openSettings = By.className("confirmButton bold");
-		static By saveAnyway = By.className("cancelConfirmButton");
+		static By learnMore = By.xpath("//a[text()='Learn more']");
+		static By openSettings = By.xpath("//button[@class='confirmButton bold']");
+		static By saveAnyway = By.className("//button[@class='cancelConfirmButton']");
 	}
 	static By menuButton = By.id("mainMenuButton");
 	

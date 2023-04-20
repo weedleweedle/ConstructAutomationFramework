@@ -1,5 +1,7 @@
 package constructAutomation;
 
+import java.awt.AWTException;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -15,7 +17,7 @@ import org.junit.jupiter.api.Order;
 class LocatorValidation extends constructAutomation.ConstructMethodLibrary
 {
 	@BeforeAll
-	static void setUp()
+	static void setUp() throws AWTException, InterruptedException
 	{
 		start();
 		
