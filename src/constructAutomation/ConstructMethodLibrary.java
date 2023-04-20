@@ -30,6 +30,14 @@ class ConstructMethodLibrary extends ConstructElementMap
 {	
 	 static WebDriver driver = WebDriverManager.edgedriver().create();
 	 Actions actions = new Actions(driver);
+	 Robot robot;
+	 {
+		 try
+		 {
+			 robot = new Robot();
+		 }
+		 catch (AWTException e){}
+	 }
 	
 	/**<h1>Click</h1>
 	 * Clicks the element specified in the By.
@@ -229,12 +237,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param MaximumProjectLoadTimeInSeconds The maximum amount of time to wait (in seconds) for the project to load.
 	 * @throws AWTException in {@link #typeIntoFileExplorer}
 	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
+	 * @throws TimeoutException if the project doesn't load in time
 	 * @author laserwolve
 	 */
-	void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException, InterruptedException // TODO: Update Javadoc with the exception that would be thrown if 'EstimatedProjectLoadTimeInSeconds' is exceeded
+	void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException, InterruptedException
 	{	
-		Robot robot = new Robot();	// TODO: Can we reuse this robot in 'TypeIntoFileExplorer'?
-		
 		click(StartPage.openButton);
 		
 		click(StartPage.OpenButtonDropdown.projectFolder);
@@ -368,8 +375,6 @@ class ConstructMethodLibrary extends ConstructElementMap
 	void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
 	{		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
-		
-		Robot robot = new Robot();
 		
 		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up
 		
