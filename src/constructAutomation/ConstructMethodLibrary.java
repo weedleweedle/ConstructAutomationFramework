@@ -31,14 +31,6 @@ class ConstructMethodLibrary extends ConstructElementMap
 {	
 	 static WebDriver driver = WebDriverManager.edgedriver().create();
 	 Actions actions = new Actions(driver);
-	 static Robot robot;
-	 {
-		 try
-		 {
-			 robot = new Robot();
-		 }
-		 catch (AWTException e){}
-	 }
 	
 	/**<h1>Click</h1>
 	 * Clicks the element specified in the By.
@@ -244,6 +236,8 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException, InterruptedException
 	{	
+		Robot robot = new Robot();
+		
 		click(StartPage.openButton);
 		
 		click(StartPage.OpenButtonDropdown.projectFolder);
@@ -327,7 +321,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 			
 			typeIntoFileExplorer(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + projectNumber);
 			
-			click(menuButton); // Goes too fast, close project isn't available yet
+			Thread.sleep(2000); // Tricky... can't tell when file explorer closed, also need to wait for progress dialog to appear then disappear
+			
+			click(menuButton);
 
 			click(MenuDropdown.project);
 			
@@ -407,7 +403,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve 
 	 */
 	static void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
-	{		
+	{	
+		Robot robot = new Robot();
+		
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
 		
 		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up

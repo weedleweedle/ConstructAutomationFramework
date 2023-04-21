@@ -520,7 +520,7 @@ class ConstructElementMap extends Data
 		static By closeX = By.xpath("//dialog[@id='confirmDialog']//ui-close-button");
 		static By learnMore = By.xpath("//a[text()='Learn more']");
 		static By openSettings = By.xpath("//button[@class='confirmButton bold']");
-		static By saveAnyway = By.className("//button[@class='cancelConfirmButton']");
+		static By saveAnyway = By.xpath("//button[@class='cancelConfirmButton']");
 	}
 	static By menuButton = By.id("mainMenuButton");
 	
