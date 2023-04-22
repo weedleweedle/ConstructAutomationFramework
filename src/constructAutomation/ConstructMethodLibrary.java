@@ -16,6 +16,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -29,8 +30,28 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 class ConstructMethodLibrary extends ConstructElementMap
 {	
-	 static WebDriver driver = WebDriverManager.edgedriver().create();
-	 Actions actions = new Actions(driver);
+	static EdgeOptions edgeOptions;
+	static WebDriver driver;
+	static Actions actions;
+	static Robot robot;
+	
+	/**<h1>Start</h1>
+	 * Initialize variables and browse to the Construct Editor.
+	 * @author laserwolve
+	 * @throws AWTException from {@link java.awt.Robot#Robot}
+	 */
+	static void start() throws AWTException
+	{
+		edgeOptions = new EdgeOptions();
+		edgeOptions.addArguments("start-maximized");
+
+		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
+		actions = new Actions(driver);
+		
+		robot = new Robot();
+		
+		driver.get(editorURL);
+	}
 	
 	/**<h1>Click</h1>
 	 * Clicks the element specified in the By.
@@ -229,15 +250,12 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * The amount of time it takes a project to load is determined both by the project's size and speed of the computer.
 	 * Uses keyboard commands to interact with the Chromium "Let site edit files?" popup.
 	 * @param MaximumProjectLoadTimeInSeconds The maximum amount of time to wait (in seconds) for the project to load.
-	 * @throws AWTException in {@link #typeIntoFileExplorer}
 	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 * @throws TimeoutException if the project doesn't load in time
 	 * @author laserwolve
 	 */
-	void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws AWTException, InterruptedException
+	void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws InterruptedException
 	{	
-		Robot robot = new Robot();
-		
 		click(StartPage.openButton);
 		
 		click(StartPage.OpenButtonDropdown.projectFolder);
@@ -331,15 +349,6 @@ class ConstructMethodLibrary extends ConstructElementMap
 		}
 	}
 	
-	/**<h1>Start</h1>
-	 *  Browse to the Construct Editor.
-	 * @author laserwolve
-	 */
-	static void start()
-	{
-		driver.get(editorURL);
-	}
-	
 	/**<h1>Dismiss Welcome Popup</h1>
 	 * Dismisses the welcome popup, and waits for it to disappear.
 	 * @author laserwolve
@@ -398,14 +407,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * Type text into a Windows File Explorer window. Use {@link #sendText} to type elsewhere. Requires window focus, so you can't do other things on the computer executing this method. This method sets the clipboard's contents
 	 * to <strong>path</strong>, then pastes it into the File Explorer window.
 	 * @param path The file path to type/paste into the File Explorer window.
-	 * @throws AWTException from {@link java.awt.Robot#Robot}
 	 * @throws InterruptedException from {@link Thread#sleep}
 	 * @author laserwolve 
 	 */
-	static void typeIntoFileExplorer(String path) throws AWTException, InterruptedException //TODO: Will this work headless?
-	{	
-		Robot robot = new Robot();
-		
+	static void typeIntoFileExplorer(String path) throws InterruptedException //TODO: Will this work headless?
+	{			
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
 		
 		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up
