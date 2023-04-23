@@ -2,17 +2,13 @@ package constructAutomation;
 
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.Objects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,6 +40,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	{
 		edgeOptions = new EdgeOptions();
 		edgeOptions.addArguments("start-maximized");
+		edgeOptions.addArguments("user-data-dir=C:\\Users\\Andre\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default");
 
 		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 		actions = new Actions(driver);
@@ -156,6 +153,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 		}
 	}
 	
+	static boolean elementIsPresent(By by)
+	{
+		return driver.findElements(by).size() != 0;
+	}
+	
 	/**<h1>Double Click</h1>
 	 * Double clicks the element specified in the By.
 	 * @param by The By of the element to double click.
@@ -167,58 +169,37 @@ class ConstructMethodLibrary extends ConstructElementMap
 		actions.doubleClick(clickableElement(by)).perform();
 	}
 	
-	/** <h1>Import Images</h1>
-	 * Imports images into the specified sprite from the specified archive. Must be inside a project with the Project Bar open.
-	 * @param spriteName The name of the sprite to create, to which images will be added.
-	 * @param archiveName The name of the {@value constructAutomation.Data#archiveFileExtension} archive containing images formatted for Construct.
-	 * @throws AWTException in {@link #typeIntoFileExplorer}
-	 * @author laserwolve
-	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
-	 */
-	void importImages(String spriteName, String archiveName) throws AWTException, InterruptedException
-	{
-		rightClick(Project.ProjectBar.ProjectFolder.objectTypes);
-		
-		click(Project.ProjectBar.ProjectFolder.ObjectTypesContext.addNewObjectType);
-		
-		sendText(Project.CreateNewObjectTypePopup.searchBar, objectTypes.sprite);
-		
-		sendText(Project.CreateNewObjectTypePopup.name, spriteName + Keys.ENTER);
-		
-		doubleClick(Project.ProjectBar.projectTreeItem(spriteName));
-		
-		rightClick(Project.AnimationsEditor.AnimationsPane.animationsPaneBackground);
-		
-		click(Project.AnimationsEditor.AnimationsPane.AnimationsPaneContext.importAnimations);
-		
-		click(Project.AnimationsEditor.AnimationsPane.AnimationsPaneContext.ImportAnimationsContext.fromFiles);
-		
-		typeIntoFileExplorer(sourcePath + archiveName + archiveFileExtension);
-	}
-	
 	/** <h1>Log In</h1>
 	 * Logs in to the Construct Editor.
 	 * @author laserwolve
 	 */
 	static void logIn()
-	{		
-		click(UserAccountButton.userAccountButton);
-		
-		click(AccountDropdown.logIn);
-		
-		switchToIframe(Misc.iframe);
-		
-		sendText(LogInDialog.usernameField, SensitiveData.username);
-		
-		sendText(LogInDialog.passwordField, SensitiveData.password);
-		
-		click(LogInDialog.logInButton);
-		
-		waitUntilElementIsGone(LogInDialog.loginDialog);		
-		
-		switchToDefaultContent();
-		
-		waitUntilTextIs(UserAccountButton.userAccountName, SensitiveData.username, 10);
+	{	
+		if(isSignedOut())
+		{
+			click(UserAccountButton.userAccountButton);
+			
+			click(AccountDropdown.logIn);
+			
+			switchToIframe(Misc.iframe);
+			
+			sendText(LogInDialog.usernameField, SensitiveData.username);
+			
+			sendText(LogInDialog.passwordField, SensitiveData.password);
+			
+			click(LogInDialog.logInButton);
+			
+			waitUntilElementIsGone(LogInDialog.loginDialog);		
+			
+			switchToDefaultContent();
+			
+			waitUntilTextIs(UserAccountButton.userAccountName, SensitiveData.username, 10);
+		}
+	}
+	
+	static boolean isSignedOut()
+	{
+		return clickableElement(UserAccountButton.userAccountName).getText() == "Guest";
 	}
 	
 	/**<h1>Wait Until Text is</h1>
@@ -236,13 +217,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 	/**<h1>Open a Project Folder</h1>
 	 * Opens a Construct 3 project folder.
 	 * @see {@link #openProjectFolder(int)}
-	 * @throws AWTException in {@link #openProjectFolder}
 	 * @author laserwolve
-	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 */
-	void openProjectFolder() throws AWTException, InterruptedException
+	void openMostRecentProject()
 	{		
-		openProjectFolder(600);
+		openMostRecentProject(600);
 	}
 	
 	/** <h1>Open a Project Folder</h1> 
@@ -250,21 +229,13 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * The amount of time it takes a project to load is determined both by the project's size and speed of the computer.
 	 * Uses keyboard commands to interact with the Chromium "Let site edit files?" popup.
 	 * @param MaximumProjectLoadTimeInSeconds The maximum amount of time to wait (in seconds) for the project to load.
-	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
 	 * @throws TimeoutException if the project doesn't load in time
 	 * @author laserwolve
 	 */
-	void openProjectFolder(int MaximumProjectLoadTimeInSeconds) throws InterruptedException
+	void openMostRecentProject(int MaximumProjectLoadTimeInSeconds)
 	{	
-		click(StartPage.openButton);
+		click(StartPage.recentProject(1));
 		
-		click(StartPage.OpenButtonDropdown.projectFolder);
-		
-		typeIntoFileExplorer(projectPath);
-		
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);		// Select directory
-		robot.delay(1000);
 		robot.keyPress(KeyEvent.VK_RIGHT);
 		robot.keyRelease(KeyEvent.VK_RIGHT);		// Give "Edit files" focus
 		robot.keyPress(KeyEvent.VK_ENTER);
@@ -307,57 +278,18 @@ class ConstructMethodLibrary extends ConstructElementMap
 		clickableElement(by).sendKeys(text);
 	}
 	
-	/**<h1>Create Recent Projects</h1>
-	 * Creates and saves empty new projects to browser storage. Projects are named numerically (first project is "1", second project is "2")
-	 * @param projectCount The number of projects to create.
-	 * @author laserwolve
-	 * @throws InterruptedException 
-	 * @throws AWTException 
-	 */
-	static void createRecentProjects(int projectCount) throws AWTException, InterruptedException
-	{
-		
-		for (int projectNumber = 1; projectNumber <= 6; projectNumber++)
-		{
-			click(menuButton);
-			
-			click(MenuDropdown.project);
-			
-			click(MenuDropdown.ProjectPopout.newProject);
-			
-			sendText(NewProjectPopup.name, String.valueOf(projectNumber));
-			
-			click(NewProjectPopup.create);
-			
-			click(menuButton);
-
-			click(MenuDropdown.project);
-			
-			click(MenuDropdown.ProjectPopout.save);
-			
-			if(projectNumber == 1) click(setUpBackupsPopup.saveAnyway);
-			
-			typeIntoFileExplorer(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + projectNumber);
-			
-			Thread.sleep(2000); // Tricky... can't tell when file explorer closed, also need to wait for progress dialog to appear then disappear
-			
-			click(menuButton);
-
-			click(MenuDropdown.project);
-			
-			click(MenuDropdown.ProjectPopout.closeProject);
-		}
-	}
-	
 	/**<h1>Dismiss Welcome Popup</h1>
 	 * Dismisses the welcome popup, and waits for it to disappear.
 	 * @author laserwolve
 	 */
 	static void dismissWelcomePopup()
 	{
-		click(WelcomePopup.noThanksLink);
-		
-		waitUntilElementIsGone(welcomePopup);
+		if(elementIsPresent(welcomePopup))
+		{
+			click(WelcomePopup.noThanksLink);
+			
+			waitUntilElementIsGone(welcomePopup);
+		}
 	}
 	
 	/**<h1>Stop</h1>
@@ -401,27 +333,6 @@ class ConstructMethodLibrary extends ConstructElementMap
 	static void switchToIframe(By by)
 	{
 		driver.switchTo().frame(clickableElement(by));
-	}
-
-	/** <h1>Type into File Explorer</h1>
-	 * Type text into a Windows File Explorer window. Use {@link #sendText} to type elsewhere. Requires window focus, so you can't do other things on the computer executing this method. This method sets the clipboard's contents
-	 * to <strong>path</strong>, then pastes it into the File Explorer window.
-	 * @param path The file path to type/paste into the File Explorer window.
-	 * @throws InterruptedException from {@link Thread#sleep}
-	 * @author laserwolve 
-	 */
-	static void typeIntoFileExplorer(String path) throws InterruptedException //TODO: Will this work headless?
-	{			
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
-		
-		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up
-	
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyRelease(KeyEvent.VK_V);			// Paste
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);		// Open directory or file
 	}
 	
 	/** <h1>Wait Until Element is Gone</h1>

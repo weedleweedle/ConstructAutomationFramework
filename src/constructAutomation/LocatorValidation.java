@@ -24,8 +24,6 @@ class LocatorValidation extends constructAutomation.ConstructMethodLibrary
 		dismissWelcomePopup();
 		
 		logIn();
-		
-		createRecentProjects(6);
 	}
 	
 	@AfterAll

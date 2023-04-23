@@ -899,6 +899,7 @@ class ConstructElementMap extends Data
 		 * @author laserwolve
 		 */
 		static By userLicenseType = By.id("userLicenseType");
+		
 		/**<h1>User Account Name</h1>
 		 * Defaults to "Guest" while signed out, and the username "Guest" is not permitted when creating a Construct account. However, an account by this name does actually exist, ableit lower case.
 		 * @see <a href="https://www.construct.net/en/users/42941/guest">User named "guest"</a>

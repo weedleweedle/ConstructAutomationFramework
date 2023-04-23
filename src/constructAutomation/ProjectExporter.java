@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class ProjectExporter extends ConstructMethodLibrary
 {
 	@Test
-	void exportProject() throws AWTException, InterruptedException
+	void exportProject() throws AWTException
 	{
 		start();
 		
@@ -15,7 +15,7 @@ class ProjectExporter extends ConstructMethodLibrary
 		
 		logIn();
 		
-		openProjectFolder();
+		openMostRecentProject();
 		
 		click(menuButton);
 		
@@ -24,6 +24,8 @@ class ProjectExporter extends ConstructMethodLibrary
 		click(MenuDropdown.ProjectPopout.export);
 		
 		click(ExportProjectPopup.nwjs);
+		
+		click(ExportProjectPopup.next);
 		
 		click(ExportProjectPopup.Page2.deduplicateImages);
 		
