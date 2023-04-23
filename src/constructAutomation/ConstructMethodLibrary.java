@@ -3,8 +3,13 @@ package constructAutomation;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import org.junit.Assert;
@@ -229,7 +234,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @throws InterruptedException from {@link Thread#sleep(long)}
 	 */
-	void openRecentProject(String projectName) throws InterruptedException
+	static void openRecentProject(String projectName) throws InterruptedException
 	{	
 		click(menuButton);
 		
@@ -365,6 +370,66 @@ class ConstructMethodLibrary extends ConstructElementMap
 	static void waitUntilElementIsPresent(By by)
 	{
 		waitUntilElementIsPresent(by, 5);
+	}
+	
+	static void exportProject(String projectName) throws InterruptedException
+	{
+		openRecentProject(projectName);
+		
+		click(menuButton);
+		
+		click(MenuDropdown.project);
+		
+		click(MenuDropdown.ProjectPopout.export);
+		
+		click(ExportProjectPopup.nwjs);
+		
+		click(ExportProjectPopup.next);
+		
+		click(ExportProjectPopup.Page2.deduplicateImages);
+		
+		click(ExportProjectPopup.Page2.losslessFormat);
+		
+		click(ExportProjectPopup.Page2.LosslessFormatOptions.webp);
+		
+		click(ExportProjectPopup.Page2.lossyFormat);
+		
+		click(ExportProjectPopup.Page2.LossyFormatOptions.webp);
+		
+		click(ExportProjectPopup.Page2.minifyMode);
+		
+		click(ExportProjectPopup.Page2.MinifyModes.advanced);
+		
+		click(ExportProjectPopup.Page2.next);
+		
+		waitUntilElementIsGone(Misc.progressDialog, 10); // "Loading NW.js versions..."
+		
+		click(ExportProjectPopup.NwjsOptions.linux32); // Uncheck
+		
+		click(ExportProjectPopup.NwjsOptions.linux64); // Uncheck
+		
+		click(ExportProjectPopup.NwjsOptions.mac64); // Uncheck
+		
+		click(ExportProjectPopup.NwjsOptions.win32); // Uncheck
+		
+		click(ExportProjectPopup.NwjsOptions.windowFrame); // Uncheck
+		
+		click(ExportProjectPopup.NwjsOptions.resizableWindow); // Uncheck
+		
+		click(ExportProjectPopup.NwjsOptions.enableDevTools); // Uncheck
+		
+		click(ExportProjectPopup.NwjsOptions.exportForSteam); // Check
+		
+		click(ExportProjectPopup.NwjsOptions.next);
+		
+		waitUntilElementIsGone(Misc.progressDialog, 6000);
+		
+		click(ExportProjectPopup.ExportReport.downloadLink);
+		
+		LocalTime expiryTime = LocalTime.now().plusSeconds(30);
+		
+		while(Files.notExists(Paths.get(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + projectName + ".zip"), LinkOption.NOFOLLOW_LINKS))
+			if(LocalTime.now().isAfter(expiryTime)) throw new TimeoutException("Unable to locate exported project");
 	}
 	
 	/** <h1>Wait Until Element is Gone</h1>
