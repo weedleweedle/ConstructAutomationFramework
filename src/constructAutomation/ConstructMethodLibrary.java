@@ -187,6 +187,8 @@ class ConstructMethodLibrary extends ConstructElementMap
 			
 			sendText(LogInDialog.passwordField, SensitiveData.password);
 			
+			click(LogInDialog.rememberCheckbox);
+			
 			click(LogInDialog.logInButton);
 			
 			waitUntilElementIsGone(LogInDialog.loginDialog);		
@@ -198,8 +200,10 @@ class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	static boolean isSignedOut()
-	{
-		return clickableElement(UserAccountButton.userAccountName).getText() == "Guest";
+	{	
+		while(clickableElement(UserAccountButton.userAccountName).getText().equals("..."));
+
+		return clickableElement(UserAccountButton.userAccountName).getText().equals("Guest");
 	}
 	
 	/**<h1>Wait Until Text is</h1>
