@@ -7,15 +7,11 @@ import org.junit.jupiter.api.Test;
 class ProjectExporter extends ConstructMethodLibrary
 {
 	@Test
-	void exportProject() throws AWTException
+	void exportProject() throws AWTException, InterruptedException
 	{
-		start();
+		start(false);
 		
-		dismissWelcomePopup();
-		
-		logIn();
-		
-		openMostRecentProject();
+		openRecentProject("DaggerQuest");
 		
 		click(menuButton);
 		
@@ -63,7 +59,7 @@ class ProjectExporter extends ConstructMethodLibrary
 		
 		click(ExportProjectPopup.NwjsOptions.next);
 		
-		waitUntilElementIsGone(Misc.progressDialog, 120);
+		waitUntilElementIsGone(Misc.progressDialog, 6000);
 		
 		click(ExportProjectPopup.ExportReport.downloadLink);
 		

@@ -999,7 +999,7 @@ class ConstructElementMap extends Data
 			static By packageAssets = By.xpath("//*[@id='nwjsPackageAssets']"); // Checked by default
 			static By compressFinalZip = By.xpath("//*[@id='nwjsCompressFinalZip']"); // Checked by default
 			static By windowFrame = By.xpath("//*[@id='nwjsWindowFrame']"); // Checked by default
-			static By resizableWindow = By.xpath("//*[@id='nwjsResizableWindow]"); // Checked by default
+			static By resizableWindow = By.xpath("//*[@id='nwjsResizableWindow']"); // Checked by default
 			static By kioskMode = By.xpath("//*[@id='nwjsKioskMode']");// Unchecked by default
 			static By ignoreGpuBlacklist = By.xpath("//*[@id='nwjsIgnoreGPUBlacklist']"); // Checked by default
 			static By enableDevTools = By.xpath("//*[@id='nwjsEnableDevTools']"); // Checked by default

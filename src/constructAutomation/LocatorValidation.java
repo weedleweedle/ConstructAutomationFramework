@@ -19,7 +19,7 @@ class LocatorValidation extends constructAutomation.ConstructMethodLibrary
 	@BeforeAll
 	static void setUp() throws AWTException, InterruptedException
 	{
-		start();
+		start(true);
 		
 		dismissWelcomePopup();
 		

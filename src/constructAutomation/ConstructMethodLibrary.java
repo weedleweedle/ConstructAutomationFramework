@@ -33,21 +33,25 @@ class ConstructMethodLibrary extends ConstructElementMap
 	
 	/**<h1>Start</h1>
 	 * Initialize variables and browse to the Construct Editor.
+	 * @param testMode whether or not to start this script with testing prerequisites
 	 * @author laserwolve
 	 * @throws AWTException from {@link java.awt.Robot#Robot}
 	 */
-	static void start() throws AWTException
+	static void start(boolean testMode) throws AWTException
 	{
 		edgeOptions = new EdgeOptions();
+		
 		edgeOptions.addArguments("start-maximized");
-		edgeOptions.addArguments("user-data-dir=C:\\Users\\Andre\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default");
+		
+		if(!testMode) edgeOptions.addArguments("user-data-dir=C:\\Users\\Andre\\AppData\\Local\\Microsoft\\Edge\\User Data\\Construct");
 
 		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
+		
 		actions = new Actions(driver);
 		
 		robot = new Robot();
 		
-		driver.get(editorURL);
+		if(!driver.getCurrentUrl().equals(editorURL)) driver.get(editorURL);
 	}
 	
 	/**<h1>Click</h1>
@@ -217,37 +221,34 @@ class ConstructMethodLibrary extends ConstructElementMap
 		stop(seconds).until(ExpectedConditions.textToBe(by, text));
 		
 	}
-
-	/**<h1>Open a Project Folder</h1>
-	 * Opens a Construct 3 project folder.
-	 * @see {@link #openProjectFolder(int)}
-	 * @author laserwolve
-	 */
-	void openMostRecentProject()
-	{		
-		openMostRecentProject(600);
-	}
 	
 	/** <h1>Open a Project Folder</h1> 
-	 * Opens a Construct 3 project folder. Must be on the Start page. Throws an exception if the project takes longer to load than <Strong>MaximumProjectLoadTimeInSeconds</Strong>.
-	 * The amount of time it takes a project to load is determined both by the project's size and speed of the computer.
+	 * Opens a Construct 3 project folder. The amount of time it takes a project to load is determined both by the project's size and speed of the computer.
 	 * Uses keyboard commands to interact with the Chromium "Let site edit files?" popup.
-	 * @param MaximumProjectLoadTimeInSeconds The maximum amount of time to wait (in seconds) for the project to load.
-	 * @throws TimeoutException if the project doesn't load in time
+	 * @param projectName A string which is contained by the name of the project to open.
 	 * @author laserwolve
+	 * @throws InterruptedException from {@link Thread#sleep(long)}
 	 */
-	void openMostRecentProject(int MaximumProjectLoadTimeInSeconds)
+	void openRecentProject(String projectName) throws InterruptedException
 	{	
-		click(StartPage.recentProject(1));
+		click(menuButton);
 		
-		robot.keyPress(KeyEvent.VK_RIGHT);
-		robot.keyRelease(KeyEvent.VK_RIGHT);		// Give "Edit files" focus
+		click(MenuDropdown.project);
+		
+		click(MenuDropdown.ProjectPopout.openRecent);
+		
+		click(MenuDropdown.ProjectPopout.OpenRecentPopout.recentProject(projectName));
+		
+		Thread.sleep(1000); // TODO: Replace this. I can't find a chrome flag to allow file editing.
+		
+		robot.keyPress(KeyEvent.VK_LEFT);
+		robot.keyRelease(KeyEvent.VK_LEFT);		// Give "Edit files" focus	
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);		// Select "Edit files"
 		
 		waitUntilElementIsPresent(Misc.progressDialog);
 		
-		waitUntilElementIsGone(Misc.progressDialog, MaximumProjectLoadTimeInSeconds);
+		waitUntilElementIsGone(Misc.progressDialog, 600);
 	}
 	
 	/**<h1>Quit</h1>
