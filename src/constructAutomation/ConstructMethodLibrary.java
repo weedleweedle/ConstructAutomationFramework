@@ -14,6 +14,7 @@ import java.util.Objects;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -57,6 +58,10 @@ class ConstructMethodLibrary extends ConstructElementMap
 		robot = new Robot();
 		
 		if(!driver.getCurrentUrl().equals(editorURL)) driver.get(editorURL);
+		
+		dismissWelcomePopup();
+		
+		logIn();
 	}
 	
 	/**<h1>Click</h1>
@@ -266,15 +271,26 @@ class ConstructMethodLibrary extends ConstructElementMap
 		driver.quit();
 	}
 	
-	/**<h1>Right Click</h1>
-	 * Right clicks the element specified in the By.
-	 * @param by The By of the element to right click.
+	/**<h1>Context Click</h1>
+	 * Performs a context click on the element specified in the By.
+	 * @param by The By of the element on which to perform a context click.
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.interactions.Actions#contextClick(WebElement)}
 	 */
-	void rightClick(By by)
+	void contextClick(By by)
 	{
 		actions.contextClick(clickableElement(by)).perform();
+	}
+	
+	void contextClickUpperLeftCorner(By by)
+	{
+		WebElement webElement = clickableElement(by);
+		
+		Dimension dimension = webElement.getSize();
+		
+		actions.moveToElement(webElement, dimension.width / -2 + 1, dimension.height / -2 + 1).perform();
+		
+		actions.contextClick().perform();
 	}
 	
 	/**<h1>Send Text</h1>

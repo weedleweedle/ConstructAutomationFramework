@@ -629,6 +629,7 @@ class ConstructElementMap extends Data
 		{
 			return By.xpath("//ui-tab[starts-with(@title, 'Layout: " + name + "')]");
 		}
+		
 		static class AnimationsEditor
 		{			
 			static class AnimationsPane
@@ -642,7 +643,19 @@ class ConstructElementMap extends Data
 					static By importAnimations = By.xpath("//span[text()='Import Animation']");
 				}
 				// Used to bring up the context menu
-				static By animationsPaneBackground = By.xpath("//ui-animation-editor-panel-content/ui-tree[@role='tree']");
+				static By animationsPaneBackground = By.xpath("//ui-animation-editor-panel-content/ui-tree");
+				
+				
+				/**<h1>Animations Pane Background Context Menu</h1>
+				 * This is the context menu that's brought up when performing a context click on the animations pane's background.
+				 * It is not the same as the context menu that's brought up when performing a context click on an individual animation.
+				 * The context click must be performed very close to the edges of the animations pane's background to sucessfully bring up the desired context menu if many animations are already present.
+				 * @author laserwolve
+				 */
+				static class animationsPaneBackgroundContextMenu
+				{
+					static By addAnimation = By.xpath("//span[text()='Add Animation']/parent::*");
+				}
 			}
 		}
 		static class CreateNewObjectTypePopup
@@ -664,9 +677,11 @@ class ConstructElementMap extends Data
 				return By.xpath("(//span[@class='tree-item-name' and text()='" + name + "'])[1]");
 			}
 		}
+		
 		static By save = By.xpath("//ui-toolbar-button[@title='Save project']");
 		static By undo = By.xpath("//div[@title='Undo']");
 		static By viewUndoStack = By.xpath("//div[@title='View undo stack']");
+		
 		/**<h1>Undo Stack</h1>
 		 * Gets a <code>By</code> for an undo action in the stack, specified by a number. This method is 0-based but Construct's undo stack is 1-based,
 		 * at least in the UI. This is a very weak locator so it might break in the future.
@@ -678,8 +693,10 @@ class ConstructElementMap extends Data
 		{
 			return By.xpath("(//span[@class='menu-item-text'])[" + number + "]");
 		}
+		
 		static By redo = By.xpath("//div[@title='Redo']");
 		static By viewRedoStack = By.xpath("//div[@title='View redo stack']");
+		
 		/**<h1>Redo Stack</h1>
 		 * Uses the same locators as {@link #undoStack(int)}, but these two menu items can't be open at the same time.
 		 * @param number The (0-based) number of the desired undo action
@@ -691,8 +708,10 @@ class ConstructElementMap extends Data
 		{
 			return By.xpath("(//span[@class='menu-item-text'])[" + number + "]");
 		}
+		
 		static By preview = By.xpath("//div[@title='Preview']");
 		static By viewOtherPreviewOptions = By.xpath("//div[@title='Other preview options']");
+		
 		static class OtherPreviewOptions
 		{
 			static By previewLayout = By.xpath("//span[@class='menu-item-text'][text()='Preview layout']");
@@ -700,7 +719,30 @@ class ConstructElementMap extends Data
 			static By previewProject = By.xpath("//span[@class='menu-item-text'][text()='Preview project']");
 			static By remotePreview = By.xpath("//span[@class='menu-item-text'][text()='Remote preview']");
 		}
+		
+		static class projectBar
+		{
+			static By searchBar = By.xpath("//input[@class='search']");
+			
+			/**<h1>Search Result</h1>
+			 * The desired result after searching in the Project Bar. The object will be the first result, which is the one returned by this method.
+			 * The following results are the references of the object in its respective families, if any.
+			 * @param query The exact name of the object.
+			 * @return A <code>By</code> for this object in the Project Bar.
+			 * @author laserwolve
+			 */
+			static By searchResult (String query)
+			{
+				return By.xpath("(//span[text()='" + query + "'])[1]");
+			}
+			
+			static class ContextMenu
+			{
+				static By editAnimations = By.xpath("//span[text()='Edit animations']/parent::ui-menuitem");
+			}
+		}
 	}
+	
 	static class SettingsPopup
 	{
 		static class BackupLocations
