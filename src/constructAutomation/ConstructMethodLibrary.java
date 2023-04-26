@@ -21,6 +21,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -36,6 +37,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	static WebDriver driver;
 	static Actions actions;
 	static Robot robot;
+	static JavascriptExecutor javascriptExecutor;
 	
 	/**<h1>Start</h1>
 	 * Initialize variables and browse to the Construct Editor.
@@ -53,6 +55,8 @@ class ConstructMethodLibrary extends ConstructElementMap
 
 		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 		
+		javascriptExecutor = (JavascriptExecutor) driver;
+		
 		actions = new Actions(driver);
 		
 		robot = new Robot();
@@ -62,6 +66,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 		dismissWelcomePopup();
 		
 		logIn();
+	}
+	
+	static void scrollToElement(By by)
+	{
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", presentElement(by));
 	}
 	
 	/**<h1>Click</h1>
@@ -165,6 +174,23 @@ class ConstructMethodLibrary extends ConstructElementMap
 		{
 			return null;
 		}
+	}
+	
+	static WebElement presentElement(By by, int seconds)
+	{
+		try
+		{
+			return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(by));
+		}
+		catch (TimeoutException e)
+		{
+			return null;
+		}
+	}
+	
+	static WebElement presentElement(By by)
+	{
+		return presentElement(by, 5);
 	}
 	
 	static boolean elementIsPresent(By by)

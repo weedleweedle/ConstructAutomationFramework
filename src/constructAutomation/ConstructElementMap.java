@@ -634,7 +634,9 @@ class ConstructElementMap extends Data
 		{			
 			static class AnimationsPane
 			{
-				static class AnimationsPaneContext
+				static By lastAnimation = By.xpath("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last()]");
+				
+				static class AnimationsContextMenu
 				{
 					static class ImportAnimationsContext
 					{
@@ -645,14 +647,13 @@ class ConstructElementMap extends Data
 				// Used to bring up the context menu
 				static By animationsPaneBackground = By.xpath("//ui-animation-editor-panel-content/ui-tree");
 				
-				
 				/**<h1>Animations Pane Background Context Menu</h1>
 				 * This is the context menu that's brought up when performing a context click on the animations pane's background.
 				 * It is not the same as the context menu that's brought up when performing a context click on an individual animation.
 				 * The context click must be performed very close to the edges of the animations pane's background to sucessfully bring up the desired context menu if many animations are already present.
 				 * @author laserwolve
 				 */
-				static class animationsPaneBackgroundContextMenu
+				static class BackgroundContextMenu
 				{
 					static By addAnimation = By.xpath("//span[text()='Add Animation']/parent::*");
 				}
