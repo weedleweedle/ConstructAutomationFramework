@@ -10,6 +10,7 @@ import java.nio.file.LinkOption;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.Map;
 import java.util.Objects;
 
 import org.junit.Assert;
@@ -21,6 +22,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.openqa.selenium.JavascriptExecutor;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -322,14 +324,41 @@ class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	/**<h1>Send Text</h1>
-	 * Sends the specified text to elemented located in the By.
-	 * @param by The By of the element to send text to.
+	 * Sends the specified text to specified element.
+	 * @param by The locator of the element which will recieve the text.
 	 * @param text The text to be inputted.
 	 * @author laserwolve
 	 */
 	static void sendText(By by, String text)
 	{
 		clickableElement(by).sendKeys(text);
+	}
+	
+	/**<h1>Add Child Element</h1>
+	 * Creates a new element with the specified attributes under the specified element.
+	 * Locates and returns the newly created element with an XPath derived from its tag name and attribute values.
+	 * @param by The locator for the element under which to create the new element.
+	 * @param tagName The tag name of the new element.
+	 * @param attributes Pairs of attributes and values for the new element.
+	 * @return The new element.
+	 * @author laserwolve
+	 */
+	static WebElement addChildElement(By by, String tagName, Map<String,String> attributes)
+	{
+		String setAttributes = "";
+		String locatorXpath = "";
+		WebElement webElement = presentElement(by);
+		
+		for(Map.Entry<String,String> entry : attributes.entrySet())
+		{
+			setAttributes += tagName + ".setAttribute('" + entry.getKey() + "', '" + entry.getValue() + "');";
+			
+			locatorXpath += "[@" + entry.getKey() + "='" + entry.getValue() + "']";
+		}
+		
+		javascriptExecutor.executeScript("let " + tagName + " = document.createElement('" + tagName + "');" + setAttributes + "arguments[0].appendChild(document.createElement('" + tagName + "'));", webElement);
+		
+		return webElement.findElement(By.xpath("(./" + tagName + locatorXpath + ")[last()]"));
 	}
 	
 	/**<h1>Dismiss Welcome Popup</h1>
