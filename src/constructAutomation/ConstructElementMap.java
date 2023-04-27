@@ -1059,5 +1059,17 @@ class ConstructElementMap extends Data
 	{
 		static By iframe = By.xpath("//ui-dialog-contents//iframe");
 		static By progressDialog = By.id("progressDialog");
+		static By application = By.xpath("//body[@role='application']");
+		static By main = By.xpath("//*[@id='main']");
+		static By html = By.xpath("//html[@desktop]");
+	}
+	
+	/**<h1>Synthetic</h1>
+	 * Locators for elements that were created during the runtime, and are not naturally found in the Construct editor.
+	 * @author laserwolve
+	 */
+	static class Synthetic
+	{
+		static By fileInput = By.xpath("//html[@desktop]/input[@type='file']");
 	}
 }
