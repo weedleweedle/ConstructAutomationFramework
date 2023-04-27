@@ -630,11 +630,12 @@ class ConstructElementMap extends Data
 			return By.xpath("//ui-tab[starts-with(@title, 'Layout: " + name + "')]");
 		}
 		
-		static class AnimationsEditor
+		static class AnimationsEditor // TODO: Incomplete
 		{			
-			static class AnimationsPane
+			static class AnimationsPane // TODO: Verify completion
 			{
-				static By lastAnimation = By.xpath("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last()]");
+				static By secondToLastAnimation = By.xpath("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last() - 1]");
+				static By firstAnimation = By.xpath("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[1]");
 				
 				static class AnimationsContextMenu
 				{
@@ -643,8 +644,14 @@ class ConstructElementMap extends Data
 						static By fromFiles = By.xpath("//span[text()='From Files']");
 					}
 					static By importAnimations = By.xpath("//span[text()='Import Animation']");
+					static By delete = By.xpath("//span[text()='Delete']/parent::*");
 				}
-				// Used to bring up the context menu
+				
+				/**<h1>Animations Pane Background</h1>
+				 * Used solely to bring up the Background Context Menu.
+				 * @author laserwolve
+				 * @see BackgroundContextMenu
+				 */
 				static By animationsPaneBackground = By.xpath("//ui-animation-editor-panel-content/ui-tree");
 				
 				/**<h1>Animations Pane Background Context Menu</h1>
@@ -653,9 +660,15 @@ class ConstructElementMap extends Data
 				 * The context click must be performed very close to the edges of the animations pane's background to sucessfully bring up the desired context menu if many animations are already present.
 				 * @author laserwolve
 				 */
-				static class BackgroundContextMenu
+				static class BackgroundContextMenu // TODO: Incomplete
 				{
 					static By addAnimation = By.xpath("//span[text()='Add Animation']/parent::*");
+					static By importAnimation = By.xpath("//span[text()='Import Animation']/parent::*");
+					
+					static class importAnimationPopout // TODO: Incomplete
+					{
+						static By fromFiles = By.xpath("//span[text()='From Files']/parent::*");
+					}
 				}
 			}
 		}
@@ -663,20 +676,6 @@ class ConstructElementMap extends Data
 		{
 			static By name = By.id("crObjectTypeNameInput");
 			static By searchBar = By.xpath("//dialog[@id='createNewObjectTypeDialog']//input[@type='search']");
-		}
-		static class ProjectBar
-		{
-			static class ProjectFolder
-			{
-				static class ObjectTypesContext
-				{
-					static By addNewObjectType = By.xpath("//span[text()='Add new object type']");
-				}
-				static By objectTypes = By.xpath("//span[text()='Object types']");
-			}
-			static By projectTreeItem (String name) {
-				return By.xpath("(//span[@class='tree-item-name' and text()='" + name + "'])[1]");
-			}
 		}
 		
 		static By save = By.xpath("//ui-toolbar-button[@title='Save project']");
@@ -721,7 +720,7 @@ class ConstructElementMap extends Data
 			static By remotePreview = By.xpath("//span[@class='menu-item-text'][text()='Remote preview']");
 		}
 		
-		static class projectBar
+		static class ProjectBar
 		{
 			static By searchBar = By.xpath("//input[@class='search']");
 			

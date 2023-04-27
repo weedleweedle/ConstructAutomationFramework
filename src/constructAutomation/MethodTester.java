@@ -3,6 +3,8 @@ package constructAutomation;
 import java.awt.AWTException;
 
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 class MethodTester extends ConstructMethodLibrary
 {
@@ -14,27 +16,43 @@ class MethodTester extends ConstructMethodLibrary
 		String sprite = "man_chestDefault_gear";
 		start(false);
 		
-		openRecentProject("DaggerQuest");
+		openRecentProject("importTesting");
 		
-		sendText(Project.projectBar.searchBar, sprite);
+		sendText(Project.ProjectBar.searchBar, sprite);
 		
-		contextClick(Project.projectBar.searchResult(sprite));
+		contextClick(Project.ProjectBar.searchResult(sprite));
 		
-		click(Project.projectBar.ContextMenu.editAnimations);
+		click(Project.ProjectBar.ContextMenu.editAnimations);
+		
+		contextClickUpperLeftCorner(Project.AnimationsEditor.AnimationsPane.animationsPaneBackground); // This will deselect the first animation.
+		
+		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.addAnimation);
+				
+		click(Project.AnimationsEditor.AnimationsPane.firstAnimation); // Click the first animation.
+		
+		stop().until(ExpectedConditions.attributeToBe(Project.AnimationsEditor.AnimationsPane.firstAnimation, "selected", "true")); // Wait until the first animation is selected.
+				
+		scrollToElement(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation);
+		
+		actions.keyDown(Keys.SHIFT).perform();
+		
+		click(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation); // Select the second to last animation while holding the shift key down. This will select all animations between the first and second to last animation.
+		
+		actions.keyUp(Keys.SHIFT).perform();
+		
+		stop(10).until(ExpectedConditions.attributeToBe(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation, "selected", "true")); // Wait until all the animations are selected.
+		
+		contextClick(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation);
+		
+		click(Project.AnimationsEditor.AnimationsPane.AnimationsContextMenu.delete);
 		
 		contextClickUpperLeftCorner(Project.AnimationsEditor.AnimationsPane.animationsPaneBackground);
 		
-		waitUntilElementIsPresent(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.addAnimation);
+		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.importAnimation);
 		
-		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.addAnimation);
+		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.importAnimationPopout.fromFiles);
 		
-		// Shift-click first animation
-		
-		scrollToElement(Project.AnimationsEditor.AnimationsPane.lastAnimation);
-		
-		// Shift click second to last animation
-		
-		// right click on any selected animation, click delete
+		// and... we're back to working with file explorer
 		
 		quit();
 	}

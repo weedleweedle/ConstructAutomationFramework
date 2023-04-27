@@ -63,6 +63,8 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 		if(!driver.getCurrentUrl().equals(editorURL)) driver.get(editorURL);
 		
+		// TODO: Handle "Your credentials have expired popup" here
+		
 		dismissWelcomePopup();
 		
 		logIn();
