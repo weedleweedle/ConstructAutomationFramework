@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Paths;
@@ -54,6 +53,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	{
 		edgeOptions = new EdgeOptions();
 		edgeOptions.addArguments("start-maximized");
+		edgeOptions.addArguments("inprivate"); // Prevents signing in automatically in the browser
 		
 		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 		javascriptExecutor = (JavascriptExecutor) driver;
@@ -122,22 +122,14 @@ class ConstructMethodLibrary extends ConstructElementMap
 	
 	/**<h1>Clickable Element</h1>
 	 * Returns the element specified by the By, after it has become clickable.
-	 * @param by The <code>By</code> of the element to click.
+	 * @param by The locator of the element to click.
 	 * @param seconds The length of time, in seconds, to wait for this element to become clickable.
 	 * @return The clickable element.
 	 * @author laserwolve
-	 * @throws TimeoutException if the element doesn't become clickable in time
 	 */
 	static WebElement clickableElement(By by, int seconds)
 	{
-		try
-		{
-			return stop(seconds).until(ExpectedConditions.elementToBeClickable(by));
-		}
-		catch (TimeoutException e)
-		{
-			return null;
-		}
+		return stop(seconds).until(ExpectedConditions.elementToBeClickable(by));
 	}
 	
 	/**<h1>Dismiss Welcome Popup</h1>
@@ -340,20 +332,14 @@ class ConstructMethodLibrary extends ConstructElementMap
 	/**<h1>Present Element</h1>
 	 * Gets the element specified, as long as it is present with the time limit specified. 
 	 * @param by The locator of the element to find.
-	 * @param Seconds the number of seconds to wait for the element to be present.
+	 * @param Seconds The number of seconds to wait for the element to be present.
 	 * @return The present element, or null if it can't be located.
 	 * @author laserwolve
 	 */
 	static WebElement presentElement(By by, int seconds)
 	{
-		try
-		{
-			return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(by));
-		}
-		catch (TimeoutException e)
-		{
-			return null;
-		}
+		return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(by));
+
 	}
 	
 	/**<h1>Quit</h1>
@@ -492,38 +478,6 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 	}
 	
-	/**<h1>Confirm Clickable</h1>
-	 * Confrim the clickability of an element.
-	 * @param by The locator of the element to determine the clickability of.
-	 * @author laserwolve
-	 */
-	static void confirmClickable(By by)
-	{
-		confirmTrue(by.toString() + " in " + by.getClass().getName() + " is clickable", isElementClickable(by));
-	}
-	
-	/**<h1>Validate Locators</h1>
-	 * Loops through the locators in a class, validating that they are clickable.
-	 * Uses a try/catch block instead of a throws declaration to make all its calling methods cleaner.
-	 * @param targetClass The class containing the locators to be validated as clickable.
-	 * @author laserwolve
-	 */
-	static void confirmClickable(Class<?> targetClass)
-	{	
-		for (Field f : targetClass.getDeclaredFields()) 
-		{
-			By by = null;
-			try
-			{
-				by = (By) f.get(targetClass);
-			}
-			catch (IllegalAccessException e)
-			{
-			}
-			confirmTrue(f.getName() + " in " + targetClass.getName() + " is clickable", isElementClickable(by));
-		}
-	}
-	
 	/**<h1>Confirm True</h1>
 	 * Basic wrapper for {@link org.junit.Assert#assertTrue(String, boolean)} 
 	 * @param message The identifying message
@@ -558,9 +512,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 		Dimension dimension = webElement.getSize();
 		
-		actions.moveToElement(webElement, dimension.width / -2 + 1, dimension.height / -2 + 1).perform();
-		
-		actions.contextClick().perform();
+		actions.moveToElement(webElement, dimension.width / -2 + 1, dimension.height / -2 + 1).contextClick().perform();
 	}
 	
 	/**<h1>Double Click</h1>

@@ -6,12 +6,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import com.google.common.io.Files;
 
+@DisplayName("Method Tester")
 class MethodTester extends ConstructMethodLibrary
 {
 	
@@ -29,7 +28,7 @@ class MethodTester extends ConstructMethodLibrary
 	
 	@Test
 	@DisplayName("Import Sprites")
-	void methodTester() throws AWTException
+	void methodTester()
 	{
 		String path = "C:" + fs + "assets" + fs + "output" + fs + "man_chestDefault_gear.zip";
 		String sprite = Files.getNameWithoutExtension(path);
@@ -42,33 +41,33 @@ class MethodTester extends ConstructMethodLibrary
 		
 		click(Project.ProjectBar.ContextMenu.editAnimations);
 		
-		contextClickUpperLeftCorner(Project.AnimationsEditor.AnimationsPane.animationsPaneBackground); // This will deselect the first animation.
+		contextClick(Project.AnimationsEditor.AnimationsPane.title); // This will deselect the first animation.
 		
-		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.addAnimation);
+		click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.addAnimation); // This creates and selects a new animation.
 				
-		click(Project.AnimationsEditor.AnimationsPane.firstAnimation); // Click the first animation.
+		click(Project.AnimationsEditor.AnimationsPane.firstAnimation); // Select the first animation. This deselects the animation that was created previously.
 		
 		waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.firstAnimation, 5);
 				
-		scrollToElement(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation);
+		scrollToElement(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
 		
 		actions.keyDown(Keys.SHIFT).perform();
 		
-		click(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation); // Select the second to last animation while holding the shift key down. This will select all animations between the first and second to last animation.
+		click(Project.AnimationsEditor.AnimationsPane.penultimateAnimation); // Select the second to last animation while holding the shift key down. This will select all animations between the first and second to last animation.
 		
 		actions.keyUp(Keys.SHIFT).perform();
 		
-		waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation, 5);
+		waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.penultimateAnimation, 5);
 		
-		contextClick(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation);
+		contextClick(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
 		
-		click(Project.AnimationsEditor.AnimationsPane.AnimationsContextMenu.delete);
+		click(Project.AnimationsEditor.AnimationsPane.AnimationContextMenu.delete);
 		
-		contextClickUpperLeftCorner(Project.AnimationsEditor.AnimationsPane.animationsPaneBackground);
+		contextClick(Project.AnimationsEditor.AnimationsPane.title);
 		
-		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.importAnimation);
+		click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.importAnimation);
 		
-		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.importAnimationPopout.fromFiles);
+		click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.importAnimationPopout.fromFiles);
 		
 		typeIntoFileExplorer(path.toString());
 	}

@@ -645,10 +645,10 @@ class ConstructElementMap extends SensitiveData
 		{			
 			static class AnimationsPane // TODO: Verify completion
 			{
-				static By secondToLastAnimation = bxp("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last() - 1]");
 				static By firstAnimation = bxp("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[1]");
+				static By penultimateAnimation = bxp("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last() - 1]");
 				
-				static class AnimationsContextMenu
+				static class AnimationContextMenu
 				{
 					static class ImportAnimationsContext
 					{
@@ -658,20 +658,15 @@ class ConstructElementMap extends SensitiveData
 					static By delete = bxp("//span[text()='Delete']/parent::*");
 				}
 				
-				/**<h1>Animations Pane Background</h1>
-				 * Used solely to bring up the Background Context Menu.
-				 * @author laserwolve
-				 * @see BackgroundContextMenu
-				 */
-				static By animationsPaneBackground = bxp("//ui-animation-editor-panel-content/ui-tree");
+				static By title = bxp("//ui-animation-editor-panel[@class='animationsEditorAnimations']/ui-animation-editor-panel-title");
+				static By background = bxp("//ui-animation-editor-panel-content/ui-tree");
 				
 				/**<h1>Animations Pane Background Context Menu</h1>
 				 * This is the context menu that's brought up when performing a context click on the animations pane's background.
 				 * It is not the same as the context menu that's brought up when performing a context click on an individual animation.
-				 * The context click must be performed very close to the edges of the animations pane's background to sucessfully bring up the desired context menu if many animations are already present.
 				 * @author laserwolve
 				 */
-				static class BackgroundContextMenu // TODO: Incomplete
+				static class PaneContextMenu // TODO: Incomplete
 				{
 					static By addAnimation = bxp("//span[text()='Add Animation']/parent::*");
 					static By importAnimation = bxp("//span[text()='Import Animation']/parent::*");
