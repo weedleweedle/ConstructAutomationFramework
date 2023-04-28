@@ -202,6 +202,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	/**<h1>Is Signed Out</h1>
 	 * Check whether or not the user signed out.
 	 * @return whether or not the user is signed out.
+	 * @author laserwolve
 	 */
 	static boolean isSignedOut()
 	{	
@@ -213,6 +214,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 		return clickableElement(UserAccountButton.userAccountName).getText().equals("Guest");
 	}
 	
+	/**<h1>Check Expiry</h1>
+	 * Check if the expiry time has been exceeded.
+	 * @return whether or not the current time is past the expiry time.
+	 * @author laserwolve
+	 */
 	static boolean checkExpiry()
 	{
 		return LocalTime.now().isAfter(expiryTime);
@@ -228,6 +234,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 		expiryTime = LocalTime.now().plusSeconds(seconds);
 	}
 	
+	/**<h1>Exceeded Expiry Time</h1>
+	 * Throws a {@link TimeoutException}, with a message.
+	 * @param message The message to include with the exception.
+	 * @author laserwolve
+	 */
 	static void exceededExpiryTime(String message)
 	{
 		throw new TimeoutException(message);
@@ -291,11 +302,19 @@ class ConstructMethodLibrary extends ConstructElementMap
 		waitUntilElementIsGone(Misc.progressDialog, 600);
 	}
 	
+	/**@See {@link #presentElement(By, int)}*/
 	static WebElement presentElement(By by)
 	{
 		return presentElement(by, 5);
 	}
 	
+	/**<h1>Present Element</h1>
+	 * Gets the element specified, as long as it is present with the time limit specified. 
+	 * @param by The locator of the element to find.
+	 * @param Seconds the number of seconds to wait for the element to be present.
+	 * @return The present element, or null if it can't be located.
+	 * @author laserwolve
+	 */
 	static WebElement presentElement(By by, int seconds)
 	{
 		try
@@ -318,6 +337,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 		driver.quit();
 	}
 	
+	/**<h1>Scroll to Element</h1>
+	 * Scrolls to the specified element, using JavaScript.
+	 * @param by The locator of the element to scroll to.
+	 * @author laserwolve
+	 */
 	static void scrollToElement(By by)
 	{
 		javascriptExecutor.executeScript("arguments[0].scrollIntoView();", presentElement(by));
@@ -335,7 +359,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	/**<h1>Start</h1>
-	 * Initialize variables and browse to the Construct Editor.
+	 * Initialize variables and browses to the Construct Editor.
 	 * @author laserwolve
 	 * @throws AWTException from {@link java.awt.Robot#Robot}
 	 */
@@ -384,7 +408,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	
 	/** <h1>Switch to IFrame</h1>
 	 * Switches to the specified IFrame.
-	 * @param by The IFrame to which to switch.
+	 * @param by The IFrame to switch to.
 	 * @author laserwolve
 	 */
 	static void switchToIframe(By by)
@@ -393,8 +417,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	/** <h1>Type into File Explorer</h1>
-	 * Type text into a Windows File Explorer window. Use {@link #sendText} to type elsewhere. Requires window focus, so you can't do other things on the computer executing this method. This method sets the clipboard's contents
-	 * to <strong>path</strong>, then pastes it into the File Explorer window.
+	 * Type text into a Windows File Explorer window. Use {@link #sendText} to type elsewhere.
+	 * Requires window focus, so you can't do other things on the computer executing this method.
+	 * This method sets the clipboard's contents to <strong>path</strong>, then pastes it into the File Explorer window.
 	 * @param path The file path to type/paste into the File Explorer window.
 	 * @throws InterruptedException from {@link Thread#sleep}
 	 * @author laserwolve 
@@ -435,6 +460,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
 	
+	/**@see #waitUntilElementIsPresent(By, int)*/
 	static void waitUntilElementIsPresent(By by)
 	{
 		waitUntilElementIsPresent(by, 5);
@@ -463,15 +489,20 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 	}
 	
+	/**<h1>Confirm Clickable</h1>
+	 * Confrim the clickability of an element.
+	 * @param by The locator of the element to determine the clickability of.
+	 * @author laserwolve
+	 */
 	void confirmClickable(By by)
 	{
 		confirmTrue(by.toString() + " in " + by.getClass().getName() + " is clickable", isElementClickable(by));
 	}
 	
 	/**<h1>Validate Locators</h1>
-	 * Loops through the <code>By</code> locators in a class, validating that they are clickable. Uses a try/catch block instead of a throws declaration to make all its calling
-	 * methods cleaner.
-	 * @param targetClass The class containing <code>By</code> locators to be validated as clickable.
+	 * Loops through the locators in a class, validating that they are clickable.
+	 * Uses a try/catch block instead of a throws declaration to make all its calling methods cleaner.
+	 * @param targetClass The class containing the locators to be validated as clickable.
 	 * @author laserwolve
 	 */
 	void confirmClickable(Class<?> targetClass)
@@ -513,6 +544,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 		actions.contextClick(clickableElement(by)).perform();
 	}
 	
+	/**<h1>Context Click Upper Left Corner</h1>
+	 * Performs a context click that's 1 pixel down and to the right of the specified element.
+	 * @param by The element on which to perform the context click.
+	 * @author laserwolve
+	 */
 	void contextClickUpperLeftCorner(By by)
 	{
 		WebElement webElement = clickableElement(by);
@@ -525,8 +561,8 @@ class ConstructMethodLibrary extends ConstructElementMap
 	}
 	
 	/**<h1>Double Click</h1>
-	 * Double clicks the element specified in the By.
-	 * @param by The By of the element to double click.
+	 * Double clicks the element specified in the locator.
+	 * @param by The locator of the element to double click.
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.interactions.Actions#doubleClick(WebElement)}
 	 */
@@ -537,7 +573,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	
 	/**<h1>Is Element Clickable</h1>
 	 * Uses {@link #clickableElement(By)} to determine if an element is clickable or not.
-	 * @param by The <code>By</code> of the element to check.
+	 * @param by The locator of the element to check.
 	 * @return whether or not the element is clickable.
 	 * @author laserwolve
 	 * @see {@link #clickableElement(By)}
