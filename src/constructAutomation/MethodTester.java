@@ -16,7 +16,7 @@ class MethodTester extends ConstructMethodLibrary
 		String sprite = "man_chestDefault_gear";
 		start();
 		
-		openProjectFolder(600, "C:" + fs + "DaggerQuest");
+		openProjectFolder(6000, "C:" + fs + "DaggerQuest");
 		
 		sendText(Project.ProjectBar.searchBar, sprite);
 		
