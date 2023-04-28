@@ -195,7 +195,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 		// TODO: Set to browser default download location, instead of the download folder.
 		// Is the downloads folder always the default on a new browser session?
-		while(Files.notExists(Paths.get(System.getProperty("user.home") + fs + "Downloads" + fs + projectName + ".zip"), LinkOption.NOFOLLOW_LINKS))
+		while(Files.notExists(Paths.get(userHome + fs + "Downloads" + fs + projectName + ".zip"), LinkOption.NOFOLLOW_LINKS))
 			if(checkExpiry()) exceededExpiryTime("Unable to locate exported project");
 	}
 	
@@ -280,7 +280,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @throws InterruptedException from {@link Thread#sleep(long)}
 	 */
-	static void openRecentProject(String projectName) throws InterruptedException
+	static void openRecentProject(String projectName)
 	{	
 		click(menuButton);
 		
@@ -290,7 +290,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 		click(MenuDropdown.ProjectPopout.OpenRecentPopout.recentProject(projectName));
 		
-		Thread.sleep(1000); // TODO: Replace this. I can't find a chrome flag to allow file editing.
+		robot.delay(1000); // TODO: Replace this. I can't find a chrome flag to allow file editing.
 		
 		robot.keyPress(KeyEvent.VK_LEFT);
 		robot.keyRelease(KeyEvent.VK_LEFT);		// Give "Edit files" focus	
@@ -424,11 +424,11 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @throws InterruptedException from {@link Thread#sleep}
 	 * @author laserwolve 
 	 */
-	static void typeIntoFileExplorer(String path) throws InterruptedException //TODO: Will this work headless?
+	static void typeIntoFileExplorer(String path)
 	{			
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
 
-		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up
+		robot.delay(2000); // TODO: Find a way to determine if the file explorer has popped up
 
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);

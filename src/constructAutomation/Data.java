@@ -8,7 +8,7 @@ import java.io.File;
  */
 public class Data
 {
+	static String userHome = System.getProperty("user.home");
 	static String fs = File.separator;
 	static String editorURL = "https://editor.construct.net/r339";
-	static String userDataArgument = "user-data-dir=" + System.getProperty("user.home") + fs + "AppData" + fs + "Local" + fs + "Microsoft" + fs + "Edge" + fs + "User Data" + fs + "Construct";
 }
