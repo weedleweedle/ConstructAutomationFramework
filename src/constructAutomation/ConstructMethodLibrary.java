@@ -2,8 +2,9 @@ package constructAutomation;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -43,17 +44,14 @@ class ConstructMethodLibrary extends ConstructElementMap
 	
 	/**<h1>Start</h1>
 	 * Initialize variables and browse to the Construct Editor.
-	 * @param testMode whether or not to start this script with testing prerequisites
 	 * @author laserwolve
 	 * @throws AWTException from {@link java.awt.Robot#Robot}
 	 */
-	static void start(boolean testMode) throws AWTException
+	static void start() throws AWTException
 	{
 		edgeOptions = new EdgeOptions();
 		
 		edgeOptions.addArguments("start-maximized");
-		
-		if(!testMode) edgeOptions.addArguments("user-data-dir=C:\\Users\\Andre\\AppData\\Local\\Microsoft\\Edge\\User Data\\Construct");
 
 		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 		
@@ -63,9 +61,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 		robot = new Robot();
 		
-		if(!driver.getCurrentUrl().equals(editorURL)) driver.get(editorURL);
-		
-		// TODO: Handle "Your credentials have expired popup" here
+		driver.get(editorURL);
 		
 		dismissWelcomePopup();
 		
@@ -132,6 +128,57 @@ class ConstructMethodLibrary extends ConstructElementMap
 			}
 			confirmTrue(f.getName() + " in " + targetClass.getName() + " is clickable", isElementClickable(by));
 		}
+	}
+	
+	/** <h1>Type into File Explorer</h1>
+	 * Type text into a Windows File Explorer window. Use {@link #sendText} to type elsewhere. Requires window focus, so you can't do other things on the computer executing this method. This method sets the clipboard's contents
+	 * to <strong>path</strong>, then pastes it into the File Explorer window.
+	 * @param path The file path to type/paste into the File Explorer window.
+	 * @throws InterruptedException from {@link Thread#sleep}
+	 * @author laserwolve 
+	 */
+	static void typeIntoFileExplorer(String path) throws InterruptedException //TODO: Will this work headless?
+	{			
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
+
+		Thread.sleep(2000); // TODO: Find a way to determine if the file explorer has popped up
+
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		robot.keyRelease(KeyEvent.VK_V);			// Paste
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);		// Open directory or file
+	}
+	
+	/** <h1>Open a Project Folder</h1> 
+	 * Opens a Construct 3 project folder. Must be on the Start page.
+	 * The amount of time a project takes to load is determined both by the project's size and speed of the computer.
+	 * Uses keyboard commands to interact with the Chromium "Let site edit files?" popup.
+	 * @param MaximumProjectLoadTimeInSeconds The maximum amount of time to wait (in seconds) for the project to load.
+	 * @throws InterruptedException in {@link #typeIntoFileExplorer}
+	 * @throws TimeoutException if the project doesn't load in time
+	 * @author laserwolve
+	 */
+	void openProjectFolder(int MaximumProjectLoadTimeInSeconds, String projectPath) throws InterruptedException
+	{	
+		click(StartPage.openButton);
+		
+		click(StartPage.OpenButtonDropdown.projectFolder);
+		
+		typeIntoFileExplorer(projectPath);
+		
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);		// Select directory
+		robot.delay(1000);
+		robot.keyPress(KeyEvent.VK_RIGHT);
+		robot.keyRelease(KeyEvent.VK_RIGHT);		// Give "Edit files" focus
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);		// Select "Edit files"
+		
+		waitUntilElementIsPresent(Misc.progressDialog);
+		
+		waitUntilElementIsGone(Misc.progressDialog, MaximumProjectLoadTimeInSeconds);
 	}
 	
 	void confirmClickable(By by)
@@ -367,12 +414,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 */
 	static void dismissWelcomePopup()
 	{
-		if(elementIsPresent(welcomePopup))
-		{
-			click(WelcomePopup.noThanksLink);
+		click(WelcomePopup.noThanksLink);
 			
-			waitUntilElementIsGone(welcomePopup);
-		}
+		waitUntilElementIsGone(welcomePopup);
 	}
 	
 	/**<h1>Stop</h1>
@@ -501,7 +545,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 		
 		LocalTime expiryTime = LocalTime.now().plusSeconds(30);
 		
-		while(Files.notExists(Paths.get(System.getProperty("user.home") + File.separator + "Downloads" + File.separator + projectName + ".zip"), LinkOption.NOFOLLOW_LINKS))
+		while(Files.notExists(Paths.get(System.getProperty("user.home") + fs + "Downloads" + fs + projectName + ".zip"), LinkOption.NOFOLLOW_LINKS))
 			if(LocalTime.now().isAfter(expiryTime)) throw new TimeoutException("Unable to locate exported project");
 	}
 	

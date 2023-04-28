@@ -14,9 +14,9 @@ class MethodTester extends ConstructMethodLibrary
 		// Import images into a sprite in a project
 		
 		String sprite = "man_chestDefault_gear";
-		start(false);
+		start();
 		
-		openRecentProject("importTesting");
+		openProjectFolder(600, "C:" + fs + "DaggerQuest");
 		
 		sendText(Project.ProjectBar.searchBar, sprite);
 		
