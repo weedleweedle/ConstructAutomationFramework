@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
  * <code>By</code> objects with locators for all the elements in the Construct Editor.
  * @author laserwolve
  */
-class ConstructElementMap extends Data
+class ConstructElementMap extends SensitiveData
 {
 	/**<h1>BXP</h1>
 	 * Abstracted shortener method for {@link org.openqa.selenium.By#xpath(String)}

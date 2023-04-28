@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -34,12 +35,40 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  */
 class ConstructMethodLibrary extends ConstructElementMap
 {	
-	static Actions actions;
-	static WebDriver driver;
 	static EdgeOptions edgeOptions;
+	static WebDriver driver;
 	static JavascriptExecutor javascriptExecutor;
+	static Actions actions;
 	static Robot robot;
 	static LocalTime expiryTime;
+	static String userHome;
+	static String fs;
+	static String editorURL;
+	
+	/**<h1>Start</h1>
+	 * Initialize variables and browses to the Construct Editor.
+	 * @author laserwolve
+	 * @throws AWTException from {@link java.awt.Robot#Robot}
+	 */
+	static void start() throws AWTException
+	{
+		edgeOptions = new EdgeOptions();
+		edgeOptions.addArguments("start-maximized");
+		
+		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
+		javascriptExecutor = (JavascriptExecutor) driver;
+		actions = new Actions(driver);
+		robot = new Robot();
+		userHome = System.getProperty("user.home");
+		fs = File.separator;
+		editorURL = "https://editor.construct.net/r339";
+		
+		driver.get(editorURL);
+		
+		dismissWelcomePopup();
+		
+		logIn();
+	}
 	
 	/**<h1>Add Child Element</h1>
 	 * Creates a new element with the specified attributes under the specified element.
@@ -258,9 +287,9 @@ class ConstructMethodLibrary extends ConstructElementMap
 			
 			switchToIframe(Misc.iframe);
 			
-			sendText(LogInDialog.usernameField, SensitiveData.username);
+			sendText(LogInDialog.usernameField, username);
 			
-			sendText(LogInDialog.passwordField, SensitiveData.password);
+			sendText(LogInDialog.passwordField, password);
 			
 			click(LogInDialog.rememberCheckbox);
 			
@@ -270,7 +299,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 			
 			switchToDefaultContent();
 			
-			waitUntilTextIs(UserAccountButton.userAccountName, SensitiveData.username, 10);
+			waitUntilTextIs(UserAccountButton.userAccountName, username, 10);
 		}
 	}
 	/** <h1>Open a Project Folder</h1> 
@@ -356,32 +385,6 @@ class ConstructMethodLibrary extends ConstructElementMap
 	static void sendText(By by, String text)
 	{
 		clickableElement(by).sendKeys(text);
-	}
-	
-	/**<h1>Start</h1>
-	 * Initialize variables and browses to the Construct Editor.
-	 * @author laserwolve
-	 * @throws AWTException from {@link java.awt.Robot#Robot}
-	 */
-	static void start() throws AWTException
-	{
-		edgeOptions = new EdgeOptions();
-		
-		edgeOptions.addArguments("start-maximized");
-
-		driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
-		
-		javascriptExecutor = (JavascriptExecutor) driver;
-		
-		actions = new Actions(driver);
-		
-		robot = new Robot();
-		
-		driver.get(editorURL);
-		
-		dismissWelcomePopup();
-		
-		logIn();
 	}
 	
 	/**<h1>Stop</h1>
