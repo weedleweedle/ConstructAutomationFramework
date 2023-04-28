@@ -497,7 +497,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param by The locator of the element to determine the clickability of.
 	 * @author laserwolve
 	 */
-	void confirmClickable(By by)
+	static void confirmClickable(By by)
 	{
 		confirmTrue(by.toString() + " in " + by.getClass().getName() + " is clickable", isElementClickable(by));
 	}
@@ -508,7 +508,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param targetClass The class containing the locators to be validated as clickable.
 	 * @author laserwolve
 	 */
-	void confirmClickable(Class<?> targetClass)
+	static void confirmClickable(Class<?> targetClass)
 	{	
 		for (Field f : targetClass.getDeclaredFields()) 
 		{
@@ -531,7 +531,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.junit.Assert#assertTrue(String, boolean)
 	 */
-	void confirmTrue(String message, boolean condition)
+	static void confirmTrue(String message, boolean condition)
 	{
 		Assert.assertTrue(message, condition);
 	}
@@ -542,7 +542,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.interactions.Actions#contextClick(WebElement)}
 	 */
-	void contextClick(By by)
+	static void contextClick(By by)
 	{
 		actions.contextClick(clickableElement(by)).perform();
 	}
@@ -552,7 +552,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @param by The element on which to perform the context click.
 	 * @author laserwolve
 	 */
-	void contextClickUpperLeftCorner(By by)
+	static void contextClickUpperLeftCorner(By by)
 	{
 		WebElement webElement = clickableElement(by);
 		
@@ -569,7 +569,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.interactions.Actions#doubleClick(WebElement)}
 	 */
-	void doubleClick(By by)
+	static void doubleClick(By by)
 	{
 		actions.doubleClick(clickableElement(by)).perform();
 	}
@@ -581,7 +581,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link #clickableElement(By)}
 	 */
-	boolean isElementClickable(By by)
+	static boolean isElementClickable(By by)
 	{
 		return Objects.nonNull(clickableElement(by));
 	}
@@ -595,7 +595,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @throws TimeoutException if the project doesn't load in time
 	 * @author laserwolve
 	 */
-	void openProjectFolder(int MaximumProjectLoadTimeInSeconds, String projectPath) throws InterruptedException
+	static void openProjectFolder(int MaximumProjectLoadTimeInSeconds, String projectPath)
 	{	
 		click(StartPage.openButton);
 		
@@ -621,7 +621,7 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.WebDriver.Navigation#refresh()}
 	 */
-	void refresh()
+	static void refresh()
 	{
 		driver.navigate().refresh();
 	}
@@ -632,8 +632,19 @@ class ConstructMethodLibrary extends ConstructElementMap
 	 * @return A wait of the specified duration.
 	 * @author laserwolve
 	 */
-	WebDriverWait stop()
+	static WebDriverWait stop()
 	{
 		return stop(5);
+	}
+	
+	/**<h1>Wait for Element to Be Selected</h1>
+	 * Waits a specified amount of seconds for an element to be selected.
+	 * @param by The locator of the element to wait upon.
+	 * @param seconds How many seconds to wait.
+	 * @author laserwolve
+	 */
+	static void waitForElementToBeSelected(By by, int seconds)
+	{
+		stop(seconds).until(ExpectedConditions.elementToBeSelected(by));
 	}
 }

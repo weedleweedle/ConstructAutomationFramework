@@ -6,8 +6,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.google.common.io.Files;
 
 class MethodTester extends ConstructMethodLibrary
 {
@@ -26,9 +29,10 @@ class MethodTester extends ConstructMethodLibrary
 	
 	@Test
 	@DisplayName("Import Sprites")
-	void methodTester() throws AWTException, InterruptedException
+	void methodTester() throws AWTException
 	{
-		String sprite = "man_chestDefault_gear";
+		String path = "C:" + fs + "assets" + fs + "output" + fs + "man_chestDefault_gear.zip";
+		String sprite = Files.getNameWithoutExtension(path);
 		
 		openProjectFolder(6000, "C:" + fs + "DaggerQuest");
 		
@@ -44,7 +48,7 @@ class MethodTester extends ConstructMethodLibrary
 				
 		click(Project.AnimationsEditor.AnimationsPane.firstAnimation); // Click the first animation.
 		
-		stop().until(ExpectedConditions.attributeToBe(Project.AnimationsEditor.AnimationsPane.firstAnimation, "selected", "true")); // Wait until the first animation is selected.
+		waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.firstAnimation, 5);
 				
 		scrollToElement(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation);
 		
@@ -54,7 +58,7 @@ class MethodTester extends ConstructMethodLibrary
 		
 		actions.keyUp(Keys.SHIFT).perform();
 		
-		stop(10).until(ExpectedConditions.attributeToBe(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation, "selected", "true")); // Wait until all the animations are selected.
+		waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation, 5);
 		
 		contextClick(Project.AnimationsEditor.AnimationsPane.secondToLastAnimation);
 		
@@ -66,6 +70,6 @@ class MethodTester extends ConstructMethodLibrary
 		
 		click(Project.AnimationsEditor.AnimationsPane.BackgroundContextMenu.importAnimationPopout.fromFiles);
 		
-		// and... we're back to working with file explorer
+		typeIntoFileExplorer(path.toString());
 	}
 }
