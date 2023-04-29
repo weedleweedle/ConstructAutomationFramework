@@ -258,8 +258,7 @@ class ConstructXpaths {
 		static String posterize = "//*[@class='section -effect']/*[@data-tag='effect-posterize']";
 		static String radialBlur = "//*[@class='section -effect']/*[@data-tag='effect-radialblur']";
 		static String replaceColor = "//*[@class='section -effect']/*[@data-tag='effect-replacecolor']";
-		static String replaceSolidColor = 
-			"//*[@class='section -effect']/*[@data-tag='effect-replacesolidcolor']";
+		static String replaceSolidColor = "//*[@class='section -effect']/*[@data-tag='effect-replacesolidcolor']";
 		static String setColor = "//*[@class='section -effect']/*[@data-tag='effect-setcolor']";
 		static String sharpen = "//*[@class='section -effect']/*[@data-tag='effect-sharpen']";
 		static String tint = "//*[@class='section -effect']/*[@data-tag='effect-tint']";
@@ -363,8 +362,7 @@ class ConstructXpaths {
 	    static class Media {
 		static String audio = "//*[@class='section -plugin']/*[@data-tag='plugin-Audio']";
 		static String geolocation = "//*[@class='section -plugin']/*[@data-tag='plugin-Geolocation']";
-		static String speechRecognition = 
-			"//*[@class='section -plugin']/*[@data-tag='plugin-SpeechRecognition']";
+		static String speechRecognition = "//*[@class='section -plugin']/*[@data-tag='plugin-SpeechRecognition']";
 		static String speechSynthesis = "//*[@class='section -plugin']/*[@data-tag='plugin-SpeechSynthesis']";
 		static String userMedia = "//*[@class='section -plugin']/*[@data-tag='plugin-UserMedia']";
 		static String videoRecorder = "//*[@class='section -plugin']/*[@data-tag='plugin-GameRecorder']";
@@ -390,8 +388,7 @@ class ConstructXpaths {
 		static String multiplayer = "//*[@class='section -plugin']/*[@data-tag='plugin-Multiplayer']";
 	    }
 
-	    static String dataAndStorageExpander = 
-		    "//*[@class='titleSection -plugin'][contains(text(),'Data & storage')]";
+	    static String dataAndStorageExpander = "//*[@class='titleSection -plugin'][contains(text(),'Data & storage')]";
 	    static String formControls = "//*[@class='titleSection -plugin'][contains(text(),'Form Controls')]";
 
 	    static String generalExpander = "//*[@class='titleSection -plugin'][contains(text(),'General')]";
@@ -532,8 +529,7 @@ class ConstructXpaths {
 	    static String beginnersGuide = "//span[contains(text(),'Beginner')]/..";
 	    static String platformGame = "//span[text()='Make a platform game']/..";
 	    static String getStartedWithJavaScript = "//span[text()='Get started with JavaScript']/..";
-	    static String getStartedWithTimelineAnimations = 
-		    "//span[text()='Get started with timeline animations']/..";
+	    static String getStartedWithTimelineAnimations = "//span[text()='Get started with timeline animations']/..";
 	}
 
 	static class ViewPopout {
@@ -562,10 +558,9 @@ class ConstructXpaths {
 
 	static class AnimationsEditor {
 	    static class AnimationsPane {
-		static String firstAnimation = 
-			"(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[1]";
-		static String penultimateAnimation = 
-			"(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last() - 1]";
+		static String animations = "//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div";
+		static String firstAnimation = "(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[1]";
+		static String penultimateAnimation = "(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last() - 1]";
 
 		static class AnimationContextMenu {
 		    static class ImportAnimationsContext {
@@ -576,8 +571,7 @@ class ConstructXpaths {
 		    static String delete = "//span[text()='Delete']/parent::*";
 		}
 
-		static String title = 
-			"//ui-animation-editor-panel[@class='animationsEditorAnimations']/ui-animation-editor-panel-title";
+		static String title = "//ui-animation-editor-panel[@class='animationsEditorAnimations']/ui-animation-editor-panel-title";
 		static String background = "//ui-animation-editor-panel-content/ui-tree";
 
 		static class PaneContextMenu {
