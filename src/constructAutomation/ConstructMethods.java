@@ -14,10 +14,11 @@ import java.time.LocalTime;
 import java.util.Map;
 import java.util.Objects;
 
-import org.junit.Assert;
+import org.apache.commons.compress.utils.FileNameUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -48,10 +49,11 @@ class ConstructMethods extends ConstructXpaths {
     /**
      * <h1>Start</h1> Initialize variables and browses to the Construct Editor.
      * Launches 'inprivate' to prevent signing into the browser.
+     * 
      * @author laserwolve
      * @throws AWTException from {@link java.awt.Robot#Robot}
      */
-    static void start() throws AWTException {
+    static void start() {
 	edgeOptions = new EdgeOptions();
 	edgeOptions.addArguments("start-maximized");
 	edgeOptions.addArguments("inprivate");
@@ -59,7 +61,10 @@ class ConstructMethods extends ConstructXpaths {
 	driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 	javascriptExecutor = (JavascriptExecutor) driver;
 	actions = new Actions(driver);
-	robot = new Robot();
+	try {
+	    robot = new Robot();
+	} catch (AWTException ignored) {
+	}
 	userHome = System.getProperty("user.home");
 	fs = File.separator;
 	editorURL = "https://editor.construct.net/r339";
@@ -83,7 +88,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return The new element.
      * @author laserwolve
      */
-    static WebElement addChildElement(String xpath, String tagName, Map<String, String> attributes) {
+    WebElement addChildElement(String xpath, String tagName, Map<String, String> attributes) {
 	String setAttributes = "";
 	String locatorXpath = "";
 	WebElement webElement = presentElement(xpath);
@@ -110,9 +115,10 @@ class ConstructMethods extends ConstructXpaths {
     static void click(String xpath) {
 	clickableElement(xpath).click();
     }
-    
-    /**<h1>Locate</h1>
-     * Turns an XPath string into a <code>By</code> locator.
+
+    /**
+     * <h1>Locate</h1> Turns an XPath string into a <code>By</code> locator.
+     * 
      * @param xpath The XPath, as a string.
      * @return A <code>By</code> locator based upon the referenced XPath.
      */
@@ -166,13 +172,14 @@ class ConstructMethods extends ConstructXpaths {
      * @return Whether or not the element is present.
      * @author laserwolve
      */
-    static boolean elementIsPresent(By by) {
+    boolean elementIsPresent(By by) {
 	return driver.findElements(by).size() != 0;
     }
 
     /**
      * <h1>Export Project</h1> Exports the currently open project. TODO: Get the
      * project name of the open project. Parameterize the export settings.
+     * 
      * @param projectName The name of the project that's being exported.
      * @throws InterruptedException
      */
@@ -229,7 +236,8 @@ class ConstructMethods extends ConstructXpaths {
 
 	setExpiryTime(30);
 
-	// TODO: Set to browser default download location, instead of the download folder.
+	// TODO: Set to browser default download location, instead of the download
+	// folder.
 	// Is the downloads folder always the default on a new browser session?
 	while (Files.notExists(Paths.get(userHome + fs + "Downloads" + fs + projectName + ".zip"),
 		LinkOption.NOFOLLOW_LINKS))
@@ -508,19 +516,6 @@ class ConstructMethods extends ConstructXpaths {
     }
 
     /**
-     * <h1>Confirm True</h1> Basic wrapper for
-     * {@link org.junit.Assert#assertTrue(String, boolean)}
-     * 
-     * @param message   The identifying message
-     * @param condition The condition to be checked
-     * @author laserwolve
-     * @see {@link org.junit.Assert#assertTrue(String, boolean)
-     */
-    static void confirmTrue(String message, boolean condition) {
-	Assert.assertTrue(message, condition);
-    }
-
-    /**
      * <h1>Context Click</h1> Performs a context click on the element specified in
      * the By.
      * 
@@ -567,7 +562,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @see {@link #clickableElement(By)}
      */
-    static boolean isElementClickable(String xpath) {
+    boolean isElementClickable(String xpath) {
 	return Objects.nonNull(clickableElement(xpath));
     }
 
@@ -620,7 +615,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return A wait of the specified duration.
      * @author laserwolve
      */
-    static WebDriverWait stop() {
+    WebDriverWait stop() {
 	return stop(5);
     }
 
@@ -634,5 +629,54 @@ class ConstructMethods extends ConstructXpaths {
      */
     static void waitForElementToBeSelected(String xpath, int seconds) {
 	stop(seconds).until(ExpectedConditions.elementToBeSelected(locate(xpath)));
+    }
+
+    static void importImages(String path, String projectFolder) {
+	String sprite = FileNameUtils.getBaseName(path);
+
+	openProjectFolder(6000, projectFolder);
+
+	sendText(Project.ProjectBar.searchBar, sprite);
+
+	contextClick(Project.ProjectBar.searchResult(sprite));
+
+	click(Project.ProjectBar.ContextMenu.editAnimations);
+
+	// This will deselect the first animation.
+	contextClick(Project.AnimationsEditor.AnimationsPane.title);
+
+	// This creates and selects a new animation.
+	click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.addAnimation);
+
+	// Select the first animation.
+	// This deselects the animation that was created previously.
+	click(Project.AnimationsEditor.AnimationsPane.firstAnimation);
+
+	waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.firstAnimation, 5);
+
+	scrollToElement(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
+
+	actions.keyDown(Keys.SHIFT).perform();
+
+	// Select the second to last animation while holding the shift key down.
+	// This will select all animations between the first and the penultimate
+	// animation.
+	click(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
+
+	actions.keyUp(Keys.SHIFT).perform();
+
+	waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.penultimateAnimation, 5);
+
+	contextClick(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
+
+	click(Project.AnimationsEditor.AnimationsPane.AnimationContextMenu.delete);
+
+	contextClick(Project.AnimationsEditor.AnimationsPane.title);
+
+	click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.importAnimation);
+
+	click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.importAnimationPopout.fromFiles);
+
+	typeIntoFileExplorer(path.toString());
     }
 }
