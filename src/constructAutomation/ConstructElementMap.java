@@ -2,10 +2,6 @@ package constructAutomation;
 
 import org.openqa.selenium.By;
 
-/**<h1>Construct Element Map</h1>
- * <code>By</code> objects with locators for all the elements in the Construct Editor.
- * @author laserwolve
- */
 class ConstructElementMap extends SensitiveData
 {
 	/**<h1>BXP</h1>
@@ -21,10 +17,6 @@ class ConstructElementMap extends SensitiveData
 	
 	static class AboutPopup
 	{
-		/**<h1>Persistent Storage Popup</h1>
-		 * Appears when persistent storage is requested, but denied.
-		 * @author laserwolve
-		 */
 		static class PersistentStoragePopup
 		{			
 			static By x = bxp("//*[@id='okDialog']//ui-close-button");
@@ -51,13 +43,8 @@ class ConstructElementMap extends SensitiveData
 		static By ok = bxp("//*[@id='aboutDialog']//*[@class='okButton']");
 		static By platformInformation = bxp("//a[text()='Platform information']");
 		static By privacyPolicy = bxp("//a[text()='Privacy policy']");
-		static By releaseNotes = bxp("//a[@class='viewReleaseNotes']"); // Can't use text as it contains version number, i.e. "View r336 release notes"
+		static By releaseNotes = bxp("//a[@class='viewReleaseNotes']");
 		static By reportIssues = bxp("//a[text()='Report issues']");
-		
-		/**<h1>Request Persistent Storage</h1>
-		 * If persistent storage has been granted, this link doesn't exist.
-		 * @author laserwolve
-		 */
 		static By requestPersistentStorage = bxp("//a[text()='Request persistent storage']");
 		static By storageCleanup = bxp("//a[text()='Storage cleanup...']");
 		static By suggestFeatures = bxp("//a[text()='Suggest features']");
@@ -503,19 +490,19 @@ class ConstructElementMap extends SensitiveData
 	}	
 	static class LogInDialog
 	{
-		static By loginDialog = By.id("loginDialog");
-		static By cancelButton = By.id("cancel");
+		static By loginDialog = bxp("loginDialog");
+		static By cancelButton = bxp("cancel");
 		static By x = bxp("//*[@id='loginDialog']//ui-close-button");
 		static By facebookButton = bxp("oAuthLoginButton");
 		static By googleButton = bxp("abcRioButtonContentWrapper");
-		static By logInButton = By.id("login");
-		static By passwordField = By.id("password");
-		static By rememberCheckbox = By.id("remember");
-		static By usernameField = By.id("username");
+		static By logInButton = bxp("login");
+		static By passwordField = bxp("password");
+		static By rememberCheckbox = bxp("remember");
+		static By usernameField = bxp("username");
 	}
 	static class GuidedToursPopup
 	{
-		static class CloseConfirmation // This window is titled "Account logged out", regardless of login status. That's probably a bug
+		static class CloseConfirmation
 		{
 			static By cancelButton = bxp("//button[@class='cancelConfirmButton']");
 			static By x = bxp("//*[@id='confirmDialog']//ui-close-button");
@@ -533,38 +520,17 @@ class ConstructElementMap extends SensitiveData
 		static By openSettings = bxp("//button[@class='confirmButton bold']");
 		static By saveAnyway = bxp("//button[@class='cancelConfirmButton']");
 	}
-	static By menuButton = By.id("mainMenuButton");
+	static By menuButton = bxp("mainMenuButton");
 	
-	/**<h1>Menu Dropdown</h1>
-	 * Like other menus, the menu will wholly populate instantaneously, but the icon images for the menu items will populate individually, presumably
-	 * as they load.
-	 * @author laserwolve
-	 */
 	static class MenuDropdown
 	{
 		static By project = bxp("//span[text()='Project'][@class='menu-item-text']/..");
 		
-		/**<h1>Project Popout</h1>
-		 * This popout has different contents depending on various conditions.
-		 * @author laserwolve
-		 */
 		static class ProjectPopout
 		{
-			/**<h1>New</h1>
-			 * We can't name this variable just "new" because that's a Java keyword. "New" is the first option when a project isn't open.
-			 * It's the 3rd from the bottom if a project is open, and there are recent projects. It's the 2nd from the bottom if a project is open,
-			 * and there are no recent projects.
-			 * @author laserwolve
-			 */
 			static By newProject = bxp("//span[text()='New']/..");
 			static class OpenRecentPopout {
-				
-				/** The element for a recent project under "Open recent". Neither these elements or the "Open recent" element will be present
-				 * if there's no recent projects. You'll need to match the project name almost exactly if it's named similarly to the other UI menu items.
-				 * @author laserwolve
-				 * @param name The name of the project for which to search.
-				 * @return The first recent project that contains 'name'.
-				 */
+
 				static By recentProject (String name) {
 					return bxp("(//span[contains(text(), '" + name + "')]/..)[1]");
 				}
@@ -616,24 +582,18 @@ class ConstructElementMap extends SensitiveData
 			static By startPage = bxp("//span[text()='Start page'][@class='menu-item-text']/..");
 			static By storageCleanup = bxp("//span[text()='Storage cleanup']/..");
 		}
-		
+
 		static By about = bxp("//span[text()='About']/..");
 		static By account = bxp("//span[text()='Account']/..");
-		
 		static By assetStore = bxp("//span[text()='Asset Store']/..");
-		static By getAddons = bxp("//span[text()='Get addons']/..");
-		
+		static By getAddons = bxp("//span[text()='Get addons']/..");	
 		static By guidedTours = bxp("//span[text()='Guided tours']/..");
 		static By help = bxp("//span[text()='Help']/..");
-		
-		/**<h1>Install as app</h1>
-		 * This menu item is not present in incognito/InPrivate browsing sessions.
-		 * @author laserwolve
-		 */
 		static By installAsApp = bxp("//span[text()='Install as app']/..");
 		static By settings = bxp("//span[text()='Settings']/..");
 		static By view = bxp("//span[text()='View']/..");
 	}
+	
 	static class Project
 	{
 		static By projectTab (String name)
@@ -641,9 +601,9 @@ class ConstructElementMap extends SensitiveData
 			return bxp("//ui-tab[starts-with(@title, 'Layout: " + name + "')]");
 		}
 		
-		static class AnimationsEditor // TODO: Incomplete
+		static class AnimationsEditor
 		{			
-			static class AnimationsPane // TODO: Verify completion
+			static class AnimationsPane
 			{
 				static By firstAnimation = bxp("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[1]");
 				static By penultimateAnimation = bxp("(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last() - 1]");
@@ -661,17 +621,12 @@ class ConstructElementMap extends SensitiveData
 				static By title = bxp("//ui-animation-editor-panel[@class='animationsEditorAnimations']/ui-animation-editor-panel-title");
 				static By background = bxp("//ui-animation-editor-panel-content/ui-tree");
 				
-				/**<h1>Animations Pane Background Context Menu</h1>
-				 * This is the context menu that's brought up when performing a context click on the animations pane's background.
-				 * It is not the same as the context menu that's brought up when performing a context click on an individual animation.
-				 * @author laserwolve
-				 */
-				static class PaneContextMenu // TODO: Incomplete
+				static class PaneContextMenu
 				{
 					static By addAnimation = bxp("//span[text()='Add Animation']/parent::*");
 					static By importAnimation = bxp("//span[text()='Import Animation']/parent::*");
 					
-					static class importAnimationPopout // TODO: Incomplete
+					static class importAnimationPopout
 					{
 						static By fromFiles = bxp("//span[text()='From Files']/parent::*");
 					}
@@ -680,44 +635,25 @@ class ConstructElementMap extends SensitiveData
 		}
 		static class CreateNewObjectTypePopup
 		{
-			static By name = By.id("crObjectTypeNameInput");
+			static By name = bxp("crObjectTypeNameInput");
 			static By searchBar = bxp("//dialog[@id='createNewObjectTypeDialog']//input[@type='search']");
 		}
 		
 		static By save = bxp("//ui-toolbar-button[@title='Save project']");
 		static By undo = bxp("//div[@title='Undo']");
 		static By viewUndoStack = bxp("//div[@title='View undo stack']");
-		
-		/**<h1>Undo Stack</h1>
-		 * Gets a <code>By</code> for an undo action in the stack, specified by a number. This method is 0-based but Construct's undo stack is 1-based,
-		 * at least in the UI. This is a very weak locator so it might break in the future.
-		 * @param number The (0-based) number of the desired undo action
-		 * @return A <code>By</code> with a locator for the element of the desired undo action
-		 * @author laserwolve
-		 */
 		static By undoStack (int number)
 		{
 			return bxp("(//span[@class='menu-item-text'])[" + number + "]");
-		}
-		
+		}		
 		static By redo = bxp("//div[@title='Redo']");
 		static By viewRedoStack = bxp("//div[@title='View redo stack']");
-		
-		/**<h1>Redo Stack</h1>
-		 * Uses the same locators as {@link #undoStack(int)}, but these two menu items can't be open at the same time.
-		 * @param number The (0-based) number of the desired undo action
-		 * @return A <code>By</code> with a locator for the element of the desired undo action
-		 * @author laserwolve
-		 * @see {@link #undoStack(int)}
-		 */
 		static By redoStack (int number)
 		{
 			return bxp("(//span[@class='menu-item-text'])[" + number + "]");
-		}
-		
+		}	
 		static By preview = bxp("//div[@title='Preview']");
-		static By viewOtherPreviewOptions = bxp("//div[@title='Other preview options']");
-		
+		static By viewOtherPreviewOptions = bxp("//div[@title='Other preview options']");	
 		static class OtherPreviewOptions
 		{
 			static By previewLayout = bxp("//span[@class='menu-item-text'][text()='Preview layout']");
@@ -725,18 +661,9 @@ class ConstructElementMap extends SensitiveData
 			static By previewProject = bxp("//span[@class='menu-item-text'][text()='Preview project']");
 			static By remotePreview = bxp("//span[@class='menu-item-text'][text()='Remote preview']");
 		}
-		
 		static class ProjectBar
 		{
 			static By searchBar = bxp("//input[@class='search']");
-			
-			/**<h1>Search Result</h1>
-			 * The desired result after searching in the Project Bar. The object will be the first result, which is the one returned by this method.
-			 * The following results are the references of the object in its respective families, if any.
-			 * @param query The exact name of the object.
-			 * @return A <code>By</code> for this object in the Project Bar.
-			 * @author laserwolve
-			 */
 			static By searchResult (String query)
 			{
 				return bxp("(//span[text()='" + query + "'])[1]");
@@ -748,7 +675,6 @@ class ConstructElementMap extends SensitiveData
 			}
 		}
 	}
-	
 	static class SettingsPopup
 	{
 		static class BackupLocations
@@ -888,33 +814,27 @@ class ConstructElementMap extends SensitiveData
 		}
 		static class RecommendedExamples
 		{
-			static By browseExamples = By.id("buttonExamples");
+			static By browseExamples = bxp("buttonExamples");
 			static By example1 = bxp("//*[@id='groupExamples']/div[1]");
 			static By example2 = bxp("//*[@id='groupExamples']/div[2]");
 			static By example3 = bxp("//*[@id='groupExamples']/div[3]");
 		}
 		static class SocialMedia
 		{
-			static By facebook = By.id("linkFacebook");
-			static By reddit = By.id("linkReddit");
-			static By twitter = By.id("linkTwitter");
-			static By youTube = By.id("linkYoutube");
+			static By facebook = bxp("linkFacebook");
+			static By reddit = bxp("linkReddit");
+			static By twitter = bxp("linkTwitter");
+			static By youTube = bxp("linkYoutube");
 		}
-		
-		/**<h1>"Get More Events" Banner</h1>
-		 * This banner only pops up while not logged in and it's not the first time per session visiting <a href="https://editor.construct.net/">editor.construct.net</a>.
-		 * If closed, the banner will not appear on subsequent visits.
-		 * @author laserwolve
-		 */
 		static class GetMoreEventsBanner
 		{
 			static By x = bxp("//div[@id='banner']//div[@class='buttonClose']");
 			static By registerAnAccount = bxp("//a[text()='Register an account']");
 			static By logIn = bxp("//a[text()='log in']");
-		}
-		static By newButton = By.id("buttonNew");
-		static By openButton = By.id("buttonOpen");
-		static By recentProject(int row) // there's a max limit of 6 recent projects
+		}	
+		static By newButton = bxp("buttonNew");
+		static By openButton = bxp("buttonOpen");	
+		static By recentProject(int row)
 		{
 			return bxp("//*[@class='cardProject'][" + row + "]");
 		}
@@ -930,44 +850,32 @@ class ConstructElementMap extends SensitiveData
 		static By nwjsStorage = bxp("clearNwjsStorage");
 		static By savedVersions = bxp("clearC3Storage");
 	}
-	static By welcomePopup = By.id("welcomeTourDialog");
+	
+	static By welcomePopup = bxp("welcomeTourDialog");
+	
 	static class WelcomePopup
 	{
-		// Clicking any button on the popup will dismiss it for the remainder of that browser session.
 		static By x = bxp("//*[@id='welcomeTourDialog']/ui-dialog-caption/ui-close-button");
 		static By noThanksLink = bxp("noThanksLink");
 		static By tourButton = bxp("tourButton");		
 	}	
 	static class UserAccountButton
 	{
-		static By userAccountButton = By.id("userAccountWrap");
-		
-		/**<h1>User License Type</h1>
-		 * The text of this element is always "Free edition". If the license type of the account that's signed in is not "Free edition", this element is hidden.
-		 * @author laserwolve
-		 */
-		static By userLicenseType = By.id("userLicenseType");
-		
-		/**<h1>User Account Name</h1>
-		 * Defaults to "Guest" while signed out, and the username "Guest" is not permitted when creating a Construct account. However, an account by this name does actually exist, ableit lower case.
-		 * @see <a href="https://www.construct.net/en/users/42941/guest">User named "guest"</a>
-		 * @author laserwolve
-		 */
-		static By userAccountName = By.id("userAccountName");
+		static By userAccountButton = bxp("userAccountWrap");
+		static By userLicenseType = bxp("userLicenseType");
+		static By userAccountName = bxp("userAccountName");
 	}
 	static class NewProjectPopup
 	{
-		static By name = By.id("npProjectNameInput");
-		static By choosePreset = By.id("npPresetSelect");
+		static By name = bxp("npProjectNameInput");
+		static By choosePreset = bxp("npPresetSelect");
 		static class Presets
 		{
 			static By retroStyle = bxp("//option[@value='retro-style']");
 			static By sdLandscape43 = bxp("//option[@value='sd-landscape-4-3']");
-			// The value attribute for this preset says "4-3", that might be a typo
 			static By sdPortrait34 = bxp("//option[@value='sd-portrait-4-3']");
 			static By sdLandscape169 = bxp("//option[@value='sd-landscape-16-9']");
 			static By sdPortrait169 = bxp("//option[@value='sd-portrait-16-9']");
-			// variable names can't start with numbers
 			static By landscape720p = bxp("//option[@value='720p-landscape']");
 			static By portrait720p = bxp("//option[@value='720p-portrait']");
 			static By landscape1080p = bxp("//option[@value='1080p-landscape']");
@@ -975,22 +883,22 @@ class ConstructElementMap extends SensitiveData
 			static By landscape4k = bxp("//option[@value='4k-landscape']");
 			static By portrait4k = bxp("//option[@value='1080p-portait']");
 		}
-		static By viewportSizeWidth = By.id("npViewportWidthInput");
-		static By viewportSizeHeight = By.id("npViewportHeightInput");
-		static By orientations = By.id("npOrientationSelect");
+		static By viewportSizeWidth = bxp("npViewportWidthInput");
+		static By viewportSizeHeight = bxp("npViewportHeightInput");
+		static By orientations = bxp("npOrientationSelect");
 		static class Orientations 
 		{
 			static By any = bxp("//option[@value='any']");
 			static By portrait = bxp("//option[@value='portrait']");
 			static By landscape = bxp("//option[@value='landscape']");
 		}
-		static By startWith = By.id("npStartWithSelect");
+		static By startWith = bxp("npStartWithSelect");
 		static class StartWith
 		{
 			static By eventSheet = bxp("//option[@value='event-sheet']");
 			static By script = bxp("//option[@value='script']");
 		}
-		static By optimizeForPixelArt = By.id("npPixelArtCheck");
+		static By optimizeForPixelArt = bxp("npPixelArtCheck");
 		static By x = bxp("//dialog[@id='newProjectDialog']//ui-close-button[@title='Close']");
 		static By help = bxp("Help");
 		static By create = bxp("okButton");
@@ -1039,19 +947,19 @@ class ConstructElementMap extends SensitiveData
 		
 		static class NwjsOptions
 		{
-			static By linux32 = bxp("//*[@id='nwjsPlatformLinux32']"); // Checked by default
-			static By linux64 = bxp("//*[@id='nwjsPlatformLinux64']"); // Checked by default
-			static By mac64 = bxp("//*[@id='nwjsPlatformMac64']"); // Checked by default
-			static By win32 = bxp("//*[@id='nwjsPlatformWin32']"); // Checked by default
-			static By win64 = bxp("//*[@id='nwjsPlatformWin64']"); // Checked by default
-			static By packageAssets = bxp("//*[@id='nwjsPackageAssets']"); // Checked by default
-			static By compressFinalZip = bxp("//*[@id='nwjsCompressFinalZip']"); // Checked by default
-			static By windowFrame = bxp("//*[@id='nwjsWindowFrame']"); // Checked by default
-			static By resizableWindow = bxp("//*[@id='nwjsResizableWindow']"); // Checked by default
-			static By kioskMode = bxp("//*[@id='nwjsKioskMode']");// Unchecked by default
-			static By ignoreGpuBlacklist = bxp("//*[@id='nwjsIgnoreGPUBlacklist']"); // Checked by default
-			static By enableDevTools = bxp("//*[@id='nwjsEnableDevTools']"); // Checked by default
-			static By exportForSteam = bxp("//*[@id='nwjsSteamMode']"); // Unchecked by default
+			static By linux32 = bxp("//*[@id='nwjsPlatformLinux32']");
+			static By linux64 = bxp("//*[@id='nwjsPlatformLinux64']");
+			static By mac64 = bxp("//*[@id='nwjsPlatformMac64']");
+			static By win32 = bxp("//*[@id='nwjsPlatformWin32']");
+			static By win64 = bxp("//*[@id='nwjsPlatformWin64']");
+			static By packageAssets = bxp("//*[@id='nwjsPackageAssets']");
+			static By compressFinalZip = bxp("//*[@id='nwjsCompressFinalZip']");
+			static By windowFrame = bxp("//*[@id='nwjsWindowFrame']");
+			static By resizableWindow = bxp("//*[@id='nwjsResizableWindow']");
+			static By kioskMode = bxp("//*[@id='nwjsKioskMode']");
+			static By ignoreGpuBlacklist = bxp("//*[@id='nwjsIgnoreGPUBlacklist']");
+			static By enableDevTools = bxp("//*[@id='nwjsEnableDevTools']");
+			static By exportForSteam = bxp("//*[@id='nwjsSteamMode']");
 			static By next = bxp("//button[@class='nextButton']");
 		}
 		
@@ -1064,18 +972,9 @@ class ConstructElementMap extends SensitiveData
 	static class Misc
 	{
 		static By iframe = bxp("//ui-dialog-contents//iframe");
-		static By progressDialog = By.id("progressDialog");
+		static By progressDialog = bxp("progressDialog");
 		static By application = bxp("//body[@role='application']");
 		static By main = bxp("//*[@id='main']");
 		static By html = bxp("//html[@desktop]");
-	}
-	
-	/**<h1>Synthetic</h1>
-	 * Locators for elements that were created during the runtime, and are not naturally found in the Construct editor.
-	 * @author laserwolve
-	 */
-	static class Synthetic
-	{
-		static By fileInput = bxp("//html[@desktop]/input[@type='file']");
 	}
 }
