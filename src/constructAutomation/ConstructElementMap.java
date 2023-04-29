@@ -27,28 +27,28 @@ class ConstructElementMap extends SensitiveData
 		 */
 		static class PersistentStoragePopup
 		{			
-			static By closeX = bxp("//*[@id='okDialog']//ui-close-button");
-			static By okButton = bxp("//*[@id='okDialog']//*[@class='okButton']");
+			static By x = bxp("//*[@id='okDialog']//ui-close-button");
+			static By ok = bxp("//*[@id='okDialog']//*[@class='okButton']");
 		}
 		
 		static class PlatformInfoPopup
 		{
-			static By closeX = bxp("//*[@id='platformInfoDialog']//ui-close-button");
-			static By copyButton = bxp("//button[@class='copy']");
-			static By okButton = bxp("//*[@id='platformInfoDialog']//*[@class='okButton']");
+			static By x = bxp("//*[@id='platformInfoDialog']//ui-close-button");
+			static By copy = bxp("//button[@class='copy']");
+			static By ok = bxp("//*[@id='platformInfoDialog']//*[@class='okButton']");
 		}
 		
 		static By aboutUs = bxp("//a[text()='About us']");
 		static By viewAccountInformation = bxp("//a[text()='View account information']");
-		static By closeX = bxp("//*[@id='aboutDialog']//ui-close-button");	
+		static By x = bxp("//*[@id='aboutDialog']//ui-close-button");	
 		static By contributeTranslations = bxp("//a[text()='Contribute translations']");	
 		static By eula = bxp("//a[text()='End-user license agreement']");
 		static By forums = bxp("//a[text()='Forums']");	
-		static By getAddons = By.linkText("//a[text()='Get addons']");
+		static By getAddons = bxp("//a[text()='Get addons']");
 		static By help = bxp("//*[@id='aboutDialog']//*[@class='helpLink']");
 		static By legalInfo = bxp("//a[text()='Legal information']");
 		static By officialWebsite = bxp("//a[text()='Construct.net']");
-		static By okButton = bxp("//*[@id='aboutDialog']//*[@class='okButton']");
+		static By ok = bxp("//*[@id='aboutDialog']//*[@class='okButton']");
 		static By platformInformation = bxp("//a[text()='Platform information']");
 		static By privacyPolicy = bxp("//a[text()='Privacy policy']");
 		static By releaseNotes = bxp("//a[@class='viewReleaseNotes']"); // Can't use text as it contains version number, i.e. "View r336 release notes"
@@ -75,8 +75,8 @@ class ConstructElementMap extends SensitiveData
 	
 	static class AccountInfoPopup
 	{
-		static By closeButton = bxp("//button[@class='okButton']");
-		static By closeX = bxp("//*[@id='accountInfoDialog']//ui-close-button");
+		static By close = bxp("//button[@class='okButton']");
+		static By x = bxp("//*[@id='accountInfoDialog']//ui-close-button");
 		static By editProfile = bxp("//a[text()='Edit profile']");
 		static By help = bxp("//a[text()='Help']");
 		static By logInToExistingAccount = bxp("//a[text()='Log in to existing account']");
@@ -88,98 +88,99 @@ class ConstructElementMap extends SensitiveData
 	{
 		static class AddonContextMenu
 		{		
-			// These two options are only available on third party addons
 			static By downloadAddon = bxp("//span[text()='Download .c3addon']");
-			
-			// This option is available on all addons that aren't Guided tours
 			static By helpFor = bxp("//span[contains(text(),'Help for')]");
 			static By uninstall = bxp("//span[text()='Uninstall']");
-			
-			// This is the only context menu option on built-in Guided tours
-			static By visitWebsite = bxp("//span[text()='Visit website']");
-			
+			static By visitWebsite = bxp("//span[text()='Visit website']");		
 		}
+		
 		static class InstallAddonPopup
 		{
 			static class InstallFinishedPopup
 			{
-				static By closeX = bxp("//*[@id='okDialog']//ui-close-button");
-				static By okButton = bxp("//*[@id='okDialog']//*[@class='okButton']");		
+				static By x = bxp("//*[@id='okDialog']//ui-close-button");
+				static By ok = bxp("//*[@id='okDialog']//*[@class='okButton']");		
 			}
-			static By addonWebsite = By.className("addonWebsite");
-			static By cancelButton = bxp("//*[@id='addonConfirmInstallDialog']//*[@class='cancelButton']");
-			static By closeX = bxp("//*[@id='addonConfirmInstallDialog']//ui-close-button");
-			static By documentationWebsite = By.className("addonDocumentation");
-			static By installButton = bxp("//*[@id='addonConfirmInstallDialog']//*[@class='okButton']");
+			static By website = bxp("//a[@class='addonWebsite']");
+			static By cancel = bxp("//*[@id='addonConfirmInstallDialog']//*[@class='cancelButton']");
+			static By x = bxp("//*[@id='addonConfirmInstallDialog']//ui-close-button");
+			static By documentation = bxp("//a[@class='addonDocumentation']");
+			static By install = bxp("//*[@id='addonConfirmInstallDialog']//*[@class='okButton']");
 		}
+		
 		static class UninstallAddonPopup
 		{
 			static class UninstallFinishedPopup
 			{
-				static By closeX = bxp("//*[@id='okDialog']//ui-close-button");
-				static By okButton = bxp("//*[@id='okDialog']//*[@class='okButton']");		
+				static By x = bxp("//*[@id='okDialog']//ui-close-button");
+				static By ok = bxp("//*[@id='okDialog']//*[@class='okButton']");		
 			}
-			static By cancelButton = By.className("cancelConfirmButton");
-			static By closeX = bxp("//*[@id='confirmDialog']//ui-close-button");
-			static By uninstallButton = bxp("//*[@id='addonConfirmInstallDialog']//*[@class='confirmButton bold']");
+			static By cancel = bxp("//button[@class='cancelConfirmButton']");
+			static By x = bxp("//*[@id='confirmDialog']//ui-close-button");
+			static By uninstall = bxp("//*[@id='addonConfirmInstallDialog']//*[@class='confirmButton bold']");
 		}
-		static By closeX = bxp("//*[@id='addonManagerDialog']//ui-close-button");
-		static By getAddons = By.linkText("Get addons");
-		static By installAddonButton = By.className("installAddon");
-		static By okButton = bxp("//*[@id='addonManagerDialog']//*[@class='okButton']");
+		
+		static By x = bxp("//*[@id='addonManagerDialog']//ui-close-button");
+		static By getAddons = bxp("//a[text()='Get addons']");
+		static By installNewAddon = bxp("//button[@class='installAddon']");
+		static By ok = bxp("//*[@id='addonManagerDialog']//*[@class='okButton']");
 		static By addon (String addon)
 		{
 			return bxp("//*[@columnname='name']/*[text()='" + addon + "']/../..");
 		}
 	}
+	
 	static class BuyNow
 	{
-		static By buyNowTab = By.className("buyNowTab");
+		static By buyNow = bxp("//ui-tab/span[text()='Buy now']");
+		
+		static class Page1
+		{
+			static By fullRunDown = bxp("//a[text()='full run down']");
+			static By visitOurPricingPages = bxp("//a[text()='visit our pricing pages']");
+			static By proceedToPaymentBottom = bxp("//*[@class='c']//a[@class='openDemo']");
+			static By proceedToPaymentMiddle = bxp("//div[@class='proceedOverlay']//a[@class='openDemo']");
+		}
+		
 		static class Page2
 		{
-			static By continueButton = By.id("BtnContinue");
-			static By emailBox = By.id("Email");
-			static By generalTAndC = By.linkText("general terms & conditions");
-			static By privacyPolicy = By.linkText("privacy policy");
-			static By storeTAndC = By.linkText("store terms & conditions");
-			static By youCanLogin = By.linkText("or you can login");
+			static By continueButton = bxp("//*[@id='BtnContinue']");
+			static By email = bxp("//*[@id='Email']");
+			static By generalTermsAndConditions = bxp("//a[text()='general terms & conditions']");
+			static By privacyPolicy = bxp("//a[text()='privacy policy']");
+			static By storeTermsAndConditions = bxp("//a[text()='store terms & conditions']");
+			static By orYouCanLogin = bxp("//a[text()='or you can login']");
 		}
+		
 		static class Page3
 		{
 			static class CancellationTermsPopup
 			{
-				static By contactingUs = By.linkText("contacting us");
-				static By okButton = By.id("CloseSubTermsOverlayLink");
+				static By contactingUs = bxp("//a[text()='contacting us']");
+				static By ok = bxp("//*[@id='CloseSubTermsOverlayLink']");
 			}
-			static By cancellationTerms = By.className("subTerms");
-			static By cancelLink = By.className("cancel");
-			// These two are only visible if "Credit or debit card" is ticked
+			
+			static By subscriptionAndCancellationTerms = bxp("//*[@id='SubTermsLink']");
+			static By cancel = bxp("//*[@class='cancel']");
 			static By cardNumber = bxp("//*[@name='cardnumber']");
-			
-			static By countryDropdown = By.id("Country");
-			static By creditOrDebit = By.id("pm1");
-			
-			static By editEmail = By.className("editEmail");
+			static By countryDropdown = bxp("//*[@id='Country']");
+			static By creditOrDebit = bxp("//*[@id='pm1']");
+			static By editEmail = bxp("//a[@class='editEmail']");
 			static By expDate = bxp("//*[@name='exp-date']");
-			static By firstNameBox = By.id("FirstName");
+			static By firstName = bxp("//*[@id='FirstName']");
+			static By go = bxp("//*[@class='go']");
+			static By lastName = bxp("//*[@id='LastName']");
+			static By payPal = bxp("//*[@id='pm2']");
+			static By phoneNumber = bxp("//*[@id='Phone']");
+			static By placeOrder = bxp("//*[@id='BtnPlaceOrder']");
+			static By postCode = bxp("//*[@id='Postcode']");
 			
-			// These two only appear if you select a country other than the default
-			static By goButton = By.className("go");
-			static By lastNameBox = By.id("LastName");
-			
-			static By payPal = By.id("pm2");
-			static By phoneNumberBox = By.id("Phone");
-			static By placeOrderButton = By.id("BtnPlaceOrder");
-			static By postCode = By.id("Postcode");
 			static By country(String country)
 			{
 				return bxp("//*[@id='Country']/*[text()='" + country + "']");
 			}
 		}
-		static By fullRunDownLink = By.linkText("full run down");
-		static By pricingPages = By.linkText("visit our pricing pages");
-		static By proceedToPaymentBottom = bxp("//*[@class='c']//a[@class='openDemo']");
-		static By proceedToPaymentMiddle = bxp("//div[@class='proceedOverlay']//a[@class='openDemo']");
+
 	}
 	static class CloudOpenPopup
 	{
@@ -190,7 +191,7 @@ class ConstructElementMap extends SensitiveData
 			static By oneDrive = bxp("//*[@value='ONE DRIVE']");
 		}
 		static By addFolder = bxp("//*[@title='Add Folder']");
-		static By closeX = bxp("//*[@id='fileListDialog']//ui-close-button");
+		static By x = bxp("//*[@id='fileListDialog']//ui-close-button");
 		static By fileNameBox = bxp("//ui-dialog-footer//input");
 		static By logOut = bxp("//*[@title='Logout']");
 		static By refresh = bxp("//*[@title='Refresh']");
@@ -203,14 +204,16 @@ class ConstructElementMap extends SensitiveData
 			return bxp("//ui-table-row[@tabindex='-1'][" + row + "]");		
 		}
 	}
+	
 	static class EnterAccessCodePopup
 	{
-		static By accessCodeField = By.className("input");
-		static By cancelButton = By.className("cancelButton");
-		static By closeX = bxp("//*[id='inputCheckDialog']//ui-close-button");
-		static By okButton = By.className("okButton");
-		static By rememberCheckbox = By.className("inputCheckbox");
+		static By accessCode = bxp("//input[@class='input']");
+		static By cancel = bxp("//*[@class='cancelButton']");
+		static By x = bxp("//*[@id='inputCheckDialog']//ui-close-button");
+		static By ok = bxp("//*[@class='okButton']");
+		static By rememberThisAccessCode = bxp("//*[@class='inputCheckbox']");
 	}
+	
 	static class ExampleBrowser
 	{
 		static By exampleBrowserTab = bxp("//ui-tabbar//span[text()='Example browser']/..");
@@ -461,21 +464,18 @@ class ConstructElementMap extends SensitiveData
 			static By threeD = bxp("//div[@class='section -tag']/div[@data-tag='3d']");
 			static By timeline = bxp("//div[@class='section -tag']/div[@data-tag='timeline']");
 		}
-		static By behaviorsExpander = By.className("titleSection -behavior");
 		
-		static By categoriesExpander = By.className("titleSection -category");
-		static By clearButton = By.className("buttonClear");
+		static By behaviors = bxp("//div[@class='listTags']/*[@class='titleSection -behavior']");
+		static By categories = bxp("//div[@class='listTags']/*[@class='titleSection -category']");
+		static By clear = bxp("buttonClear");
+		static By clearButtonFooter = bxp("resultsFooterClearTags");
+		static By effects = bxp("titleSection -effect");
+		static By genres = bxp("titleSection -genre");
+		static By levels = bxp("titleSection -level");
+		static By plugins = bxp("titleSection -plugin");
+		static By searchBox = bxp("searchInputField");
+		static By tags = bxp("titleSection -tag");
 		
-		static By clearButtonFooter = By.className("resultsFooterClearTags");
-		static By effectsExpander = By.className("titleSection -effect");
-		
-		static By genresExpander = By.className("titleSection -genre");
-		static By levelsExpander = By.className("titleSection -level");
-		
-		static By pluginsExpander = By.className("titleSection -plugin");
-		static By searchBox = By.className("searchInputField");
-		
-		static By tagsExpander = By.className("titleSection -tag");
 		static By removeFilter(String tag)
 		{
 			return bxp("//div[@id='selectedTags']/div[@data-tag='" + tag.toLowerCase() + "']");
@@ -485,7 +485,7 @@ class ConstructElementMap extends SensitiveData
 	{
 		static By addArchive = bxp("//*[@title='Add archive']");
 		static By buildApplication = bxp("//*[@title='Build Application']");
-		static By closeX = bxp("//*[@id='archiveManagerDialog']//ui-close-button");
+		static By x = bxp("//*[@id='archiveManagerDialog']//ui-close-button");
 		static By deleteArchive = bxp("//*[@title='Delete archive']");
 		static By downloadArchive = bxp("//*[@title='Download archive']");
 		static By export (String export)
@@ -496,18 +496,18 @@ class ConstructElementMap extends SensitiveData
 	static class FreeEditionPopup
 	{
 		static By cancelButton = bxp("//*[@id='addonManagerDialog']//*[@class='cancelButton']");
-		static By closeX = bxp("//*[@id='freeEditionLimitDialog']//ui-close-button");
+		static By x = bxp("//*[@id='freeEditionLimitDialog']//ui-close-button");
 		static By learnMoreButton = bxp("//*[@id='addonManagerDialog']//*[@class='infoButton']");
-		static By logInLink = By.linkText("log in to your account");
+		static By logInLink = bxp("log in to your account");
 		static By purchaseButton = bxp("//*[@id='addonManagerDialog']//*[@class='okButton']");
 	}	
 	static class LogInDialog
 	{
 		static By loginDialog = By.id("loginDialog");
 		static By cancelButton = By.id("cancel");
-		static By closeX = bxp("//*[@id='loginDialog']//ui-close-button");
-		static By facebookButton = By.className("oAuthLoginButton");
-		static By googleButton = By.className("abcRioButtonContentWrapper");
+		static By x = bxp("//*[@id='loginDialog']//ui-close-button");
+		static By facebookButton = bxp("oAuthLoginButton");
+		static By googleButton = bxp("abcRioButtonContentWrapper");
 		static By logInButton = By.id("login");
 		static By passwordField = By.id("password");
 		static By rememberCheckbox = By.id("remember");
@@ -518,7 +518,7 @@ class ConstructElementMap extends SensitiveData
 		static class CloseConfirmation // This window is titled "Account logged out", regardless of login status. That's probably a bug
 		{
 			static By cancelButton = bxp("//button[@class='cancelConfirmButton']");
-			static By closeX = bxp("//*[@id='confirmDialog']//ui-close-button");
+			static By x = bxp("//*[@id='confirmDialog']//ui-close-button");
 			static By exitButton = bxp("//button[@class='confirmButton bold']");
 		}
 		static By exitTour = bxp("//span[text()='Exit tour']/../..");
@@ -528,7 +528,7 @@ class ConstructElementMap extends SensitiveData
 	
 	static class setUpBackupsPopup
 	{
-		static By closeX = bxp("//dialog[@id='confirmDialog']//ui-close-button");
+		static By x = bxp("//dialog[@id='confirmDialog']//ui-close-button");
 		static By learnMore = bxp("//a[text()='Learn more']");
 		static By openSettings = bxp("//button[@class='confirmButton bold']");
 		static By saveAnyway = bxp("//button[@class='cancelConfirmButton']");
@@ -799,55 +799,55 @@ class ConstructElementMap extends SensitiveData
 			static By desktop = bxp("//*[@class='uiMode']/*[@value='desktop']");
 			static By mobile = bxp("//*[@class='uiMode']/*[@value='mobile']");
 		}
-		static By autoHideStartPage = By.className("autoHideStartPage");
+		static By autoHideStartPage = bxp("autoHideStartPage");
 		
-		static By autoSaveDuration = By.className("autosaveDuration");
-		static By backupLocation = By.className("autosaveLocation");
+		static By autoSaveDuration = bxp("autosaveDuration");
+		static By backupLocation = bxp("autosaveLocation");
 		
-		static By cacheCloudMetadata = By.className("cacheCloudMetadata");
-		static By chooseLocalBackupButton = By.className("localBackupFolderChoose");
+		static By cacheCloudMetadata = bxp("cacheCloudMetadata");
+		static By chooseLocalBackupButton = bxp("localBackupFolderChoose");
 		static By closeButton = bxp("//*[@id='settingsDialog']//*[@class='okButton']");
-		static By closeX = bxp("//*[@id='settingsDialog']//ui-close-button");
-		static By defaultAnimationSpeed = By.className("defaultAnimationSpeed");
-		static By defaultProjectAuthor = By.className("defaultProjectAuthor");
-		static By defaultProjectEmail = By.className("defaultProjectEmail");
-		static By defaultProjectWebsite = By.className("defaultProjectWebsite");
+		static By x = bxp("//*[@id='settingsDialog']//ui-close-button");
+		static By defaultAnimationSpeed = bxp("defaultAnimationSpeed");
+		static By defaultProjectAuthor = bxp("defaultProjectAuthor");
+		static By defaultProjectEmail = bxp("defaultProjectEmail");
+		static By defaultProjectWebsite = bxp("defaultProjectWebsite");
 		
-		static By enableAutoSave = By.className("enableAutosave");
-		static By enableExperimentalFeatures = By.className("experimentalFeatures");
+		static By enableAutoSave = bxp("enableAutosave");
+		static By enableExperimentalFeatures = bxp("experimentalFeatures");
 		
-		static By enableNotifications = By.className("enableNotifications");
+		static By enableNotifications = bxp("enableNotifications");
 		
-		static By enableTakeABreakReminders = By.className("showTakeBreakReminders");
-		static By enableUiAnimations = By.className("enableUIAnims");
-		static By enableUiEffects = By.className("enableUIEffects");
-		static By gpuPreference = By.className("gpuPowerPreference");
+		static By enableTakeABreakReminders = bxp("showTakeBreakReminders");
+		static By enableUiAnimations = bxp("enableUIAnims");
+		static By enableUiEffects = bxp("enableUIEffects");
+		static By gpuPreference = bxp("gpuPowerPreference");
 		
-		static By help = By.linkText("Help");
-		static By hideAddActionRows = By.className("hideAddActionRows");
-		static By iconColor = By.className("iconColor");
-		static By languageSetting = By.className("languageSetting");
+		static By help = bxp("Help");
+		static By hideAddActionRows = bxp("hideAddActionRows");
+		static By iconColor = bxp("iconColor");
+		static By languageSetting = bxp("languageSetting");
 		
-		static By previewSelector = By.className("previewMode");
-		static By releaseNotifications = By.className("updateChannel");
+		static By previewSelector = bxp("previewMode");
+		static By releaseNotifications = bxp("updateChannel");
 		
-		static By resetButton = By.className("resetLayout");
-		static By saveLocation = By.className("defaultSaveLocation");
+		static By resetButton = bxp("resetLayout");
+		static By saveLocation = bxp("defaultSaveLocation");
 		
-		static By showInProgressLanguages = By.className("inProgressLanguages");
-		static By showStartPage = By.className("showStartPage");
-		static By showStartPageMessageBanners = By.className("showStartPageMessageBanners");
-		static By simplifiedMode = By.className("useSimplifiedMode");
-		static By textEditorAutoIndent = By.className("textEditorAutoIndent");
-		static By textEditorFontSize = By.className("textEditorFontSize");
-		static By theme = By.className("theme");
-		static By translateExpressions = By.className("translateExpressions");
-		static By uiMode = By.className("uiMode");
+		static By showInProgressLanguages = bxp("inProgressLanguages");
+		static By showStartPage = bxp("showStartPage");
+		static By showStartPageMessageBanners = bxp("showStartPageMessageBanners");
+		static By simplifiedMode = bxp("useSimplifiedMode");
+		static By textEditorAutoIndent = bxp("textEditorAutoIndent");
+		static By textEditorFontSize = bxp("textEditorFontSize");
+		static By theme = bxp("theme");
+		static By translateExpressions = bxp("translateExpressions");
+		static By uiMode = bxp("uiMode");
 		
-		static By useDefaultIconColor = By.className("useDefaultIconColor");
-		static By useInAppClipboard = By.className("useFakeClipboard");
+		static By useDefaultIconColor = bxp("useDefaultIconColor");
+		static By useInAppClipboard = bxp("useFakeClipboard");
 		
-		static By zoomMouseWheelOnly = By.className("zoomMouseWheelOnly");
+		static By zoomMouseWheelOnly = bxp("zoomMouseWheelOnly");
 		static By language (String languageCode)
 		{
 			return bxp("//*[@class='languageSetting']/*[@value='" + languageCode + "']");
@@ -855,7 +855,7 @@ class ConstructElementMap extends SensitiveData
 	}
 	static class ShortBreakPopup
 	{
-		static By closeX = bxp("//*[@id='okDialog']//ui-close-button");
+		static By x = bxp("//*[@id='okDialog']//ui-close-button");
 		static By okButton = bxp("//*[@id='okDialog']//*[@class='okButton']");		
 	}
 	static class StartPage
@@ -908,7 +908,7 @@ class ConstructElementMap extends SensitiveData
 		 */
 		static class GetMoreEventsBanner
 		{
-			static By closeX = bxp("//div[@id='banner']//div[@class='buttonClose']");
+			static By x = bxp("//div[@id='banner']//div[@class='buttonClose']");
 			static By registerAnAccount = bxp("//a[text()='Register an account']");
 			static By logIn = bxp("//a[text()='log in']");
 		}
@@ -923,20 +923,20 @@ class ConstructElementMap extends SensitiveData
 	{
 		static By cancelButton = bxp("//*[@id='storageCleanupDialog']//*[@class='cancelButton']");
 		static By clearStorageButton = bxp("//*[@id='storageCleanupDialog']//*[@class='okButton bold']");
-		static By closeX = bxp("//*[@id='storageCleanupDialog']//ui-close-button");
-		static By exampleProjects = By.className("clearExampleProjectsStorage");
-		static By exportedProjects = By.className("clearExportManagerStorage");
+		static By x = bxp("//*[@id='storageCleanupDialog']//ui-close-button");
+		static By exampleProjects = bxp("clearExampleProjectsStorage");
+		static By exportedProjects = bxp("clearExportManagerStorage");
 		static By help = bxp("//*[@id='storageCleanupDialog']//*[@class='helpLink']");
-		static By nwjsStorage = By.className("clearNwjsStorage");
-		static By savedVersions = By.className("clearC3Storage");
+		static By nwjsStorage = bxp("clearNwjsStorage");
+		static By savedVersions = bxp("clearC3Storage");
 	}
 	static By welcomePopup = By.id("welcomeTourDialog");
 	static class WelcomePopup
 	{
 		// Clicking any button on the popup will dismiss it for the remainder of that browser session.
-		static By closeX = bxp("//*[@id='welcomeTourDialog']/ui-dialog-caption/ui-close-button");
-		static By noThanksLink = By.className("noThanksLink");
-		static By tourButton = By.className("tourButton");		
+		static By x = bxp("//*[@id='welcomeTourDialog']/ui-dialog-caption/ui-close-button");
+		static By noThanksLink = bxp("noThanksLink");
+		static By tourButton = bxp("tourButton");		
 	}	
 	static class UserAccountButton
 	{
@@ -991,17 +991,17 @@ class ConstructElementMap extends SensitiveData
 			static By script = bxp("//option[@value='script']");
 		}
 		static By optimizeForPixelArt = By.id("npPixelArtCheck");
-		static By closeX = bxp("//dialog[@id='newProjectDialog']//ui-close-button[@title='Close']");
-		static By help = By.linkText("Help");
-		static By create = By.className("okButton");
-		static By cancel = By.className("cancelButton");
+		static By x = bxp("//dialog[@id='newProjectDialog']//ui-close-button[@title='Close']");
+		static By help = bxp("Help");
+		static By create = bxp("okButton");
+		static By cancel = bxp("cancelButton");
 	}	
 	static class OpenSecondProjectPopup
 	{
 		static By dontAskAgain = bxp("//label[@class='confirmCheckWrap']/input");
 		static By closePreviousProject = bxp("//button[@class='confirmButton bold']");
 		static By openBothProjects = bxp("//button[@class='cancelConfirmButton']");
-		static By closeX = bxp("//dialog[@id='confirmCheckDialog']//ui-close-button");
+		static By x = bxp("//dialog[@id='confirmCheckDialog']//ui-close-button");
 	}
 	static class ExportProjectPopup
 	{
