@@ -11,7 +11,7 @@ import org.openqa.selenium.Keys;
 import com.google.common.io.Files;
 
 @DisplayName("Method Tester")
-class MethodTester extends ConstructMethodLibrary {
+class MethodTester extends ConstructMethods {
 
     @BeforeEach
     void setUp() throws AWTException {
@@ -37,13 +37,15 @@ class MethodTester extends ConstructMethodLibrary {
 
 	click(Project.ProjectBar.ContextMenu.editAnimations);
 
-	contextClick(Project.AnimationsEditor.AnimationsPane.title); // This will deselect the first animation.
+	// This will deselect the first animation.
+	contextClick(Project.AnimationsEditor.AnimationsPane.title);
 
-	click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.addAnimation); // This creates and selects a new
-										     // animation.
-
-	click(Project.AnimationsEditor.AnimationsPane.firstAnimation); // Select the first animation. This deselects the
-								       // animation that was created previously.
+	// This creates and selects a new animation.
+	click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.addAnimation);
+										    
+	// Select the first animation.
+	// This deselects the animation that was created previously.
+	click(Project.AnimationsEditor.AnimationsPane.firstAnimation);
 
 	waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.firstAnimation, 5);
 
@@ -51,10 +53,9 @@ class MethodTester extends ConstructMethodLibrary {
 
 	actions.keyDown(Keys.SHIFT).perform();
 
-	click(Project.AnimationsEditor.AnimationsPane.penultimateAnimation); // Select the second to last animation
-									     // while holding the shift key down. This
-									     // will select all animations between the
-									     // first and second to last animation.
+	// Select the second to last animation while holding the shift key down. 
+	// This will select all animations between the first and the penultimate animation.
+	click(Project.AnimationsEditor.AnimationsPane.penultimateAnimation); 
 
 	actions.keyUp(Keys.SHIFT).perform();
 

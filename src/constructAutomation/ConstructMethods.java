@@ -34,7 +34,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  * 
  * @author laserwolve
  */
-class ConstructMethodLibrary extends ConstructElementMap {
+class ConstructMethods extends ConstructXpaths {
     static EdgeOptions edgeOptions;
     static WebDriver driver;
     static JavascriptExecutor javascriptExecutor;
@@ -47,14 +47,14 @@ class ConstructMethodLibrary extends ConstructElementMap {
 
     /**
      * <h1>Start</h1> Initialize variables and browses to the Construct Editor.
-     * 
+     * Launches 'inprivate' to prevent signing into the browser.
      * @author laserwolve
      * @throws AWTException from {@link java.awt.Robot#Robot}
      */
     static void start() throws AWTException {
 	edgeOptions = new EdgeOptions();
 	edgeOptions.addArguments("start-maximized");
-	edgeOptions.addArguments("inprivate"); // Prevents signing in automatically in the browser
+	edgeOptions.addArguments("inprivate");
 
 	driver = WebDriverManager.edgedriver().capabilities(edgeOptions).create();
 	javascriptExecutor = (JavascriptExecutor) driver;
@@ -83,10 +83,10 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @return The new element.
      * @author laserwolve
      */
-    static WebElement addChildElement(By by, String tagName, Map<String, String> attributes) {
+    static WebElement addChildElement(String xpath, String tagName, Map<String, String> attributes) {
 	String setAttributes = "";
 	String locatorXpath = "";
-	WebElement webElement = presentElement(by);
+	WebElement webElement = presentElement(xpath);
 
 	for (Map.Entry<String, String> entry : attributes.entrySet()) {
 	    setAttributes += tagName + ".setAttribute('" + entry.getKey() + "', '" + entry.getValue() + "');";
@@ -107,8 +107,17 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @author laserwolve
      * @see {@link org.openqa.selenium.WebElement#click()}
      */
-    static void click(By by) {
-	clickableElement(by).click();
+    static void click(String xpath) {
+	clickableElement(xpath).click();
+    }
+    
+    /**<h1>Locate</h1>
+     * Turns an XPath string into a <code>By</code> locator.
+     * @param xpath The XPath, as a string.
+     * @return A <code>By</code> locator based upon the referenced XPath.
+     */
+    static By locate(String xpath) {
+	return By.xpath(xpath);
     }
 
     /**
@@ -120,8 +129,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @return The clickable element.
      * @author laserwolve
      */
-    static WebElement clickableElement(By by) {
-	return clickableElement(by, 5);
+    static WebElement clickableElement(String xpath) {
+	return clickableElement(xpath, 5);
     }
 
     /**
@@ -134,8 +143,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @return The clickable element.
      * @author laserwolve
      */
-    static WebElement clickableElement(By by, int seconds) {
-	return stop(seconds).until(ExpectedConditions.elementToBeClickable(by));
+    static WebElement clickableElement(String xpath, int seconds) {
+	return stop(seconds).until(ExpectedConditions.elementToBeClickable(locate(xpath)));
     }
 
     /**
@@ -145,7 +154,7 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @author laserwolve
      */
     static void dismissWelcomePopup() {
-	click(WelcomePopup.noThanksLink);
+	click(WelcomePopup.noThanksNotNow);
 
 	waitUntilElementIsGone(welcomePopup);
     }
@@ -164,7 +173,6 @@ class ConstructMethodLibrary extends ConstructElementMap {
     /**
      * <h1>Export Project</h1> Exports the currently open project. TODO: Get the
      * project name of the open project. Parameterize the export settings.
-     * 
      * @param projectName The name of the project that's being exported.
      * @throws InterruptedException
      */
@@ -221,8 +229,7 @@ class ConstructMethodLibrary extends ConstructElementMap {
 
 	setExpiryTime(30);
 
-	// TODO: Set to browser default download location, instead of the download
-	// folder.
+	// TODO: Set to browser default download location, instead of the download folder.
 	// Is the downloads folder always the default on a new browser session?
 	while (Files.notExists(Paths.get(userHome + fs + "Downloads" + fs + projectName + ".zip"),
 		LinkOption.NOFOLLOW_LINKS))
@@ -291,11 +298,9 @@ class ConstructMethodLibrary extends ConstructElementMap {
 
 	    switchToIframe(Misc.iframe);
 
-	    sendText(LogInDialog.usernameField, username);
+	    sendText(LogInDialog.username, SensitiveData.username);
 
-	    sendText(LogInDialog.passwordField, password);
-
-	    click(LogInDialog.rememberCheckbox);
+	    sendText(LogInDialog.password, SensitiveData.password);
 
 	    click(LogInDialog.logInButton);
 
@@ -303,7 +308,7 @@ class ConstructMethodLibrary extends ConstructElementMap {
 
 	    switchToDefaultContent();
 
-	    waitUntilTextIs(UserAccountButton.userAccountName, username, 10);
+	    waitUntilTextIs(UserAccountButton.userAccountName, SensitiveData.username, 10);
 	}
     }
 
@@ -340,8 +345,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
     }
 
     /** @See {@link #presentElement(By, int)} */
-    static WebElement presentElement(By by) {
-	return presentElement(by, 5);
+    static WebElement presentElement(String xpath) {
+	return presentElement(xpath, 5);
     }
 
     /**
@@ -353,8 +358,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @return The present element, or null if it can't be located.
      * @author laserwolve
      */
-    static WebElement presentElement(By by, int seconds) {
-	return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(by));
+    static WebElement presentElement(String xpath, int seconds) {
+	return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath)));
 
     }
 
@@ -375,8 +380,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @param by The locator of the element to scroll to.
      * @author laserwolve
      */
-    static void scrollToElement(By by) {
-	javascriptExecutor.executeScript("arguments[0].scrollIntoView();", presentElement(by));
+    static void scrollToElement(String xpath) {
+	javascriptExecutor.executeScript("arguments[0].scrollIntoView();", presentElement(xpath));
     }
 
     /**
@@ -386,8 +391,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @param text The text to be inputted.
      * @author laserwolve
      */
-    static void sendText(By by, String text) {
-	clickableElement(by).sendKeys(text);
+    static void sendText(String xpath, String text) {
+	clickableElement(xpath).sendKeys(text);
     }
 
     /**
@@ -418,8 +423,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @param by The IFrame to switch to.
      * @author laserwolve
      */
-    static void switchToIframe(By by) {
-	driver.switchTo().frame(clickableElement(by));
+    static void switchToIframe(String xpath) {
+	driver.switchTo().frame(clickableElement(xpath));
     }
 
     /**
@@ -454,8 +459,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @see {@link #waitUntilElementIsGone(by, int)}
      * @author laserwolve
      */
-    static void waitUntilElementIsGone(By by) {
-	waitUntilElementIsGone(by, 10);
+    static void waitUntilElementIsGone(String xpath) {
+	waitUntilElementIsGone(xpath, 10);
     }
 
     /**
@@ -467,13 +472,13 @@ class ConstructMethodLibrary extends ConstructElementMap {
      *                visible.
      * @author laserwolve
      */
-    static void waitUntilElementIsGone(By by, int seconds) {
-	stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(by));
+    static void waitUntilElementIsGone(String xpath, int seconds) {
+	stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(locate(xpath)));
     }
 
     /** @see #waitUntilElementIsPresent(By, int) */
-    static void waitUntilElementIsPresent(By by) {
-	waitUntilElementIsPresent(by, 5);
+    static void waitUntilElementIsPresent(String xpath) {
+	waitUntilElementIsPresent(xpath, 5);
     }
 
     /**
@@ -484,8 +489,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @param seconds How long to wait, in seconds, for the element to be visible.
      * @author laserwolve
      */
-    static void waitUntilElementIsPresent(By by, int seconds) {
-	stop(seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
+    static void waitUntilElementIsPresent(String xpath, int seconds) {
+	stop(seconds).until(ExpectedConditions.visibilityOfElementLocated(locate(xpath)));
     }
 
     /**
@@ -497,8 +502,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @param seconds How long to wait for the text
      * @author laserwolve
      */
-    static void waitUntilTextIs(By by, String text, int seconds) {
-	stop(seconds).until(ExpectedConditions.textToBe(by, text));
+    static void waitUntilTextIs(String xpath, String text, int seconds) {
+	stop(seconds).until(ExpectedConditions.textToBe(locate(xpath), text));
 
     }
 
@@ -523,8 +528,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @author laserwolve
      * @see {@link org.openqa.selenium.interactions.Actions#contextClick(WebElement)}
      */
-    static void contextClick(By by) {
-	actions.contextClick(clickableElement(by)).perform();
+    static void contextClick(String xpath) {
+	actions.contextClick(clickableElement(xpath)).perform();
     }
 
     /**
@@ -534,8 +539,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @param by The element on which to perform the context click.
      * @author laserwolve
      */
-    static void contextClickUpperLeftCorner(By by) {
-	WebElement webElement = clickableElement(by);
+    static void contextClickUpperLeftCorner(String xpath) {
+	WebElement webElement = clickableElement(xpath);
 
 	Dimension dimension = webElement.getSize();
 
@@ -549,8 +554,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @author laserwolve
      * @see {@link org.openqa.selenium.interactions.Actions#doubleClick(WebElement)}
      */
-    static void doubleClick(By by) {
-	actions.doubleClick(clickableElement(by)).perform();
+    static void doubleClick(String xpath) {
+	actions.doubleClick(clickableElement(xpath)).perform();
     }
 
     /**
@@ -562,8 +567,8 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @author laserwolve
      * @see {@link #clickableElement(By)}
      */
-    static boolean isElementClickable(By by) {
-	return Objects.nonNull(clickableElement(by));
+    static boolean isElementClickable(String xpath) {
+	return Objects.nonNull(clickableElement(xpath));
     }
 
     /**
@@ -627,7 +632,7 @@ class ConstructMethodLibrary extends ConstructElementMap {
      * @param seconds How many seconds to wait.
      * @author laserwolve
      */
-    static void waitForElementToBeSelected(By by, int seconds) {
-	stop(seconds).until(ExpectedConditions.elementToBeSelected(by));
+    static void waitForElementToBeSelected(String xpath, int seconds) {
+	stop(seconds).until(ExpectedConditions.elementToBeSelected(locate(xpath)));
     }
 }
