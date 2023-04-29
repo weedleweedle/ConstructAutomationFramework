@@ -36,15 +36,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  * @author laserwolve
  */
 class ConstructMethods extends ConstructXpaths {
-    static EdgeOptions edgeOptions;
-    static WebDriver driver;
-    static JavascriptExecutor javascriptExecutor;
-    static Actions actions;
-    static Robot robot;
-    static LocalTime expiryTime;
-    static String userHome;
-    static String fs;
-    static String editorURL;
+    EdgeOptions edgeOptions;
+    WebDriver driver;
+    JavascriptExecutor javascriptExecutor;
+    Actions actions;
+    Robot robot;
+    LocalTime expiryTime;
+    String userHome;
+    String fs;
+    String editorURL;
 
     /**
      * <h1>Start</h1> Initialize variables and browses to the Construct Editor.
@@ -53,7 +53,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @throws AWTException from {@link java.awt.Robot#Robot}
      */
-    static void start() {
+    void start() {
 	edgeOptions = new EdgeOptions();
 	edgeOptions.addArguments("start-maximized");
 	edgeOptions.addArguments("inprivate");
@@ -112,7 +112,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @see {@link org.openqa.selenium.WebElement#click()}
      */
-    static void click(String xpath) {
+    void click(String xpath) {
 	clickableElement(xpath).click();
     }
 
@@ -122,7 +122,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param xpath The XPath, as a string.
      * @return A <code>By</code> locator based upon the referenced XPath.
      */
-    static By locate(String xpath) {
+    By locate(String xpath) {
 	return By.xpath(xpath);
     }
 
@@ -135,7 +135,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return The clickable element.
      * @author laserwolve
      */
-    static WebElement clickableElement(String xpath) {
+    WebElement clickableElement(String xpath) {
 	return clickableElement(xpath, 5);
     }
 
@@ -149,7 +149,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return The clickable element.
      * @author laserwolve
      */
-    static WebElement clickableElement(String xpath, int seconds) {
+    WebElement clickableElement(String xpath, int seconds) {
 	return stop(seconds).until(ExpectedConditions.elementToBeClickable(locate(xpath)));
     }
 
@@ -159,7 +159,7 @@ class ConstructMethods extends ConstructXpaths {
      * 
      * @author laserwolve
      */
-    static void dismissWelcomePopup() {
+    void dismissWelcomePopup() {
 	click(WelcomePopup.noThanksNotNow);
 
 	waitUntilElementIsGone(welcomePopup);
@@ -183,7 +183,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param projectName The name of the project that's being exported.
      * @throws InterruptedException
      */
-    static void exportProject(String projectName) {
+    void exportProject(String projectName) {
 	click(menuButton);
 
 	click(MenuDropdown.project);
@@ -251,7 +251,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return whether or not the user is signed out.
      * @author laserwolve
      */
-    static boolean isSignedOut() {
+    boolean isSignedOut() {
 	setExpiryTime(10);
 
 	while (clickableElement(UserAccountButton.userAccountName).getText().equals("..."))
@@ -267,7 +267,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return whether or not the current time is past the expiry time.
      * @author laserwolve
      */
-    static boolean checkExpiry() {
+    boolean checkExpiry() {
 	return LocalTime.now().isAfter(expiryTime);
     }
 
@@ -278,7 +278,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param seconds The number of seconds to set.
      * @author laserwolve
      */
-    static void setExpiryTime(int seconds) {
+    void setExpiryTime(int seconds) {
 	expiryTime = LocalTime.now().plusSeconds(seconds);
     }
 
@@ -289,7 +289,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param message The message to include with the exception.
      * @author laserwolve
      */
-    static void exceededExpiryTime(String message) {
+    void exceededExpiryTime(String message) {
 	throw new TimeoutException(message);
     }
 
@@ -298,7 +298,7 @@ class ConstructMethods extends ConstructXpaths {
      * 
      * @author laserwolve
      */
-    static void logIn() {
+    void logIn() {
 	if (isSignedOut()) {
 	    click(UserAccountButton.userAccountButton);
 
@@ -331,7 +331,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @throws InterruptedException from {@link Thread#sleep(long)}
      */
-    static void openRecentProject(String projectName) {
+    void openRecentProject(String projectName) {
 	click(menuButton);
 
 	click(MenuDropdown.project);
@@ -353,7 +353,7 @@ class ConstructMethods extends ConstructXpaths {
     }
 
     /** @See {@link #presentElement(By, int)} */
-    static WebElement presentElement(String xpath) {
+    WebElement presentElement(String xpath) {
 	return presentElement(xpath, 5);
     }
 
@@ -366,7 +366,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return The present element, or null if it can't be located.
      * @author laserwolve
      */
-    static WebElement presentElement(String xpath, int seconds) {
+    WebElement presentElement(String xpath, int seconds) {
 	return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath)));
 
     }
@@ -377,7 +377,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @see {@link org.openqa.selenium.WebDriver#quit()}
      */
-    static void quit() {
+    void quit() {
 	driver.quit();
     }
 
@@ -388,7 +388,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param by The locator of the element to scroll to.
      * @author laserwolve
      */
-    static void scrollToElement(String xpath) {
+    void scrollToElement(String xpath) {
 	javascriptExecutor.executeScript("arguments[0].scrollIntoView();", presentElement(xpath));
     }
 
@@ -399,7 +399,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param text The text to be inputted.
      * @author laserwolve
      */
-    static void sendText(String xpath, String text) {
+    void sendText(String xpath, String text) {
 	clickableElement(xpath).sendKeys(text);
     }
 
@@ -411,7 +411,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @see {@link org.openqa.selenium.support.ui.WebDriverWait#WebDriverWait(WebDriver, Duration)}
      */
-    static WebDriverWait stop(int seconds) {
+    WebDriverWait stop(int seconds) {
 	return new WebDriverWait(driver, Duration.ofSeconds(seconds));
     }
 
@@ -421,7 +421,7 @@ class ConstructMethods extends ConstructXpaths {
      * @see {@link org.openqa.selenium.WebDriver.TargetLocator#defaultContent()}
      * @author laserwolve
      */
-    static void switchToDefaultContent() {
+    void switchToDefaultContent() {
 	driver.switchTo().defaultContent();
     }
 
@@ -431,7 +431,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param by The IFrame to switch to.
      * @author laserwolve
      */
-    static void switchToIframe(String xpath) {
+    void switchToIframe(String xpath) {
 	driver.switchTo().frame(clickableElement(xpath));
     }
 
@@ -446,7 +446,7 @@ class ConstructMethods extends ConstructXpaths {
      * @throws InterruptedException from {@link Thread#sleep}
      * @author laserwolve
      */
-    static void typeIntoFileExplorer(String path) {
+    void typeIntoFileExplorer(String path) {
 	Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(path), null);
 
 	robot.delay(2000); // TODO: Find a way to determine if the file explorer has popped up
@@ -467,7 +467,7 @@ class ConstructMethods extends ConstructXpaths {
      * @see {@link #waitUntilElementIsGone(by, int)}
      * @author laserwolve
      */
-    static void waitUntilElementIsGone(String xpath) {
+    void waitUntilElementIsGone(String xpath) {
 	waitUntilElementIsGone(xpath, 10);
     }
 
@@ -480,12 +480,12 @@ class ConstructMethods extends ConstructXpaths {
      *                visible.
      * @author laserwolve
      */
-    static void waitUntilElementIsGone(String xpath, int seconds) {
+    void waitUntilElementIsGone(String xpath, int seconds) {
 	stop(seconds).until(ExpectedConditions.invisibilityOfElementLocated(locate(xpath)));
     }
 
     /** @see #waitUntilElementIsPresent(By, int) */
-    static void waitUntilElementIsPresent(String xpath) {
+    void waitUntilElementIsPresent(String xpath) {
 	waitUntilElementIsPresent(xpath, 5);
     }
 
@@ -497,7 +497,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param seconds How long to wait, in seconds, for the element to be visible.
      * @author laserwolve
      */
-    static void waitUntilElementIsPresent(String xpath, int seconds) {
+    void waitUntilElementIsPresent(String xpath, int seconds) {
 	stop(seconds).until(ExpectedConditions.visibilityOfElementLocated(locate(xpath)));
     }
 
@@ -510,7 +510,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param seconds How long to wait for the text
      * @author laserwolve
      */
-    static void waitUntilTextIs(String xpath, String text, int seconds) {
+    void waitUntilTextIs(String xpath, String text, int seconds) {
 	stop(seconds).until(ExpectedConditions.textToBe(locate(xpath), text));
 
     }
@@ -523,7 +523,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @see {@link org.openqa.selenium.interactions.Actions#contextClick(WebElement)}
      */
-    static void contextClick(String xpath) {
+    void contextClick(String xpath) {
 	actions.contextClick(clickableElement(xpath)).perform();
     }
 
@@ -534,7 +534,7 @@ class ConstructMethods extends ConstructXpaths {
      * @param by The element on which to perform the context click.
      * @author laserwolve
      */
-    static void contextClickUpperLeftCorner(String xpath) {
+    void contextClickUpperLeftCorner(String xpath) {
 	WebElement webElement = clickableElement(xpath);
 
 	Dimension dimension = webElement.getSize();
@@ -549,7 +549,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @see {@link org.openqa.selenium.interactions.Actions#doubleClick(WebElement)}
      */
-    static void doubleClick(String xpath) {
+    void doubleClick(String xpath) {
 	actions.doubleClick(clickableElement(xpath)).perform();
     }
 
@@ -578,7 +578,7 @@ class ConstructMethods extends ConstructXpaths {
      * @throws TimeoutException     if the project doesn't load in time
      * @author laserwolve
      */
-    static void openProjectFolder(int MaximumProjectLoadTimeInSeconds, String projectPath) {
+    void openProjectFolder(int MaximumProjectLoadTimeInSeconds, String projectPath) {
 	click(StartPage.openButton);
 
 	click(StartPage.OpenButtonDropdown.projectFolder);
@@ -604,7 +604,7 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      * @see {@link org.openqa.selenium.WebDriver.Navigation#refresh()}
      */
-    static void refresh() {
+    void refresh() {
 	driver.navigate().refresh();
     }
 
@@ -627,11 +627,11 @@ class ConstructMethods extends ConstructXpaths {
      * @param seconds How many seconds to wait.
      * @author laserwolve
      */
-    static void waitForElementToBeSelected(String xpath, int seconds) {
+    void waitForElementToBeSelected(String xpath, int seconds) {
 	stop(seconds).until(ExpectedConditions.elementToBeSelected(locate(xpath)));
     }
 
-    static void importImages(String path, String projectFolder) {
+    void importImages(String path, String projectFolder) {
 	String sprite = FileNameUtils.getBaseName(path);
 
 	openProjectFolder(6000, projectFolder);

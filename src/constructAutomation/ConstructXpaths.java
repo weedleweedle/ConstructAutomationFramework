@@ -924,7 +924,7 @@ class ConstructXpaths {
 
     static class Misc {
 	static String iframe = "//ui-dialog-contents//iframe";
-	static String progressDialog = "progressDialog";
+	static String progressDialog = "//*[@id='progressDialog']";
 	static String application = "//body[@role='application']";
 	static String main = "//*[@id='main']";
 	static String html = "//html[@desktop]";
