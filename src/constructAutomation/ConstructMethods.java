@@ -241,7 +241,7 @@ class ConstructMethods extends ConstructXpaths {
 	// Is the downloads folder always the default on a new browser session?
 	while (Files.notExists(Paths.get(userHome + fs + "Downloads" + fs + projectName + ".zip"),
 		LinkOption.NOFOLLOW_LINKS))
-	    if (checkExpiry())
+	    if (hasExpired())
 		exceededExpiryTime("Unable to locate exported project");
     }
 
@@ -255,7 +255,7 @@ class ConstructMethods extends ConstructXpaths {
 	setExpiryTime(10);
 
 	while (clickableElement(UserAccountButton.userAccountName).getText().equals("..."))
-	    if (checkExpiry())
+	    if (hasExpired())
 		exceededExpiryTime("Unable to complete sign-in");
 
 	return clickableElement(UserAccountButton.userAccountName).getText().equals("Guest");
@@ -267,7 +267,7 @@ class ConstructMethods extends ConstructXpaths {
      * @return whether or not the current time is past the expiry time.
      * @author laserwolve
      */
-    static boolean checkExpiry() {
+    static boolean hasExpired() {
 	return LocalTime.now().isAfter(expiryTime);
     }
 
@@ -496,9 +496,10 @@ class ConstructMethods extends ConstructXpaths {
      * @param The     element for which to wait upon.
      * @param seconds How long to wait, in seconds, for the element to be visible.
      * @author laserwolve
+     * @return The web element, once present.
      */
-    static void waitUntilElementIsPresent(String xpath, int seconds) {
-	stop(seconds).until(ExpectedConditions.visibilityOfElementLocated(locate(xpath)));
+    static WebElement waitUntilElementIsPresent(String xpath, int seconds) {
+	return stop(seconds).until(ExpectedConditions.visibilityOfElementLocated(locate(xpath)));
     }
 
     /**
@@ -627,11 +628,15 @@ class ConstructMethods extends ConstructXpaths {
      * @param seconds How many seconds to wait.
      * @author laserwolve
      */
-    static void waitForElementToBeSelected(String xpath, int seconds) {
-	stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath + "/self::*[@selected]")));
+    static void waitForElementToHaveAttribute(String xpath, String attribute, int seconds) {
+	stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath + "[@" + attribute + "]")));
     }
 
-    static void importImages(String path, String projectFolder) {
+    static void waitForElementToNotHaveAttribute(String xpath, String attribute, int seconds) {
+	stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath + "[not(@" + attribute + ")]")));
+    }
+
+    static void importImages(String path, String projectFolder, String yValue) {
 	String sprite = FileNameUtils.getBaseName(path);
 
 	openProjectFolder(6000, projectFolder);
@@ -643,28 +648,29 @@ class ConstructMethods extends ConstructXpaths {
 	click(Project.ProjectBar.ContextMenu.editAnimations);
 
 	// Add an animation, because we can't delete all animations.
-	addAnimation();
+	String newAnimation = addAnimation();
 
-	// Select the first animation.
-	// This deselects the animation that was created previously.
-	click(Project.AnimationsEditor.AnimationsPane.firstAnimation);
+	// Select the first animation. This deselects the animation that was created
+	// previously.
+	click(Project.AnimationsEditor.AnimationsPane.animation(1));
 
-	waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.firstAnimation, 5);
+	waitForElementToHaveAttribute(Project.AnimationsEditor.AnimationsPane.animation(1), "selected", 5);
+	
+	int penultimateAnimation = numberOfAnimations() - 1;
 
-	scrollToElement(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
+	scrollToElement(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation));
 
 	actions.keyDown(Keys.SHIFT).perform();
 
-	// Select the second to last animation while holding the shift key down.
-	// This will select all animations between the first and the penultimate
-	// animation.
-	click(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
+	// Select the second to last animation while holding the shift key down. This
+	// will select all animations between the first and the penultimate animation.
+	click(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation));
 
 	actions.keyUp(Keys.SHIFT).perform();
 
-	waitForElementToBeSelected(Project.AnimationsEditor.AnimationsPane.penultimateAnimation, 5);
+	waitForElementToHaveAttribute(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation), "selected", 5);
 
-	contextClick(Project.AnimationsEditor.AnimationsPane.penultimateAnimation);
+	contextClick(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation));
 
 	click(Project.AnimationsEditor.AnimationsPane.AnimationContextMenu.delete);
 
@@ -674,7 +680,48 @@ class ConstructMethods extends ConstructXpaths {
 
 	click(Project.AnimationsEditor.AnimationsPane.PaneContextMenu.importAnimationPopout.fromFiles);
 
-	typeIntoFileExplorer(path.toString());
+	typeIntoFileExplorer(path);
+
+	waitForElementToHaveAttribute(Project.AnimationsEditor.blocker, "locked", 60);
+
+	waitForElementToNotHaveAttribute(Project.AnimationsEditor.blocker, "locked", 180);
+	
+	contextClick(Project.AnimationsEditor.AnimationsPane.animation(newAnimation));
+
+	// Delete the animation we created, whose whole purpose was to satisfy the
+	// requirement that a sprite must always have at least one animation.
+	click(Project.AnimationsEditor.AnimationsPane.AnimationContextMenu.delete);
+
+	click(Project.AnimationsEditor.Toolbar.editImagePoints);
+
+	// Click into the input box, to make the correct input appear
+	click(Project.AnimationsEditor.Toolbar.ySpinner);
+	
+	sendText(Project.AnimationsEditor.Toolbar.y, yValue);
+
+	contextClick(Project.AnimationsEditor.ImagePoints.origin);
+
+	click(Project.AnimationsEditor.ImagePoints.ImagePointsContextMenu.applyToAllAnimations);
+
+	click(Project.AnimationsEditor.Toolbar.cropDropdownArrow);
+
+	actions.keyDown(Keys.SHIFT).keyDown(Keys.CONTROL).perform();
+
+	click(Project.AnimationsEditor.Toolbar.CropDropdown.applyToAllAnimations);
+
+	actions.keyUp(Keys.SHIFT).keyUp(Keys.CONTROL).perform();
+	
+	waitForElementToHaveAttribute(Project.AnimationsEditor.blocker, "locked", 5);
+
+	waitForElementToNotHaveAttribute(Project.AnimationsEditor.blocker, "locked", 180);
+	
+	click(Project.AnimationsEditor.x);
+	
+	waitUntilElementIsGone(Misc.dimmer, 300);
+	
+	click(Project.save);
+	
+	waitUntilElementIsGone(Misc.progressDialog, 300);
     }
 
     /**
@@ -685,9 +732,10 @@ class ConstructMethods extends ConstructXpaths {
      * currently selected animations and selects the newly created animation.
      * 
      * @author laserwolve
+     * @return The name of the animation that was created.
      * 
      */
-    static void addAnimation() {
+    static String addAnimation() {
 
 	int numberOfAnimationsBefore = numberOfAnimations();
 
@@ -698,8 +746,10 @@ class ConstructMethods extends ConstructXpaths {
 	setExpiryTime(5);
 
 	while (numberOfAnimationsBefore == numberOfAnimations())
-	    if (checkExpiry())
+	    if (hasExpired())
 		exceededExpiryTime("Animation was never created");
+
+	return presentElement(Project.AnimationsEditor.AnimationsPane.animation(numberOfAnimations())).getText();
     }
 
     /**

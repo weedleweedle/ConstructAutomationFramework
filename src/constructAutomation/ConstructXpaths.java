@@ -557,10 +557,20 @@ class ConstructXpaths {
 	}
 
 	static class AnimationsEditor {
+	    static String blocker = "//div[@class='blocker']";
+	    static String x = "//*[@id='animationsEditorDialog']//ui-close-button";
+
 	    static class AnimationsPane {
 		static String animations = "//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div";
-		static String firstAnimation = "(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[1]";
-		static String penultimateAnimation = "(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)[last() - 1]";
+
+		static String animation(int number) {
+		    return "(//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//div)["
+			    + number + "]";
+		}
+		
+		static String animation(String name) {
+		    return "//ui-animation-editor-panel[@class='animationsEditorAnimations']//ui-treeitem//span[text()='" + name + "']";
+		}
 
 		static class AnimationContextMenu {
 		    static class ImportAnimationsContext {
@@ -581,6 +591,25 @@ class ConstructXpaths {
 		    static class importAnimationPopout {
 			static String fromFiles = "//span[text()='From Files']/parent::*";
 		    }
+		}
+	    }
+
+	    static class Toolbar {
+		static String editImagePoints = "//ui-toolbar-button[contains(@title, 'Edit the image points')]";
+		static String ySpinner = "//span[text()='Y']/following-sibling::input[@type='number']";
+		static String y = "//*[@id='spinnerEditInput']";
+		static String cropDropdownArrow = "//div[contains(@title, 'Crop transparent edges')]/following-sibling::div";
+
+		static class CropDropdown {
+		    static String applyToAllAnimations = "//span[text()='Apply to all animations']";
+		}
+	    }
+
+	    static class ImagePoints {
+		static String origin = "//div[text()='Origin']";
+
+		static class ImagePointsContextMenu {
+		    static String applyToAllAnimations = "//span[text()='Apply to all animations']";
 		}
 	    }
 	}
@@ -922,5 +951,6 @@ class ConstructXpaths {
 	static String application = "//body[@role='application']";
 	static String main = "//*[@id='main']";
 	static String html = "//html[@desktop]";
+	static String dimmer = "//div[@class='c3-dimmer']";
     }
 }
