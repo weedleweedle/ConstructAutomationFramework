@@ -400,7 +400,11 @@ class ConstructMethods extends ConstructXpaths {
      * @author laserwolve
      */
     static void sendText(String xpath, String text) {
-	clickableElement(xpath).sendKeys(text);
+	WebElement element = clickableElement(xpath);
+	
+	element.clear();
+	
+	element.sendKeys(text);
     }
 
     /**
@@ -621,22 +625,47 @@ class ConstructMethods extends ConstructXpaths {
     }
 
     /**
-     * <h1>Wait for Element to Be Selected</h1> Waits a specified amount of seconds
-     * for the <code>selected</code> attribute to appear in the element.
+     * <h1>Wait for Element to have Attribute</h1> Waits a specified amount of
+     * seconds for the specified attribute to appear in the specified element.
      * 
-     * @param by      The locator of the element to wait upon.
-     * @param seconds How many seconds to wait.
+     * @param xpath     The locator of the element to wait upon.
+     * @param seconds   How many seconds to wait.
+     * @param attribute Waits for this attribute to appear.
      * @author laserwolve
+     * @return A {@link org.openqa.selenium.WebElement} for the element in question.
      */
-    static void waitForElementToHaveAttribute(String xpath, String attribute, int seconds) {
-	stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath + "[@" + attribute + "]")));
+    static WebElement waitForElementToHaveAttribute(String xpath, String attribute, int seconds) {
+	return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath + "[@" + attribute + "]")));
     }
 
-    static void waitForElementToNotHaveAttribute(String xpath, String attribute, int seconds) {
-	stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath + "[not(@" + attribute + ")]")));
+    /**
+     * <h1>Wait for Element to not have Attribute</h1> Waits a specified amount of
+     * seconds for the specified attribute to not be in the specified element.
+     * 
+     * @param xpath     The locator of the element to wait upon.
+     * @param seconds   How many seconds to wait.
+     * @param attribute Waits for this attribute to be gone.
+     * @author laserwolve
+     * @return A {@link org.openqa.selenium.WebElement} for the element in question.
+     */
+    static WebElement waitForElementToNotHaveAttribute(String xpath, String attribute, int seconds) {
+	return stop(seconds)
+		.until(ExpectedConditions.presenceOfElementLocated(locate(xpath + "[not(@" + attribute + ")]")));
     }
 
-    static void importImages(String path, String projectFolder, String yValue) {
+    /**
+     * <h1>Import Animations</h1> Imports the specified animations into the
+     * specified project. Replaces all existing animations of a sprite, if that
+     * sprite already exists. Otherwise creates a new sprite. Corrects the Y value
+     * of the new animations to the specified value, then crops to visible pixels.
+     * Saves the project.
+     * 
+     * @param path          The path to the zipped archive containing the
+     *                      animations.
+     * @param projectFolder The path to the project folder.
+     * @param yValue        the new Y value of the animations.
+     */
+    static void importAnimations(String path, String projectFolder, String yValue) {
 	String sprite = FileNameUtils.getBaseName(path);
 
 	openProjectFolder(6000, projectFolder);
@@ -647,28 +676,24 @@ class ConstructMethods extends ConstructXpaths {
 
 	click(Project.ProjectBar.ContextMenu.editAnimations);
 
-	// Add an animation, because we can't delete all animations.
 	String newAnimation = addAnimation();
 
-	// Select the first animation. This deselects the animation that was created
-	// previously.
 	click(Project.AnimationsEditor.AnimationsPane.animation(1));
 
 	waitForElementToHaveAttribute(Project.AnimationsEditor.AnimationsPane.animation(1), "selected", 5);
-	
+
 	int penultimateAnimation = numberOfAnimations() - 1;
 
 	scrollToElement(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation));
 
 	actions.keyDown(Keys.SHIFT).perform();
 
-	// Select the second to last animation while holding the shift key down. This
-	// will select all animations between the first and the penultimate animation.
 	click(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation));
 
 	actions.keyUp(Keys.SHIFT).perform();
 
-	waitForElementToHaveAttribute(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation), "selected", 5);
+	waitForElementToHaveAttribute(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation),
+		"selected", 5);
 
 	contextClick(Project.AnimationsEditor.AnimationsPane.animation(penultimateAnimation));
 
@@ -685,24 +710,25 @@ class ConstructMethods extends ConstructXpaths {
 	waitForElementToHaveAttribute(Project.AnimationsEditor.blocker, "locked", 60);
 
 	waitForElementToNotHaveAttribute(Project.AnimationsEditor.blocker, "locked", 180);
-	
+
 	contextClick(Project.AnimationsEditor.AnimationsPane.animation(newAnimation));
 
 	// Delete the animation we created, whose whole purpose was to satisfy the
 	// requirement that a sprite must always have at least one animation.
 	click(Project.AnimationsEditor.AnimationsPane.AnimationContextMenu.delete);
 
-	click(Project.AnimationsEditor.Toolbar.editImagePoints);
+	if (Objects.nonNull(yValue)) {
+	    click(Project.AnimationsEditor.Toolbar.editImagePoints);
 
-	// Click into the input box, to make the correct input appear
-	click(Project.AnimationsEditor.Toolbar.ySpinner);
-	
-	sendText(Project.AnimationsEditor.Toolbar.y, yValue);
+	    // Click into the input box, to make the correct input appear
+	    click(Project.AnimationsEditor.Toolbar.ySpinner);
 
-	contextClick(Project.AnimationsEditor.ImagePoints.origin);
+	    sendText(Project.AnimationsEditor.Toolbar.y, yValue);
 
-	click(Project.AnimationsEditor.ImagePoints.ImagePointsContextMenu.applyToAllAnimations);
+	    contextClick(Project.AnimationsEditor.ImagePoints.origin);
 
+	    click(Project.AnimationsEditor.ImagePoints.ImagePointsContextMenu.applyToAllAnimations);
+	}
 	click(Project.AnimationsEditor.Toolbar.cropDropdownArrow);
 
 	actions.keyDown(Keys.SHIFT).keyDown(Keys.CONTROL).perform();
@@ -710,17 +736,17 @@ class ConstructMethods extends ConstructXpaths {
 	click(Project.AnimationsEditor.Toolbar.CropDropdown.applyToAllAnimations);
 
 	actions.keyUp(Keys.SHIFT).keyUp(Keys.CONTROL).perform();
-	
+
 	waitForElementToHaveAttribute(Project.AnimationsEditor.blocker, "locked", 5);
 
 	waitForElementToNotHaveAttribute(Project.AnimationsEditor.blocker, "locked", 180);
-	
+
 	click(Project.AnimationsEditor.x);
-	
+
 	waitUntilElementIsGone(Misc.dimmer, 300);
-	
+
 	click(Project.save);
-	
+
 	waitUntilElementIsGone(Misc.progressDialog, 300);
     }
 
