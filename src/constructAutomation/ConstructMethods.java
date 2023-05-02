@@ -113,11 +113,9 @@ class ConstructMethods extends ConstructXpaths {
 	 * @param by The By of the element to click.
 	 * @author laserwolve
 	 * @see {@link org.openqa.selenium.WebElement#click()}
-	 * @return The same XPath locator string that was passed.
 	 */
-	static String click(String xpath) {
+	static void click(String xpath) {
 		clickableElement(xpath).click();
-		return xpath;
 	}
 
 	/**
@@ -176,7 +174,7 @@ class ConstructMethods extends ConstructXpaths {
 	 * @return Whether or not the element is present.
 	 * @author laserwolve
 	 */
-	boolean elementIsPresent(By by) {
+	static boolean elementIsPresent(By by) {
 		return driver.findElements(by).size() != 0;
 	}
 
@@ -372,7 +370,6 @@ class ConstructMethods extends ConstructXpaths {
 	 */
 	static WebElement presentElement(String xpath, int seconds) {
 		return stop(seconds).until(ExpectedConditions.presenceOfElementLocated(locate(xpath)));
-
 	}
 
 	/**
