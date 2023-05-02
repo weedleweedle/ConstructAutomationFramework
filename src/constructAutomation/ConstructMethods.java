@@ -67,7 +67,7 @@ class ConstructMethods extends ConstructXpaths {
 		}
 		userHome = System.getProperty("user.home");
 		fs = File.separator;
-		editorURL = "https://editor.construct.net/r339";
+		editorURL = "https://editor.construct.net/r340";
 
 		driver.get(editorURL);
 
@@ -676,6 +676,8 @@ class ConstructMethods extends ConstructXpaths {
 		openProjectFolder(6000, projectFolder);
 
 		sendText(Project.ProjectBar.searchBar, sprite);
+		
+		// TODO: Check if the sprite doesn't exist here. If it doesn't, create it.
 
 		contextClick(Project.ProjectBar.searchResult(sprite));
 
