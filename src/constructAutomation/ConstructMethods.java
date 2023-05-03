@@ -186,7 +186,7 @@ class ConstructMethods extends ConstructXpaths {
 	 * @throws InterruptedException
 	 */
 	static void exportProject(String projectName) {
-		click(menuButton);
+		click(menu);
 
 		click(MenuDropdown.project);
 
@@ -256,11 +256,11 @@ class ConstructMethods extends ConstructXpaths {
 	static boolean isSignedOut() {
 		setExpiryTime(10);
 
-		while (clickableElement(UserAccountButton.userAccountName).getText().equals("..."))
+		while (clickableElement(UserAccount.userAccountName).getText().equals("..."))
 			if (hasExpired())
 				exceededExpiryTime("Unable to complete sign-in");
 
-		return clickableElement(UserAccountButton.userAccountName).getText().equals("Guest");
+		return clickableElement(UserAccount.userAccountName).getText().equals("Guest");
 	}
 
 	/**
@@ -302,7 +302,7 @@ class ConstructMethods extends ConstructXpaths {
 	 */
 	static void logIn() {
 		if (isSignedOut()) {
-			click(UserAccountButton.userAccountButton);
+			click(userAccount);
 
 			click(AccountDropdown.logIn);
 
@@ -312,13 +312,13 @@ class ConstructMethods extends ConstructXpaths {
 
 			sendText(LogInDialog.password, SensitiveData.password);
 
-			click(LogInDialog.logInButton);
+			click(LogInDialog.logIn);
 
 			waitUntilElementIsGone(LogInDialog.loginDialog);
 
 			switchToDefaultContent();
 
-			waitUntilTextIs(UserAccountButton.userAccountName, SensitiveData.username, 10);
+			waitUntilTextIs(UserAccount.userAccountName, SensitiveData.username, 10);
 		}
 	}
 
@@ -334,7 +334,7 @@ class ConstructMethods extends ConstructXpaths {
 	 * @throws InterruptedException from {@link Thread#sleep(long)}
 	 */
 	static void openRecentProject(String projectName) {
-		click(menuButton);
+		click(menu);
 
 		click(MenuDropdown.project);
 
@@ -589,7 +589,7 @@ class ConstructMethods extends ConstructXpaths {
 	 * @author laserwolve
 	 */
 	static void openProjectFolder(int MaximumProjectLoadTimeInSeconds, String projectPath) {
-		click(StartPage.openButton);
+		click(StartPage.open);
 
 		click(StartPage.OpenButtonDropdown.projectFolder);
 
